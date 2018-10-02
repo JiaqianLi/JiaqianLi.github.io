@@ -44,13 +44,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
-        <lastmod>2018-10-02T12:48:57.508Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/CNN/</loc>
         <lastmod>2018-10-02T13:05:31.155Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -88,13 +81,6 @@
     <url>
         <loc>http://jiaqianlee.com/tags/Machine-Learning/</loc>
         <lastmod>2018-10-02T13:09:02.221Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/SR/</loc>
-        <lastmod>2018-10-02T13:09:35.719Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -144,6 +130,20 @@
     <url>
         <loc>http://jiaqianlee.com/tags/FAN/</loc>
         <lastmod>2018-10-02T15:07:33.320Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/SR/</loc>
+        <lastmod>2018-10-02T15:23:53.685Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
+        <lastmod>2018-10-02T15:24:17.191Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
