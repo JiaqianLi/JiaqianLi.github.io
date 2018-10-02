@@ -15,11 +15,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          李佳倩的博客 | LJQ&#39;s Blog
+          Git及Github的使用 - 李佳倩的博客 | LJQ&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://jiaqianlee.com/categories/目标检测/">
+    <link rel="canonical" href="http://jiaqianlee.com/2018/04/25/Git/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -81,8 +81,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/undefined')
-            /*page*/
+            background-image: url('git-bg.jpg')
+            /*post*/
         
     }
     
@@ -95,10 +95,16 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>LJQ&#39;s Blog</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">欢迎交换友链，互相交流！</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>Git及Github的使用</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Jiaqian Li on
+                            2018-04-25
+                        </span>
                     </div>
                 
 
@@ -212,231 +218,157 @@ var _hmt = _hmt || [];
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
-            
-            
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=1296583188&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
-                    <span class="tag-text">2018</span>
-                </span>
-                <ul>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-25
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/25/Git/" style="color: #0085a1">
-                        <span>
-                            Git及Github的使用
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-24
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/24/RCNN/" style="color: #0085a1">
-                        <span>
-                            RCNN 学习笔记
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>以win10系统为例<br>首先在Github上创建用户名，网址是<a href="http://www.github.com" target="_blank" rel="noopener">https://www.github.com</a><br>然后下载并安装Git，网址是<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a>，下载与自己电脑对应的版本即可</p>
+<h2 id="将项目上传到Github"><a href="#将项目上传到Github" class="headerlink" title="将项目上传到Github"></a>将项目上传到Github</h2><p>打开你的待上传项目，然后在该目录下右键，选择Git Bash Here，如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/52250520.jpg" alt="1"></p>
+<h3 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h3><p>（1）在打开的窗口中输入以下命令：<br>ssh-keygen -t rsa -C “youremail@example.com”<br>把邮件地址换成你自己注册Github时的邮件地址，然后一路回车，使用默认值即可，然后根据它显示的路径找到.ssh的一个文件夹，里面有两个文件，一个id_rsa为私钥，不能泄露；另一个id_rsa.pub为公钥，可以用记事本打开；<br>（2）登录Github，打开”Account settings”,”SSH Keys”页面：<br>（3）点”Add SSH Key”，填写任意的Title，在Key文本框粘贴id_rsa.pub文件的内容<br>（4）点”Add Key”，你就可以看到已添加的Key<br>这是因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h3 id="上传项目"><a href="#上传项目" class="headerlink" title="上传项目"></a>上传项目</h3><p>有了这些准备工作，接下来把你的项目上传到Github上就很简单啦！<br>（1）在Github网站中，选择个人中心，然后点一个“+”，选择”New repository” ，然后给你要上传的项目等添加标题、描述等信息，然后创建就可以了。</p>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/99272135.jpg" alt="2"><br>（2）在之前的Git Bash Here命令框中依次输入以下语句并回车：<br>①git init<br>表示初始化<br>②git add .<br>添加项目<br>③git commit -m “描述你做了什么”<br>把文件放到Git仓库，引号里面可以自己定义你具体做了什么内容，比如我在原来项目的基础上又新加了一些内容，就可以写成：git commit -m “add a new file”<br>④git remote add origin <a href="https://github.com/****/****.git" target="_blank" rel="noopener">https://github.com/****/****.git</a><br>然后就需要把你本地计算机上的项目与Github联系起来，后面的网址可以在你之前创建完New repository之后跳转的页面上找到，一般第一个”*“里的是你的用户名，后一个”*“是你的项目名称<br>⑤git push origin master<br>最后一步就可以把你的项目上传啦</p>
+
+
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+                <div id="gitalk-container"></div>     <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                        clientID: '98e7cbcd4e5f0c3b1319',
+                        clientSecret: 'd506d8485b483357c399e2cc572840d73c8df3c6',
+                        repo: 'JiaqianLi.github.io',
+                        owner: 'JiaqianLi',
+                        admin: ['JiaqianLi'],
+                        id: '2018/04/25/Git/',
+                        distractionFreeMode: true,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/24/RCNN/" data-toggle="tooltip" data-placement="top" title="RCNN 学习笔记">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
+                <p></p>
+
             </div>
             
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
 
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#准备工作"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">准备工作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#将项目上传到Github"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">将项目上传到Github</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建SSH-Key"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">创建SSH Key</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#上传项目"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">上传项目</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
 
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://cv-junchengli.github.io/" target="_blank">junchengli</a></li>
+                    
+                        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+                    
+                        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+                    
+                        <li><a href="https://me.csdn.net/kirito_acmer" target="_blank">SLY&#39;s Blog</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+                    
+                        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+                    
+                        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+                    
+                </ul>
+                
+            </div>
         </div>
     </div>
-</div>
+</article>
 
-            </div>
 
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!--  <script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>  -->
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#R-CNN" title="R-CNN" rel="1">R-CNN</a>
-            
-        
-    </div>
-</section>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
-        
-            <img id = "avatar_pic" src="/img/ironman-draw.png" />
-        
+<script type="text/javascript" src="/js/zooming.js"></script>
 
-        
-            <p>一只小白的成长之路！</p>
-        
-
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
-                <li>
-                    <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/JiaqianLi">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-
-            
-                <li>
-                    <a target="_blank" href="https://user.qzone.qq.com/770534632">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-
-            
-
-            
-            
-            
-        </ul>
-    </div>
-</section>
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/2018/04/25/Git/">Git及Github的使用</a>
-        </li>
-      
-        <li>
-          <a href="/2018/04/24/RCNN/">RCNN 学习笔记</a>
-        </li>
-      
-    </ul>
-  </div>
-
-        <hr>
-    
-        <!-- Friends Blog -->
-
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://cv-junchengli.github.io/" target="_blank">junchengli</a></li>
-    
-        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
-    
-        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
-    
-        <li><a href="https://me.csdn.net/kirito_acmer" target="_blank">SLY&#39;s Blog</a></li>
-    
-        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
-    
-        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
-    
-        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li></ul>
-    </div>
-
-        <hr>
-    
-        <!-- Categories -->
-
-    <h5>categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/目标检测/">目标检测</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件使用/">软件使用</a><span class="category-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
