@@ -165,14 +165,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -235,30 +235,16 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=25706282&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>介绍</h2>
-<p>本文使用 深度循环卷积神经网络deeply-recursive convolutional network (DRCN)，该网络可以重复使用一个卷积层，多次循环也不会增加参数，尽管DRCN具有较好的性质，但也存在一个问题，由于梯度消失或者爆炸，使用随机梯度下降优化时很难收敛，使用单个权重层来学习像素之间的长期依赖关系是非常困难的。<br>
-为了解决难训练的问题，提出了两种方法：<br>
-①所有递归都是受监督的。每次循环后的特征矩阵用来重建高分辨率的图像（ high-resolution ，HR），并且所有循环的重建方法都是一样的，每次循环会得到一个不同的HR预测，将所有预测结合返回一个精确的最后预测结果。<br>
-②使用跃层连接（skip-connection），在许多向前传递过程中，输入的精确拷贝可能会被减弱，所以我们将输入连接到各个层以进行输出重构。<br>
-本文中提出的方法展现了非常好的效果。</p>
-<h2>网络结构</h2>
-<h3>基本模型</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/88761164.jpg" alt="1"></p>
-<p>图1：基本的模型结构，包含了三个部分，嵌入式网络（Embedding network），将输入图像表示为一系列的特征映射，使用3*3的filter；推理网络（Inference network）为主要部分，用于完成超分辨率任务，使用3*3的卷积;重建网络（Reconstruction network）将高分辨率图像（多通道）转变成原始状态（1或3通道）。Inference network是一个循环结构，展开如图2。<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/63005314.jpg" alt="2"></p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=25706282&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本文使用 深度循环卷积神经网络deeply-recursive convolutional network (DRCN)，该网络可以重复使用一个卷积层，多次循环也不会增加参数，尽管DRCN具有较好的性质，但也存在一个问题，由于梯度消失或者爆炸，使用随机梯度下降优化时很难收敛，使用单个权重层来学习像素之间的长期依赖关系是非常困难的。<br>为了解决难训练的问题，提出了两种方法：<br>①所有递归都是受监督的。每次循环后的特征矩阵用来重建高分辨率的图像（ high-resolution ，HR），并且所有循环的重建方法都是一样的，每次循环会得到一个不同的HR预测，将所有预测结合返回一个精确的最后预测结果。<br>②使用跃层连接（skip-connection），在许多向前传递过程中，输入的精确拷贝可能会被减弱，所以我们将输入连接到各个层以进行输出重构。<br>本文中提出的方法展现了非常好的效果。    </p>
+<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><h3 id="基本模型"><a href="#基本模型" class="headerlink" title="基本模型"></a>基本模型</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/88761164.jpg" alt="1"></p>
+<p>图1：基本的模型结构，包含了三个部分，嵌入式网络（Embedding network），将输入图像表示为一系列的特征映射，使用3<em>3的filter；推理网络（Inference network）为主要部分，用于完成超分辨率任务，使用3\</em>3的卷积;重建网络（Reconstruction network）将高分辨率图像（多通道）转变成原始状态（1或3通道）。Inference network是一个循环结构，展开如图2。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/63005314.jpg" alt="2"></p>
 <p>图2：未折叠的inference network，左边是一个循环层，右边是未折叠的结构。特征映射循环使用相同的filter W,我们的模型可以在非常大的context中不引入新的权重参数。</p>
-<h3>改进的模型</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/27072421.jpg" alt="3"></p>
-<p>图3：(a): 我们最终的模型，采用了recursive-supervision 和kip-connection。重建网络共享用于递归预测，使用中间循环的所有的预测结果得到最后的输出。(b）:采用深度监督（deep-supervision），与（a）不同，（b）中使用不同地重建网络用于循环，参数也更多；（c）：（a）的扩展，没有参数共享（没有循环），权重参数的数量与深度的平方成正比。<br>
-<strong>循环监督</strong>：<br>
-在改进的模型中，我们监督所有的循环过程来减小梯度消失或者爆炸的影响。循环监督结构降低了循环网络训练的结构，如果监督信号在之前的循环损失层中经过，那么反向传播只会穿过少量的层，这样不同的预测损失求得的梯度反向传播反馈影响就会比较小，这样就可以减缓梯度消失或爆炸问题。此外，监督还能利用所有中间层的预测结果使最优循环次数的重要性下降，如果循环次数越多，我们就希望后预测的权重比较小，先预测的权重比较大。<br>
-<strong>跃层连接</strong><br>
-优点：①在循环过程中存储输入信号的网络容量被保存；②在目标预测时可以使用输入信号的精确拷贝，这种 skip-connection 简单却很有用。</p>
-<h2>实验结果</h2>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/69954210.jpg" alt="4"></p>
+<h3 id="改进的模型"><a href="#改进的模型" class="headerlink" title="改进的模型"></a>改进的模型</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/27072421.jpg" alt="3"></p>
+<p>图3：(a): 我们最终的模型，采用了recursive-supervision 和kip-connection。重建网络共享用于递归预测，使用中间循环的所有的预测结果得到最后的输出。(b）:采用深度监督（deep-supervision），与（a）不同，（b）中使用不同地重建网络用于循环，参数也更多；（c）：（a）的扩展，没有参数共享（没有循环），权重参数的数量与深度的平方成正比。<br><strong>循环监督</strong>：<br>在改进的模型中，我们监督所有的循环过程来减小梯度消失或者爆炸的影响。循环监督结构降低了循环网络训练的结构，如果监督信号在之前的循环损失层中经过，那么反向传播只会穿过少量的层，这样不同的预测损失求得的梯度反向传播反馈影响就会比较小，这样就可以减缓梯度消失或爆炸问题。此外，监督还能利用所有中间层的预测结果使最优循环次数的重要性下降，如果循环次数越多，我们就希望后预测的权重比较小，先预测的权重比较大。<br><strong>跃层连接</strong><br>优点：①在循环过程中存储输入信号的网络容量被保存；②在目标预测时可以使用输入信号的精确拷贝，这种 skip-connection 简单却很有用。     </p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/69954210.jpg" alt="4"></p>
 <p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/96116642.jpg" alt="5"></p>
 
 
@@ -304,7 +290,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">网络结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">基本模型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">改进的模型</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实验结果</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#网络结构"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">网络结构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#基本模型"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">基本模型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#改进的模型"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">改进的模型</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实验结果"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实验结果</span></a></li></ol>
         
         </div>
       </aside>

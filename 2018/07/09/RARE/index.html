@@ -167,14 +167,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -237,80 +237,36 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=440208643&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>介绍</h2>
-<p>识别自然图像中的文字仍是一个充满挑战的任务，本文提出了RARE（Robust text recognizer with Automatic REctification），一个对于不规则的文字具有鲁棒性的识别模型。RARE是一个深度神经网络，包括一个空间变换网络Spatial Transformer Network (STN)和一个序列识别网络Sequence Recognition Network (SRN)，两个网络同时用BP算法进行训练。网络结构如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/78846255.jpg" alt="1"></p>
-<p>在测试中，一张图像先通过Thin-Plate-Spline (TPS)变换成一个正规的、更易读的图像，此变换可以矫正不同类型的不规则文本，包括透射变换和弯曲的文本。TPS变换由一组基准点（fiducial points）表示，坐标通过卷积神经网络回归得到。然后再放入SRN中进行识别。SRN使用序列识别的attention-based方法，包含一个编码器和一个解码器。编码器产生一个特征表示序列，即序列的特征向量；解码器根据输入序列循环地产生一个字符序列。这个系统是一个端到端的文本识别系统，在训练过程中也不需要额外标记字符串的关键点、字符位置等。<br>
-本文的主要贡献：1）提出了一个新颖且对不规则文本具有鲁棒性的场景文字识别方法；2）采用了基于注意力模型（attention-based）的STN框架。传统的STN只在普通的卷积神经网络中测试；3）在SRN编码器中使用循环卷积结构。</p>
-<h2>模型</h2>
-<p>模型的输入为图像I，输出为一个序列L=<br>
-(L1, . . . , LT ),Lt表示第T个字符，T为序列长度。</p>
-<h3>Spatial Transformer Network（STN）</h3>
-<p>STN使用一个预测的TPS转换将输入图像I变成矫正后的图像I’。如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/77185236.jpg" alt="2"></p>
-<p>首先通过定位网络预测一组基准点，然后在网格生成器用上述基准点计算TPS变换参数，产生一个关于I的采样网格，采样器将网格和输入图像一起，通过采样网格上的点得到图像I’。STN具有一个独特的性质，即采样器是可微的，因此，一旦我们拥有一个可微的定位网络和可微的网格生成器，STN可以反向传播错误进行训练。</p>
-<h3>Localization Network</h3>
-<p>定位网络通过回归它们的x,y坐标确定了K个基准点，常数K为偶数，坐标表示为C=<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/72625257.jpg" alt="3"></p>
-<p>第k列ck = [xk, yk]T包含第k个基准点的坐标，我们以图像的中心作为原点构造一个归一化的坐标系，因此xk, yk的范围为[-1,1]。使用CNN来做回归，包含卷积层、池化层和全连接层，用于回归而不是分类，输出节点设置为2K，激活函数为tanh(·),输出向量（-1，1）之间。</p>
-<h3>Grid Generator</h3>
-<p>网格生成器评估TPS转换的参数并产生一个采样网格，如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/89678512.jpg" alt="4"></p>
-<h3>Sampler</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/33910954.jpg" alt="5"></p>
-<p>其中，V代表双线性采样器，是一个可微模型。<br>
-TPS转换的灵活性使得我们可以把多种类型的不规则文本都变得正规、可读，效果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/8870689.jpg" alt="6"></p>
-<h2>Sequence Recognition Network</h2>
-<p>SRN是一个基于注意力（attention-based）的模型，可以直接从输入图像中识别一个序列，包含一个编码器和一个解码器。编码器从输入图像I’中提取特征序列表示；解码器通过解码每一步中相关的内容来循环产生以序列表示为条件的序列。</p>
-<h3>Encoder: Convolutional-Recurrent Network</h3>
-<p>我们建立了一个结合卷积层和循环网络的结构，提取特征向量，输入图像大小可以是任意的，如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/11652869.jpg" alt="7"></p>
-<p>BLSTM是一个可以分析两个方向序列独立性的循环网络，它的输出是和输入大小长度相同的另一个序列h = (h1, . . . , hL)，L是特征映射的宽度。</p>
-<h3>Decoder: Recurrent Character Generator</h3>
-<p>解码器以编码器产生的序列为条件生成一组字符序列，在循环部分，采用Gated Recurrent Unit (GRU)为单元。<br>
-生成包含T步，在第t步，解码器通过下式计算一个注意力权重αt ∈ RL的向量：<br>
-αt = Attend(st−1, αt−1, h) ，  st−1是GRU单元的上一步。当t=1时，s0、α0都是零向量。<br>
-glimpse gt与向量h线性结合：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/36127189.jpg" alt="8"></p>
-<p>st-1通过GRU循环过程进行更新：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/75216391.jpg" alt="9"></p>
-<p>Lt-1表示训练中的第t-1个真实标签。<br>
-概率分布函数如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/26715462.jpg" alt="10"></p>
-<h2>模型训练</h2>
-<p>设训练集为<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/65757614.jpg" alt="11"></p>
-<p>优化算法采用ADADELTA，收敛速度较快。<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/71450225.jpg" alt="12"></p>
-<p>模型参数除了定位网络全连接层权值都为0，其他都随机初始化，偏差初始化为上图a的形式；经验表明，b、c初始化效果比较差。但随机初始化定位网络的参数会导致结果不收敛。</p>
-<h2>用字典进行识别</h2>
-<p>使用后验条件概率识别单词：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/18357431.jpg" alt="13"></p>
-<p>为了缩小字典集，构造前缀树，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/15358619.jpg" alt="14"></p>
-<h3>实验</h3>
-<h3>参数设置</h3>
-<p><strong>Spatial Transformer Network：</strong> STN的定位网络有4个卷积层，2*2max-pooling 池化层，filter、padding、stride大小分别为3，1，1；filter数量分别为64，128，256，512。卷积层和池化层后是两个全连接层包含1024个隐藏单元，基准点数K=20，要求输出40维的向量，激活函数使用RELU，除了输出层是使用tanh(·)<br>
-**Sequence Recognition Network：*<em>在SRN中，编码器包含7个卷积层 ，filter大小、filter数量、stride、padding大小分别为{3,64,1,1}, {3,128,1,1}, {3,256,1,1}, {3,256,1,1,}, {3,512,1,1}, {3,512,1,1},{2,512,1,0}. 第1、2、4、6个卷积层后分别连接2</em>2的max-pooling。在卷积层上是两层带256个隐藏单元的BLSTM网络。对于解码器，GRL单元有256个记忆模块和37个输出单元（26单词、10数字和1EOS）<br>
-<strong>Model Training</strong> ：8百万合成样本，batch size=64，图像大小为 100×32 ，STN中输出的图像大小也为100×32</p>
-<h3>不同基准的实验结果</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/37561555.jpg" alt="15"></p>
-<h3>识别投射文本</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/53179953.jpg" alt="16"></p>
-<p>SVT-Perspective 是用于投射文本识别的算法，并与其他方法进行对比，结果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/23188524.jpg" alt="17"></p>
-<h3>识别变形的文本</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/13159111.jpg" alt="18"><br>
-CUTE80用于识别变形的文本，与其他方法进行对比，结果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/3632764.jpg" alt="19"></p>
-<h2>结论</h2>
-<p>为了解决不规则文本的识别，采用了一个可微的空间转换网络（spatial transformer network），此外，它还与基于注意力学习的序列识别结合，使得整个模型可以端到端进行识别。实验结果表明：1）在没有几何监督的前提下，这个模型能自动产生可读性更强的图像；2）本文提出的图像矫正模型能提高识别精确度；3）本文提出的识别系统与现有方法相比结果更好。</p>
-<p>原文链接：<br>
-<a href="https://arxiv.org/pdf/1603.03915.pdf" target="_blank" rel="noopener"> https://arxiv.org/pdf/1603.03915.pdf</a></p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=440208643&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>识别自然图像中的文字仍是一个充满挑战的任务，本文提出了RARE（Robust text recognizer with Automatic REctification），一个对于不规则的文字具有鲁棒性的识别模型。RARE是一个深度神经网络，包括一个空间变换网络Spatial Transformer Network (STN)和一个序列识别网络Sequence Recognition Network (SRN)，两个网络同时用BP算法进行训练。网络结构如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/78846255.jpg" alt="1">    </p>
+<p>在测试中，一张图像先通过Thin-Plate-Spline (TPS)变换成一个正规的、更易读的图像，此变换可以矫正不同类型的不规则文本，包括透射变换和弯曲的文本。TPS变换由一组基准点（fiducial points）表示，坐标通过卷积神经网络回归得到。然后再放入SRN中进行识别。SRN使用序列识别的attention-based方法，包含一个编码器和一个解码器。编码器产生一个特征表示序列，即序列的特征向量；解码器根据输入序列循环地产生一个字符序列。这个系统是一个端到端的文本识别系统，在训练过程中也不需要额外标记字符串的关键点、字符位置等。<br>本文的主要贡献：1）提出了一个新颖且对不规则文本具有鲁棒性的场景文字识别方法；2）采用了基于注意力模型（attention-based）的STN框架。传统的STN只在普通的卷积神经网络中测试；3）在SRN编码器中使用循环卷积结构。      </p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p>模型的输入为图像I，输出为一个序列L=<br>(L1, . . . , LT ),Lt表示第T个字符，T为序列长度。       </p>
+<h3 id="Spatial-Transformer-Network（STN）"><a href="#Spatial-Transformer-Network（STN）" class="headerlink" title="Spatial Transformer Network（STN）"></a>Spatial Transformer Network（STN）</h3><p>STN使用一个预测的TPS转换将输入图像I变成矫正后的图像I’。如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/77185236.jpg" alt="2">      </p>
+<p>首先通过定位网络预测一组基准点，然后在网格生成器用上述基准点计算TPS变换参数，产生一个关于I的采样网格，采样器将网格和输入图像一起，通过采样网格上的点得到图像I’。STN具有一个独特的性质，即采样器是可微的，因此，一旦我们拥有一个可微的定位网络和可微的网格生成器，STN可以反向传播错误进行训练。      </p>
+<h3 id="Localization-Network"><a href="#Localization-Network" class="headerlink" title="Localization Network"></a>Localization Network</h3><p>定位网络通过回归它们的x,y坐标确定了K个基准点，常数K为偶数，坐标表示为C=<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/72625257.jpg" alt="3">      </p>
+<p>第k列ck = [xk, yk]T包含第k个基准点的坐标，我们以图像的中心作为原点构造一个归一化的坐标系，因此xk, yk的范围为[-1,1]。使用CNN来做回归，包含卷积层、池化层和全连接层，用于回归而不是分类，输出节点设置为2K，激活函数为tanh(·),输出向量（-1，1）之间。      </p>
+<h3 id="Grid-Generator"><a href="#Grid-Generator" class="headerlink" title="Grid Generator"></a>Grid Generator</h3><p>网格生成器评估TPS转换的参数并产生一个采样网格，如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/89678512.jpg" alt="4">      </p>
+<h3 id="Sampler"><a href="#Sampler" class="headerlink" title="Sampler"></a>Sampler</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/33910954.jpg" alt="5">       </p>
+<p>其中，V代表双线性采样器，是一个可微模型。<br>TPS转换的灵活性使得我们可以把多种类型的不规则文本都变得正规、可读，效果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/8870689.jpg" alt="6">    </p>
+<h2 id="Sequence-Recognition-Network"><a href="#Sequence-Recognition-Network" class="headerlink" title="Sequence Recognition Network"></a>Sequence Recognition Network</h2><p>SRN是一个基于注意力（attention-based）的模型，可以直接从输入图像中识别一个序列，包含一个编码器和一个解码器。编码器从输入图像I’中提取特征序列表示；解码器通过解码每一步中相关的内容来循环产生以序列表示为条件的序列。       </p>
+<h3 id="Encoder-Convolutional-Recurrent-Network"><a href="#Encoder-Convolutional-Recurrent-Network" class="headerlink" title="Encoder: Convolutional-Recurrent Network"></a>Encoder: Convolutional-Recurrent Network</h3><p>我们建立了一个结合卷积层和循环网络的结构，提取特征向量，输入图像大小可以是任意的，如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/11652869.jpg" alt="7">     </p>
+<p>BLSTM是一个可以分析两个方向序列独立性的循环网络，它的输出是和输入大小长度相同的另一个序列h = (h1, . . . , hL)，L是特征映射的宽度。      </p>
+<h3 id="Decoder-Recurrent-Character-Generator"><a href="#Decoder-Recurrent-Character-Generator" class="headerlink" title="Decoder: Recurrent Character Generator"></a>Decoder: Recurrent Character Generator</h3><p>解码器以编码器产生的序列为条件生成一组字符序列，在循环部分，采用Gated Recurrent Unit (GRU)为单元。<br>生成包含T步，在第t步，解码器通过下式计算一个注意力权重αt ∈ RL的向量：<br>αt = Attend(st−1, αt−1, h) ，  st−1是GRU单元的上一步。当t=1时，s0、α0都是零向量。<br>glimpse gt与向量h线性结合：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/36127189.jpg" alt="8">     </p>
+<p>st-1通过GRU循环过程进行更新：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/75216391.jpg" alt="9">     </p>
+<p>Lt-1表示训练中的第t-1个真实标签。<br>概率分布函数如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/26715462.jpg" alt="10">     </p>
+<h2 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h2><p>设训练集为<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/65757614.jpg" alt="11">     </p>
+<p>优化算法采用ADADELTA，收敛速度较快。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/71450225.jpg" alt="12">       </p>
+<p>模型参数除了定位网络全连接层权值都为0，其他都随机初始化，偏差初始化为上图a的形式；经验表明，b、c初始化效果比较差。但随机初始化定位网络的参数会导致结果不收敛。  </p>
+<h2 id="用字典进行识别"><a href="#用字典进行识别" class="headerlink" title="用字典进行识别"></a>用字典进行识别</h2><p>使用后验条件概率识别单词：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/18357431.jpg" alt="13">     </p>
+<p>为了缩小字典集，构造前缀树，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/15358619.jpg" alt="14">       </p>
+<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><h3 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h3><p><strong>Spatial Transformer Network：</strong> STN的定位网络有4个卷积层，2<em>2max-pooling 池化层，filter、padding、stride大小分别为3，1，1；filter数量分别为64，128，256，512。卷积层和池化层后是两个全连接层包含1024个隐藏单元，基准点数K=20，要求输出40维的向量，激活函数使用RELU，除了输出层是使用tanh(·)<br><strong>Sequence Recognition Network：</strong>在SRN中，编码器包含7个卷积层 ，filter大小、filter数量、stride、padding大小分别为{3,64,1,1}, {3,128,1,1}, {3,256,1,1}, {3,256,1,1,}, {3,512,1,1}, {3,512,1,1},{2,512,1,0}. 第1、2、4、6个卷积层后分别连接2</em>2的max-pooling。在卷积层上是两层带256个隐藏单元的BLSTM网络。对于解码器，GRL单元有256个记忆模块和37个输出单元（26单词、10数字和1EOS）<br><strong>Model Training</strong> ：8百万合成样本，batch size=64，图像大小为 100×32 ，STN中输出的图像大小也为100×32       </p>
+<h3 id="不同基准的实验结果"><a href="#不同基准的实验结果" class="headerlink" title="不同基准的实验结果"></a>不同基准的实验结果</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/37561555.jpg" alt="15">      </p>
+<h3 id="识别投射文本"><a href="#识别投射文本" class="headerlink" title="识别投射文本"></a>识别投射文本</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/53179953.jpg" alt="16">      </p>
+<p> SVT-Perspective 是用于投射文本识别的算法，并与其他方法进行对比，结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/23188524.jpg" alt="17">     </p>
+<h3 id="识别变形的文本"><a href="#识别变形的文本" class="headerlink" title="识别变形的文本"></a>识别变形的文本</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/13159111.jpg" alt="18"><br> CUTE80用于识别变形的文本，与其他方法进行对比，结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/3632764.jpg" alt="19">     </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>为了解决不规则文本的识别，采用了一个可微的空间转换网络（spatial transformer network），此外，它还与基于注意力学习的序列识别结合，使得整个模型可以端到端进行识别。实验结果表明：1）在没有几何监督的前提下，这个模型能自动产生可读性更强的图像；2）本文提出的图像矫正模型能提高识别精确度；3）本文提出的识别系统与现有方法相比结果更好。     </p>
+<p>原文链接：<br><a href="https://arxiv.org/pdf/1603.03915.pdf" target="_blank" rel="noopener"> https://arxiv.org/pdf/1603.03915.pdf</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -355,7 +311,7 @@ CUTE80用于识别变形的文本，与其他方法进行对比，结果如下�
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Spatial Transformer Network（STN）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Localization Network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Grid Generator</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Sampler</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Sequence Recognition Network</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Encoder: Convolutional-Recurrent Network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Decoder: Recurrent Character Generator</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">模型训练</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">用字典进行识别</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">实验</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">参数设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">不同基准的实验结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">识别投射文本</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.5.</span> <span class="toc-nav-text">识别变形的文本</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">结论</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">模型</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Spatial-Transformer-Network（STN）"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Spatial Transformer Network（STN）</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Localization-Network"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Localization Network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Grid-Generator"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Grid Generator</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Sampler"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Sampler</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Sequence-Recognition-Network"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Sequence Recognition Network</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Encoder-Convolutional-Recurrent-Network"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">Encoder: Convolutional-Recurrent Network</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Decoder-Recurrent-Character-Generator"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">Decoder: Recurrent Character Generator</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模型训练"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">模型训练</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#用字典进行识别"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">用字典进行识别</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实验"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">实验</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#参数设置"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">参数设置</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#不同基准的实验结果"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">不同基准的实验结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#识别投射文本"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">识别投射文本</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#识别变形的文本"><span class="toc-nav-number">5.5.</span> <span class="toc-nav-text">识别变形的文本</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结论"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">结论</span></a></li></ol>
         
         </div>
       </aside>
