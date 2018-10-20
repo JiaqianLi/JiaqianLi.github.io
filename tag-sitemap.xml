@@ -142,8 +142,22 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/tags/convex-set/</loc>
+        <lastmod>2018-10-03T14:51:46.086Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/convex-function/</loc>
+        <lastmod>2018-10-03T14:51:46.086Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
-        <lastmod>2018-10-02T15:24:17.191Z</lastmod>
+        <lastmod>2018-10-19T14:14:58.005Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

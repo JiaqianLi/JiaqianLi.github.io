@@ -2,14 +2,14 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="baidu-site-verification" content="rlXUrNbP8h" />
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="ECNU Computer Vision Group - JiaqianLi">
-    <meta name="keyword"  content="华东师范大学18级研究生 图形图像处理与计算机视觉方向">
+    <meta name="keyword" content="华东师范大学18级研究生 图形图像处理与计算机视觉方向">
     <link rel="shortcut icon" href="/img/ironman-draw.png">
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -88,7 +88,7 @@
     
 </style>
 
-<header class="intro-header" >
+<header class="intro-header">
     <!-- Signature -->
     <div id="signature">
         <div class="container">
@@ -233,30 +233,67 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28285910&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
-
-
+                <div align="middle">
+    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28285910&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
+</div>
 <p><strong>ResNet</strong>——MSRA何凯明团队的Residual Networks，在2015年ImageNet上大放异彩，在ImageNet的classification、detection、localization以及COCO的detection和segmentation上均斩获了第一名的成绩，而且Deep Residual Learning for Image Recognition也获得了CVPR2016的best paper，实在是实至名归。</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本文采用了152层的残差神经网络，比去年的VGG还要多8层，但复杂度确比它低，最后以3.57%的top-5错误率赢得了2015年ILSVRC的冠军,同时在COCO detection 和 COCO segmentation 也获得了第一位。<br>源于网络深度的重要性，会引发一个问题：网络是否会随着深度的增加而获得越好的效果？增加深度会造成梯度消失或梯度爆炸。解决这个问题的方法是正则化初始化和正则化中间层，这样可以训练十几层网络。但是深层网络刚开始会收敛，之后会退化，也就是说随着梯度的增加，正确率会达到饱和，之后会下降。但这不是过拟合造成的，因为随着网络深度的增加会导致更高的错误率。下图就是一个典型的例子：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/14508915.jpg" alt="1"></p>
-<p>在本文中就使用残差网络来解决随着深度增加导致的性能退化问题，残差块如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/57365058.jpg" alt="2"></p>
-<p>我们假设期望的结果为一个潜在映射H（x）,H(x) = F（x）+ x ，则F（x）= H(x) - x 为残差映射，其优化比H（x）更简单，所以使用残差网络相当于学习的目标不是最优解H（x）和全等映射x，而是他们的差。F（x）+ x 可以通过shortcut connections 这种前馈神经网络实现，在我们的实验中，shortcut connections就简化为图中的identity mapping，这样没有引入额外的参数，也不会增加计算的复杂性。     </p>
-<h2 id="Shortcuts恒等映射"><a href="#Shortcuts恒等映射" class="headerlink" title="Shortcuts恒等映射"></a>Shortcuts恒等映射</h2><p>在本文主，我们认为一个残差块应该定义为：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/68603414.jpg" alt="3"></p>
-<p>其中，x,y分别代表这一层的输入和输出，F(x,{Wi})代表需要学习的残差映射。例如在上图2中，中间是2层网络，则<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/20639553.jpg" alt="4"><br>σ表示ReLU，x和F的维度必须相同，如果维度不同，就通过shortcut connections用一个线性投影Ws来使维度相匹配，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/59925538.jpg" alt="5">     </p>
+<h2>介绍</h2>
+<p>本文采用了152层的残差神经网络，比去年的VGG还要多8层，但复杂度确比它低，最后以3.57%的top-5错误率赢得了2015年ILSVRC的冠军,同时在COCO detection 和 COCO segmentation 也获得了第一位。<br>
+源于网络深度的重要性，会引发一个问题：网络是否会随着深度的增加而获得越好的效果？增加深度会造成梯度消失或梯度爆炸。解决这个问题的方法是正则化初始化和正则化中间层，这样可以训练十几层网络。但是深层网络刚开始会收敛，之后会退化，也就是说随着梯度的增加，正确率会达到饱和，之后会下降。但这不是过拟合造成的，因为随着网络深度的增加会导致更高的错误率。下图就是一个典型的例子：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/14508915.jpg" alt="1"></p>
+<p>在本文中就使用残差网络来解决随着深度增加导致的性能退化问题，残差块如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/57365058.jpg" alt="2"></p>
+<p>我们假设期望的结果为一个潜在映射H（x）,H(x) = F（x）+ x ，则F（x）= H(x) - x 为残差映射，其优化比H（x）更简单，所以使用残差网络相当于学习的目标不是最优解H（x）和全等映射x，而是他们的差。F（x）+ x 可以通过shortcut connections 这种前馈神经网络实现，在我们的实验中，shortcut connections就简化为图中的identity mapping，这样没有引入额外的参数，也不会增加计算的复杂性。</p>
+<h2>Shortcuts恒等映射</h2>
+<p>在本文主，我们认为一个残差块应该定义为：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/68603414.jpg" alt="3"></p>
+<p>其中，x,y分别代表这一层的输入和输出，F(x,{Wi})代表需要学习的残差映射。例如在上图2中，中间是2层网络，则<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/20639553.jpg" alt="4"><br>
+σ表示ReLU，x和F的维度必须相同，如果维度不同，就通过shortcut connections用一个线性投影Ws来使维度相匹配，如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/59925538.jpg" alt="5"></p>
 <p>残差函数F比较灵活，本文的实验中F有2-3个层，当然更多也是可以的，当只有1层时，就退化为线性。</p>
-<h2 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h2><p>下图为VGG-19、34层的普通卷积神经网络和34层的ResNet网络的对比图。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/66170990.jpg" alt="6"></p>
+<h2>网络结构</h2>
+<p>下图为VGG-19、34层的普通卷积神经网络和34层的ResNet网络的对比图。<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/66170990.jpg" alt="6"></p>
 <p>由于shortcuts只能在输入输出维度相同时才能直接使用，当维度增大时，有两种选择：（A）使用额外的zero padding 来增加维度，这种选择不会引入参数（B）使用Ws投影到新的空间，用1*1的卷积实现，直接改变1*1卷积的filters数目，这种选择会增加参数。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>（1）使用color augmentation做数据扩增<br>（2）在每个卷积层之后，激活函数之前使用batch normalization (BN)<br>（3）SGD作优化，weight decay =0.0001，momentum=0.9<br>（4）learning rate=0.1,当错误率停滞时除以10<br>（5）不使用dropout    </p>
-<p><strong>普通神经网络结构</strong><br>先评估18层和34层的网络结构，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/29431678.jpg" alt="7"></p>
-<p>18层和34层的普通神经网络和残差网络实验结果对比如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/79796163.jpg" alt="8"></p>
-<p>其top-1错误率如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/51957840.jpg" alt="9"></p>
-<p>从上面两张图中，可以得出三个结论：<br>①34层的残差网络比18层的网络错误率降低2.8%，并且34层的网络训练误差更小，在验证集中更generalizable，这说明这种网络结构可以解决退化问题；（实验了plain-18和plain-34，展示了退化问题。说明了退化问题不是因为梯度弥散，因为加入了BN。另外也不能简单地增加迭代次数来使其收敛，增加迭代次数仍然会出现退化问题。）<br>参考链接：<a href="https://www.jianshu.com/p/e58437f39f65" target="_blank" rel="noopener">https://www.jianshu.com/p/e58437f39f65</a><br>②34层的残差网络比34层的普通网络错误率下降3.5%，证明了残差网络在深度结构中的有效性；<br>最后，比较18层的普通网络和18层的残差网络，发现18层的残差网络更容易优化，收敛速度更快。<br>对于同等映射维度不匹配时，匹配维度有两种方法，zero padding不会增加参数，projection投影法会引入参数。本文比较了三种方式：（A）渐增维度使用zero-padding shortcuts（B）渐增维度使用projection shortcuts，其他使用全等映射(C)维度匹配或不匹配的同等映射全用投影法。实验结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/21326884.jpg" alt="10"></p>
-<p>从上可以发现，B比A的效果稍好一些，因为zero padding的部分没有参与残差学习。C比B也稍好一些，但是考虑到不增加复杂度和参数free，不采用这种方法。    </p>
-<p><strong>更深的瓶颈结构：</strong><br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/166673.jpg" alt="11"></p>
-<p>考虑到我们能承受的训练时间，将残差块（building block ）修改为瓶颈（bottleneck）设计如上图。首端和末端使用1<em>1卷积用来削减和恢复维度，剩下中间3\</em>3的卷积为瓶颈部分。与原来结构相比，这两种结构的时间复杂度相似。此时，没有引入参数的全等映射对这种瓶颈结构就显得非常重要，如果使用投影法（projection）会使得时间复杂度和模型大小加倍，所以要使用zero padding的同等映射。     </p>
-<p><strong>探索大于1000层的网络</strong><br>我们设置大于1000的网络结构深度，我们的方法没有出现优化困难的问题，测试误差仍然比较好，为7.93%，但是结果比110层的网络要差，尽管两者的训练误差相似，这是因为过拟合，可以使用maxout/dropout来解决过拟合的问题，但本文的实验没有使用任何maxout/dropout等强大的正则化方式。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/58605763.jpg" alt="12">     </p>
-<h2 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h2><p>这里我以CIFAR10为数据集，写了一个简单的ResNet用于图像分类，最后的top-1正确率为83%左右，主要程序如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/58888349.jpg" alt="13"><br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/72087590.jpg" alt="14"><br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/71712007.jpg" alt="15">     </p>
-<p>参考链接：<br><a href="https://www.jianshu.com/p/e58437f39f65" target="_blank" rel="noopener">https://www.jianshu.com/p/e58437f39f65</a><br><a href="https://blog.csdn.net/diamonjoy_zone/article/details/70904212" target="_blank" rel="noopener">https://blog.csdn.net/diamonjoy_zone/article/details/70904212</a>    </p>
-<p>推荐两篇写得比较详细的残差网络的博客：<br><a href="https://blog.csdn.net/loveliuzz/article/details/79117397" target="_blank" rel="noopener">https://blog.csdn.net/loveliuzz/article/details/79117397</a><br><a href="https://blog.csdn.net/qq_40027052/article/details/78261737" target="_blank" rel="noopener">https://blog.csdn.net/qq_40027052/article/details/78261737</a></p>
+<h2>实验</h2>
+<p>（1）使用color augmentation做数据扩增<br>
+（2）在每个卷积层之后，激活函数之前使用batch normalization (BN)<br>
+（3）SGD作优化，weight decay =0.0001，momentum=0.9<br>
+（4）learning rate=0.1,当错误率停滞时除以10<br>
+（5）不使用dropout</p>
+<p><strong>普通神经网络结构</strong><br>
+先评估18层和34层的网络结构，如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/29431678.jpg" alt="7"></p>
+<p>18层和34层的普通神经网络和残差网络实验结果对比如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/79796163.jpg" alt="8"></p>
+<p>其top-1错误率如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/51957840.jpg" alt="9"></p>
+<p>从上面两张图中，可以得出三个结论：<br>
+①34层的残差网络比18层的网络错误率降低2.8%，并且34层的网络训练误差更小，在验证集中更generalizable，这说明这种网络结构可以解决退化问题；（实验了plain-18和plain-34，展示了退化问题。说明了退化问题不是因为梯度弥散，因为加入了BN。另外也不能简单地增加迭代次数来使其收敛，增加迭代次数仍然会出现退化问题。）<br>
+参考链接：<a href="https://www.jianshu.com/p/e58437f39f65" target="_blank" rel="noopener">https://www.jianshu.com/p/e58437f39f65</a><br>
+②34层的残差网络比34层的普通网络错误率下降3.5%，证明了残差网络在深度结构中的有效性；<br>
+最后，比较18层的普通网络和18层的残差网络，发现18层的残差网络更容易优化，收敛速度更快。<br>
+对于同等映射维度不匹配时，匹配维度有两种方法，zero padding不会增加参数，projection投影法会引入参数。本文比较了三种方式：（A）渐增维度使用zero-padding shortcuts（B）渐增维度使用projection shortcuts，其他使用全等映射©维度匹配或不匹配的同等映射全用投影法。实验结果如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/21326884.jpg" alt="10"></p>
+<p>从上可以发现，B比A的效果稍好一些，因为zero padding的部分没有参与残差学习。C比B也稍好一些，但是考虑到不增加复杂度和参数free，不采用这种方法。</p>
+<p><strong>更深的瓶颈结构：</strong><br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/166673.jpg" alt="11"></p>
+<p>考虑到我们能承受的训练时间，将残差块（building block ）修改为瓶颈（bottleneck）设计如上图。首端和末端使用1*1卷积用来削减和恢复维度，剩下中间3*3的卷积为瓶颈部分。与原来结构相比，这两种结构的时间复杂度相似。此时，没有引入参数的全等映射对这种瓶颈结构就显得非常重要，如果使用投影法（projection）会使得时间复杂度和模型大小加倍，所以要使用zero padding的同等映射。</p>
+<p><strong>探索大于1000层的网络</strong><br>
+我们设置大于1000的网络结构深度，我们的方法没有出现优化困难的问题，测试误差仍然比较好，为7.93%，但是结果比110层的网络要差，尽管两者的训练误差相似，这是因为过拟合，可以使用maxout/dropout来解决过拟合的问题，但本文的实验没有使用任何maxout/dropout等强大的正则化方式。<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/58605763.jpg" alt="12"></p>
+<h2>程序实现</h2>
+<p>这里我以CIFAR10为数据集，写了一个简单的ResNet用于图像分类，最后的top-1正确率为83%左右，主要程序如下：<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/58888349.jpg" alt="13"><br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/72087590.jpg" alt="14"><br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-24/71712007.jpg" alt="15"></p>
+<p>参考链接：<br>
+<a href="https://www.jianshu.com/p/e58437f39f65" target="_blank" rel="noopener">https://www.jianshu.com/p/e58437f39f65</a><br>
+<a href="https://blog.csdn.net/diamonjoy_zone/article/details/70904212" target="_blank" rel="noopener">https://blog.csdn.net/diamonjoy_zone/article/details/70904212</a></p>
+<p>推荐两篇写得比较详细的残差网络的博客：<br>
+<a href="https://blog.csdn.net/loveliuzz/article/details/79117397" target="_blank" rel="noopener">https://blog.csdn.net/loveliuzz/article/details/79117397</a><br>
+<a href="https://blog.csdn.net/qq_40027052/article/details/78261737" target="_blank" rel="noopener">https://blog.csdn.net/qq_40027052/article/details/78261737</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -301,7 +338,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Shortcuts恒等映射"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Shortcuts恒等映射</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#网络结构"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">网络结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实验"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实验</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#程序实现"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">程序实现</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Shortcuts恒等映射</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">网络结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实验</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">程序实现</span></a></li></ol>
         
         </div>
       </aside>
@@ -419,7 +456,7 @@ var _hmt = _hmt || [];
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/JiaqianLi">
+                        <a target="_blank" href="https://github.com/JiaqianLi">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -455,8 +492,7 @@ var _hmt = _hmt || [];
                     style="border-width:0"/></a> -->
 
                     <!-- GoStats Simple HTML Based Code -->
-                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics"
-                    src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0" /></a>
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
                     <!-- End GoStats Simple HTML Based Code -->
 
                     <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
@@ -467,13 +503,13 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">34.4k words altogether</span>
+                    <span class="post-count">34.6k words altogether</span>
                 </p>
                   
                 </div>
             </div>
         </div>
-    </div>
+    
 </footer>
 
 <!-- jQuery -->
