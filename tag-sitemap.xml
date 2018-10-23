@@ -44,13 +44,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/CNN/</loc>
-        <lastmod>2018-10-02T13:05:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/ResNet/</loc>
         <lastmod>2018-10-02T13:07:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -142,22 +135,29 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
+        <lastmod>2018-10-19T14:14:58.005Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/tags/convex-set/</loc>
-        <lastmod>2018-10-03T14:51:48.000Z</lastmod>
+        <lastmod>2018-10-22T08:44:19.771Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>http://jiaqianlee.com/tags/convex-function/</loc>
-        <lastmod>2018-10-03T14:51:48.000Z</lastmod>
+        <lastmod>2018-10-22T08:44:19.771Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
-        <lastmod>2018-10-19T14:14:58.005Z</lastmod>
+        <loc>http://jiaqianlee.com/tags/CNN/</loc>
+        <lastmod>2018-10-23T15:11:25.823Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
