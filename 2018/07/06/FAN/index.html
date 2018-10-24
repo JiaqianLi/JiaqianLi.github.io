@@ -165,14 +165,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -235,89 +235,36 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=38592976&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>介绍</h2>
-<p>对于一些复杂的或者质量低的图像，现有的基于注意力（attention-based）的方法识别效果很差，我们研究发现其中一个主要的原因是使用这种注意力模型评估的排列很容易损坏由于这些复杂或质量低的图像。换句话说，注意力模型（attention model）不能精确地联系特征向量与输入图像中对应的目标区域，这种现象称为attention drift。为了解决这个问题，本文提出了一种新的方法，称为FAN（Focusing Attention Network）来精确地识别自然图像中的文本。FAN主要由两个子网络组成：AN（attention Network）和现有方法一样，用于识别目标字符；FN（Focusing  Network）通过检查AN的注意区域是非在图像中目标字符的正确位置，然后自动地调整这个注意点，下图直观地展示了这两个网络的功能。<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/65800624.jpg" alt="1"></p>
-<p>本文的主要贡献：<br>
-（1）提出了attention drift的概念，解释了使用现有的基于注意力的方法处理复杂、低质量的自然图像会得到很差效果的原因；<br>
-（2）提出了一个新的模型FAN来解决上述问题，AN在很多现有方法已经存在，FN是新引入的，可以将注意点转移到目标区域上；<br>
-（3）我们采用了一个强大的基于ResNet的卷积神经网络（CNN）以丰富场景文本图像的深度表征；<br>
-（4）在不同的数据集上做了大量实验，我们的方法比现有的方法取得更好的效果。</p>
-<h2>FAN方法</h2>
-<p>FAN包含两部分：AN和FN，在AN部分，由目标标签和特征产生alignment factors，每个alignment factor对应输入图像中的注意力区域；FN部分先定位目标标签的注意力区域，对注意力区域进行密集的预测得到对应的glimpse vector他，通过这种方式，FN可以判断glimpse vector是否合理。总之，FN基于AN给出的glimpse vector，对输入图像的注意力区域产生密集的输出，AN根据FN的反馈来更新glimpse vectors。</p>
-<h3>AN</h3>
-<p>AN解码器使一个循环神经网络（RNN）直接从输入图像I产生目标序列（y1,…yM）。在实验中，I通常用CNN-LSTM编码成一个特征向量序列，Encoder(I)=(h1, …, hT )，在第t步，解码器产生一个输出yt<br>
-yt = Generate(st, gt)<br>
-其中st是在t时刻RNN的一个隐藏状态，<br>
-st = RNN(yt−1, gt, st−1)<br>
-其中，gt是连续特征向量（h1,…hT）的权值和<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/79280437.jpg" alt="2"></p>
-<p>其中，  <img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/90752983.jpg" alt="3">     是注意力向量的权重，也叫做alignment factors，αt由（h1,…hT）中每个元素的得分来评估，用下式对得分进行归一化：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/13384946.jpg" alt="4"></p>
-<p>其中,v,W,V,b都是可训练的参数。<br>
-这里，Generate函数和RNN函数分别表示一个反馈网络和LSTM循环网络。此外，解码器需要产生一个可变长度的序列，在目标集中添加 special end-of-sentence (EOS)，因此解码器可以在EOS发散时完成字符的生成，注意力模型的损失函数定义为：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/27796892.jpg" alt="5"></p>
-<p>其中，yt^第t-th的真实字符，θ是一个结合了整个网络参数的向量。<br>
-AN模型有两个缺点：1）该模型很容易受到复杂或低质量的图像的影响，产生不精确的alignment factors，导致注意力区域与真实区域的偏差，这就是我们之前提到的attention drift现象；2）在数据很大时，这个模型很难训练。例如800-million的真实数据。在本文中，我们主要解决attention drift现象。</p>
-<h2>FN</h2>
-<p>为了解决attention drift现象，引入FN网络，focusing-mechanism如图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/96246675.jpg" alt="6"></p>
-<p>主要包含两步：1）计算每个预测标签的中心注意点；2）通过生成注意力区域的概率分布来将注意力集中在目标区域<br>
-**计算中心注意点：**在卷积或池化操作中，我们定义输入为N × Di × Hi × W，输出为N × Do × Ho × W，其中N, D, H，W分别表示batch size，通道数，特征映射的高度和宽度，根据卷积策略中的kernel，stride，pad，我们可以有：<br>
-Ho = (Hi + 2 × padH −kernelH)/strideH + 1<br>
-Wo= (Wi + 2 × padW −   kernelW)/strideW + 1<br>
-在L层(x,y)位置处，我们计算L-1层的感受野为边界坐标r = (xmin, xmax, ymin, ymax)，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/54873275.jpg" alt="7"></p>
-<p>在第t步，输入图像的感受野hj循环使用上式计算得到，然后选择感受野的中心作为注意力的中心：<br>
-c t,j = location(j)<br>
-其中，j为hj的下标；location函数用于评估感受野的中心，因此，输入图像中的目标yt的注意力中心可以用下式计算：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/70402419.jpg" alt="8"></p>
-<p>**将注意力集中在目标区域：**计算出目标yt的注意力中心后，我们可以从输入图像或者其中的一次卷积输出中得到一组特征映射 P(PH,PW )，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/10674598.jpg" alt="9"></p>
-<p>其中，F为图像或者卷积特征映射，P是输入图像中真实区域的最大值。<br>
-有了剪裁后的特征映射，我们可以计算注意力区域的能力分布：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/52638804.jpg" alt="10"></p>
-<p>其中，R和S分别Wie可训练的参数，（i,j）代表第(i × PW + j)个特征向量。可能性概率可表示为：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/61738751.jpg" alt="11"></p>
-<p>其中，K为标签类别的数量。<br>
-然后，我们定义focusing的损失函数：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/98045739.jpg" alt="12"></p>
-<p>其中，ytˆ(i,j)是真实的像素标签，ω是结合整个FN中参数的向量。损失只对带有字符注解的图像子集会增加。</p>
-<h3>FAN Training</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/66191174.jpg" alt="13"></p>
-<p>目标函数同时考虑target-generation 和attention-focusing，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/12704851.jpg" alt="14"></p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=38592976&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>对于一些复杂的或者质量低的图像，现有的基于注意力（attention-based）的方法识别效果很差，我们研究发现其中一个主要的原因是使用这种注意力模型评估的排列很容易损坏由于这些复杂或质量低的图像。换句话说，注意力模型（attention model）不能精确地联系特征向量与输入图像中对应的目标区域，这种现象称为attention drift。为了解决这个问题，本文提出了一种新的方法，称为FAN（Focusing Attention Network）来精确地识别自然图像中的文本。FAN主要由两个子网络组成：AN（attention Network）和现有方法一样，用于识别目标字符；FN（Focusing  Network）通过检查AN的注意区域是非在图像中目标字符的正确位置，然后自动地调整这个注意点，下图直观地展示了这两个网络的功能。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/65800624.jpg" alt="1"></p>
+<p>本文的主要贡献：<br>（1）提出了attention drift的概念，解释了使用现有的基于注意力的方法处理复杂、低质量的自然图像会得到很差效果的原因；<br>（2）提出了一个新的模型FAN来解决上述问题，AN在很多现有方法已经存在，FN是新引入的，可以将注意点转移到目标区域上；<br>（3）我们采用了一个强大的基于ResNet的卷积神经网络（CNN）以丰富场景文本图像的深度表征；<br>（4）在不同的数据集上做了大量实验，我们的方法比现有的方法取得更好的效果。  </p>
+<h2 id="FAN方法"><a href="#FAN方法" class="headerlink" title="FAN方法"></a>FAN方法</h2><p>FAN包含两部分：AN和FN，在AN部分，由目标标签和特征产生alignment factors，每个alignment factor对应输入图像中的注意力区域；FN部分先定位目标标签的注意力区域，对注意力区域进行密集的预测得到对应的glimpse vector他，通过这种方式，FN可以判断glimpse vector是否合理。总之，FN基于AN给出的glimpse vector，对输入图像的注意力区域产生密集的输出，AN根据FN的反馈来更新glimpse vectors。     </p>
+<h3 id="AN"><a href="#AN" class="headerlink" title="AN"></a>AN</h3><p>AN解码器使一个循环神经网络（RNN）直接从输入图像I产生目标序列（y1,…….yM）。在实验中，I通常用CNN-LSTM编码成一个特征向量序列，Encoder(I)=(h1, …, hT )，在第t步，解码器产生一个输出yt<br>yt = Generate(st, gt)<br>其中st是在t时刻RNN的一个隐藏状态，<br>st = RNN(yt−1, gt, st−1)<br>其中，gt是连续特征向量（h1,……hT）的权值和<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/79280437.jpg" alt="2"></p>
+<p>其中，  <img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/90752983.jpg" alt="3">     是注意力向量的权重，也叫做alignment factors，αt由（h1,……hT）中每个元素的得分来评估，用下式对得分进行归一化：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/13384946.jpg" alt="4">     </p>
+<p>其中,v,W,V,b都是可训练的参数。<br>这里，Generate函数和RNN函数分别表示一个反馈网络和LSTM循环网络。此外，解码器需要产生一个可变长度的序列，在目标集中添加 special end-of-sentence (EOS)，因此解码器可以在EOS发散时完成字符的生成，注意力模型的损失函数定义为：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/27796892.jpg" alt="5"></p>
+<p>其中，yt^第t-th的真实字符，θ是一个结合了整个网络参数的向量。<br>AN模型有两个缺点：1）该模型很容易受到复杂或低质量的图像的影响，产生不精确的alignment factors，导致注意力区域与真实区域的偏差，这就是我们之前提到的attention drift现象；2）在数据很大时，这个模型很难训练。例如800-million的真实数据。在本文中，我们主要解决attention drift现象。</p>
+<h2 id="FN"><a href="#FN" class="headerlink" title="FN"></a>FN</h2><p>为了解决attention drift现象，引入FN网络，focusing-mechanism如图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/96246675.jpg" alt="6"></p>
+<p>主要包含两步：1）计算每个预测标签的中心注意点；2）通过生成注意力区域的概率分布来将注意力集中在目标区域<br><strong>计算中心注意点：</strong>在卷积或池化操作中，我们定义输入为N × Di × Hi × W，输出为N × Do × Ho × W，其中N, D, H，W分别表示batch size，通道数，特征映射的高度和宽度，根据卷积策略中的kernel，stride，pad，我们可以有：<br>Ho = (Hi + 2 × padH −kernelH)/strideH + 1<br>Wo= (Wi + 2 × padW −   kernelW)/strideW + 1<br>在L层(x,y)位置处，我们计算L-1层的感受野为边界坐标r = (xmin, xmax, ymin, ymax)，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/54873275.jpg" alt="7">     </p>
+<p>在第t步，输入图像的感受野hj循环使用上式计算得到，然后选择感受野的中心作为注意力的中心：<br>c t,j = location(j)<br>其中，j为hj的下标；location函数用于评估感受野的中心，因此，输入图像中的目标yt的注意力中心可以用下式计算：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/70402419.jpg" alt="8">     </p>
+<p><strong>将注意力集中在目标区域：</strong>计算出目标yt的注意力中心后，我们可以从输入图像或者其中的一次卷积输出中得到一组特征映射 P(PH,PW )，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/10674598.jpg" alt="9">      </p>
+<p>其中，F为图像或者卷积特征映射，P是输入图像中真实区域的最大值。<br>有了剪裁后的特征映射，我们可以计算注意力区域的能力分布：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/52638804.jpg" alt="10"></p>
+<p>其中，R和S分别Wie可训练的参数，（i,j）代表第(i × PW + j)个特征向量。可能性概率可表示为：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/61738751.jpg" alt="11"></p>
+<p>其中，K为标签类别的数量。<br>然后，我们定义focusing的损失函数：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/98045739.jpg" alt="12"></p>
+<p>其中，ytˆ(i,j)是真实的像素标签，ω是结合整个FN中参数的向量。损失只对带有字符注解的图像子集会增加。     </p>
+<h3 id="FAN-Training"><a href="#FAN-Training" class="headerlink" title="FAN Training"></a>FAN Training</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/66191174.jpg" alt="13">      </p>
+<p>目标函数同时考虑target-generation 和attention-focusing，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/12704851.jpg" alt="14">      </p>
 <p>使用一个可调参数λ (0 6 λ &lt; 1)，用于衡量AN和FN的影响，这个网络使用标准的BP训练。</p>
-<h3>解码</h3>
-<p>基于注意力的解码器使为了产生输出字符序列，在无约束的字符识别中，我们直接选择可能性最大的字符；然而在有约束的识别中，依据不同大小的辞典，我们计算所有单词的条件概率分布，然后选择可能性最大的作为我们的输出结果。<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/66364289.jpg" alt="15"></p>
-<h2>实验评估</h2>
-<h3>数据集</h3>
-<p><strong>IIIT 5K-Words（IIIT5K）</strong><br>
-<strong>Street View Text  (SVT)</strong><br>
-<strong>ICDAR 2003  (IC03)</strong><br>
-<strong>ICDAR 2013  (IC13)</strong><br>
-<strong>ICDAR 2015 (IC15)</strong></p>
-<h3>具体设置</h3>
-<p>**网络：**32层ResNet-based CNN,如上表所示来获得更深层次的文本特征。<br>
-表1中残差网络块：{[kernel size, number of channels]×}、{stride, pad} = {0, 0}<br>
-其他卷积层：{kernelW ×kernelH, strideW × strideH, padW × padH, channels}<br>
-池化层： {kernelW × kerneH, strideW × strideH, padW ×padH}<br>
-H和W分别为特征映射的高和宽。从CNN中提取的特征序列进入BLSTM (256 hidden units)网络中。对于字符生成任务，注意力设置成一个LSTM (256 memory blocks)和37个输出单元 (26 letters, 10 digits, and 1 EOS symbol)。对于FAN，我们从输入图像中裁剪特征映射且设置λ = 0.01。<br>
-**模型训练：*<em>使用ADADELTA优化方法，训练我们的模型在8百万的合成数据没有pixel-wise标记和4百万带标签的，大约30%有pixel标签。设置batch size=32，图像大小256</em>32。每秒90个样本，epochs=3，约5天后收敛。<br>
-<strong>运行环境：</strong>：CAFFE框架、CUDA GPU加速</p>
-<h2>实验结果</h2>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/60765390.jpg" alt="16"></p>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/54535248.jpg" alt="17"></p>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/16440185.jpg" alt="18"></p>
+<h3 id="解码"><a href="#解码" class="headerlink" title="解码"></a>解码</h3><p>基于注意力的解码器使为了产生输出字符序列，在无约束的字符识别中，我们直接选择可能性最大的字符；然而在有约束的识别中，依据不同大小的辞典，我们计算所有单词的条件概率分布，然后选择可能性最大的作为我们的输出结果。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/66364289.jpg" alt="15">      </p>
+<h2 id="实验评估"><a href="#实验评估" class="headerlink" title="实验评估"></a>实验评估</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p><strong>IIIT 5K-Words（IIIT5K）</strong><br><strong>Street View Text  (SVT)</strong><br><strong>ICDAR 2003  (IC03)</strong><br><strong>ICDAR 2013  (IC13)</strong><br><strong>ICDAR 2015 (IC15)</strong>      </p>
+<h3 id="具体设置"><a href="#具体设置" class="headerlink" title="具体设置"></a>具体设置</h3><p><strong>网络：</strong>32层ResNet-based CNN,如上表所示来获得更深层次的文本特征。<br>表1中残差网络块：{[kernel size, number of channels]×}、{stride, pad} = {0, 0}<br>其他卷积层：{kernelW ×kernelH, strideW × strideH, padW × padH, channels}<br>池化层： {kernelW × kerneH, strideW × strideH, padW ×padH}<br>H和W分别为特征映射的高和宽。从CNN中提取的特征序列进入BLSTM (256 hidden units)网络中。对于字符生成任务，注意力设置成一个LSTM (256 memory blocks)和37个输出单元 (26 letters, 10 digits, and 1 EOS symbol)。对于FAN，我们从输入图像中裁剪特征映射且设置λ = 0.01。<br><strong>模型训练：</strong>使用ADADELTA优化方法，训练我们的模型在8百万的合成数据没有pixel-wise标记和4百万带标签的，大约30%有pixel标签。设置batch size=32，图像大小256<em>32。每秒90个样本，epochs=3，约5天后收敛。<br><em>*运行环境：</em></em>：CAFFE框架、CUDA GPU加速   </p>
+<h2 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h2><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/60765390.jpg" alt="16">      </p>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/54535248.jpg" alt="17">    </p>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-18/16440185.jpg" alt="18">         </p>
 <p><strong>原文后续还有关于参数λ和Pixel Labeling的影响，可参考原文，这里不详述。</strong></p>
-<h2>结论</h2>
-<p>在本文中我们给出了attention drift的概念解释了为什么现有的AN方法对复杂或低质量的图像识别效果很差，继而提出一种新的方法FAN来解决这个问题。不同于现有方法，FAN使用创新的focusing网络来改进AN模型处理复杂低质量图像的drifted attention ,大量的实验证明我们的方法比现有的方法效果好。</p>
-<p>原文链接：<br>
-<a href="https://arxiv.org/pdf/1709.02054.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1709.02054.pdf</a></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中我们给出了attention drift的概念解释了为什么现有的AN方法对复杂或低质量的图像识别效果很差，继而提出一种新的方法FAN来解决这个问题。不同于现有方法，FAN使用创新的focusing网络来改进AN模型处理复杂低质量图像的drifted attention ,大量的实验证明我们的方法比现有的方法效果好。    </p>
+<p>原文链接：<br><a href="https://arxiv.org/pdf/1709.02054.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1709.02054.pdf</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -362,7 +309,7 @@ H和W分别为特征映射的高和宽。从CNN中提取的特征序列进入BLS
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">FAN方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">AN</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">FN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">FAN Training</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">解码</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实验评估</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">数据集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">具体设置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">实验结果</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">结论</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#FAN方法"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">FAN方法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#AN"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">AN</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#FN"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">FN</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#FAN-Training"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">FAN Training</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#解码"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">解码</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实验评估"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实验评估</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据集"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">数据集</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#具体设置"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">具体设置</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#实验结果"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">实验结果</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结论"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">结论</span></a></li></ol>
         
         </div>
       </aside>
