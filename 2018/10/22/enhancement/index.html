@@ -167,13 +167,6 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/tags/">Tags</a>
                         </li>
                         
@@ -182,6 +175,13 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -255,7 +255,7 @@ var _hmt = _hmt || [];
 <h2>动态增强滤波器</h2>
 <p>本部分的模型根据端到端学习方法中的输入图像和输出增强图像对来学习不同的增强方法中有代表性的增强滤波器，目标是提高分类效果。对于一张输入的RGB图像I，先把它转化成亮度-色度（luminance-chrominance）Y CbCr 彩色空间，增强算法用于RGB图像的亮度通道，可以使得过滤器修改整体色调属性和图像锐度，而不影响颜色。 亮度图像\(Y \in {R^{ {\rm{h*}}w}}\)卷积一个增强算法\(E:Y \to T\)，产生增强后的目标输出图像\(T \in {R^{ {\rm{h*}}w}}\)，h和w分别代表图像Y的高和宽。具体结构如下：<br>
 <img src="/2018/10/22/enhancement/2.png" data-action="zoom"><br>
-** 一、增强阶段**<br>
+<strong>一、增强阶段</strong><br>
 增强网络（EnhanceNet）由卷积层和全连接层组成，输入是单通道的亮度图像Y，输出是滤波器\({f_\Theta }\)，\(\Theta  \in {R^{s*s*n}}\)，\(\Theta \)是增强网络动态产生的转换参数，s是滤波器大小，n是滤波器数量，对于一幅单通道的亮度图像产生的单一滤波器数量等于1。这个生成的滤波器对于输入图像中每个位置\((i,j)\)产生其输出图像\(Y’(i,j) = {f_\Theta }(Y(i,j)),Y’ \in {R^{h*w}}\)，滤波器对于每一张输入图像Y都是特定的，对于不同的样本参数也不一样。参数\(\Theta \)通过训练目标图像T和输出图像Y’之间的均方误差（MSE）得到。之后，加上色度部分CbCr得到变换后的RGB图像I’。我们发现滤波器可以学到期望的变换并正确的增强图像，图5可以看到动态增强后的图像纹理。<br>
 <img src="/2018/10/22/enhancement/3.png" data-action="zoom"><br>
 <strong>二、分类阶段</strong><br>
