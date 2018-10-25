@@ -165,6 +165,13 @@ var _hmt = _hmt || [];
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -173,13 +180,6 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -235,57 +235,17 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28240138&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>介绍</h2>
-<p>在本文中，我们用自然图像中包含的文字创建了一个大型数据集，名为Chinese Text in the Wild（CTW）。该数据集包含32,285张带有1,018,402个中文字符的图像，远远超出了之前的数据集，这些图片来自腾讯街景，从中国数十个不同的城市获取，没有任何特殊目的。由于其多样性和复杂性，该数据库存在极大的挑战性。它包含平面文本，凸起文本，城市文本，农村文本，低亮度文本，远处文本，部分遮挡文本等。对于每个图像，我们注释其所有中文。对每一个中文字符，我们注释它的底层字符，边界框和6个属性，以指示它是否被遮挡，复杂背景，扭曲，3D文字，艺术字和手写体。</p>
-<h2>数据集</h2>
-<h3>图像选择</h3>
-<p>图像大小2048*2048；去掉一些重复的图像，最终选择32285张图像。<br>
-###	Annotation<br>
-对于一幅图像，首先用一个框选中一行文字，然后再框出每一个汉字，接着缩小这个框，显示其对应的汉字并判断之前的6个属性。如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/48168546.jpg" alt="1"><br>
-之前我们设定了六种属性，分别为是否被遮挡，背景是否清晰，是否扭曲，是否为3D文字，是艺术字还是标准的字体，是手写体还是印刷体，判断每个汉字是否具有这6种属性，结果见下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/35224312.jpg" alt="2"><br>
-最后以数据集中的两幅图像为例，显示其文字识别情况，如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/74631391.jpg" alt="3"></p>
-<h3>数据集的划分</h3>
-<p>以8：1：1的比例将数据集分为训练集（25887张图像，812872个汉字），识别测试集（3269张图像，103519个汉字），检测测试集（3129张图像，102001个汉字）。</p>
-<h3>统计</h3>
-<p>32285张图像中一共包含3850种汉字。频率最高的50个汉字如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/32689871.jpg" alt="4"><br>
-在训练集和测试集中包含特定数量汉字的图像和包含特定类别汉字的图像统计如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/57429005.jpg" alt="5"><br>
-在训练集和测试集中，不同字体大小的汉字数量如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/63000198.jpg" alt="6"><br>
-在所有字体大小、大、中、小(大是字体大小&gt;=32、中是字体大小在[16，32)之间、小是字体大小&lt;16)这四类中分析6中属性所占的比例如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/17185564.jpg" alt="7"><br>
-从中我们发现，字体比较大的汉字属性复杂的可能性越大。<br>
-数据集的多样性如下表，a-j分别为平面文本，凸起文本，城市文本，农村文本，水平文本、竖直文本，远处文本，近处文本，低亮度文本，部分遮挡文本。<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/1660170.jpg" alt="8"></p>
-<h2>基本算法和实验结果</h2>
-<h3>汉字识别</h3>
-<p>最终将汉字分为1001类，1000类出现频率最高的汉字和其他，随机从测试集中选择20种汉字，选用几种已有的网络进行实验，实验结果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/99636623.jpg" alt="9"><br>
-并给出这几种网络对出现频率前十的汉字的top-1精确率，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/88051965.jpg" alt="10"><br>
-从上述结果中可以看到Google Inception取得的正确率最高，使用该网络对不同字体大小和不同属性的汉字进行实验，得到的结果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/71232140.jpg" alt="11"></p>
-<h3>汉字检测</h3>
-<p>我们使用YOLOv2算法来检测图像中的汉字，每个边框中包含一个汉字。对于训练集我们用YOLOv2设置输入分辨率为672*672，这样2048*2028的图像就被分为196个子图，每个分辨率为168*168，其中有23-24个像素是重叠的，然后这个672*672的子图作为下一次YOLOv2的输入。对于测试集，由于字符的大小不同，使用多尺度方案。首先，设置输入分辨率为1216*1216，然后分成16个子图，每个大小为608*608，重叠像素为128；同时将输入图像分为64个小的子图，每个大小为304*304，重叠像素为54-55；之后这80个子图再重新调整大小作为分辨率1216*1216的下一次YOLOv2算法的下一次输入。最后用非极大抑制来避免重复检测。<br>
-出现频率前10的汉字的AP百分比如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/7538790.jpg" alt="12"><br>
-给出不同字体大小的查准率和查全率曲线，如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/45495446.jpg" alt="13"><br>
-给出不同属性和不同字体大小的汉字使用YOLOv2算法后的查全率曲线如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/23508969.jpg" alt="14"><br>
-使用YOLOv2算法检测的部分结果如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/75725245.jpg" alt="15"></p>
-<h2>总结</h2>
-<p>本文主要介绍了户外文字识别方法及其数据库。采用了几种已有的方法来完成两个任务：识别选定区域的文字和从图像中检测出文字所在的位置，我们相信这个数据库可以为今后的文字识别和检测功能提供激励作用。</p>
-<p>原文链接：<a href="https://arxiv.org/pdf/1803.00085.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1803.00085.pdf</a><br>
-数据集和源程序下载链接：<a href="https://ctwdataset.github.io/" target="_blank" rel="noopener">https://ctwdataset.github.io/</a></p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28240138&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在本文中，我们用自然图像中包含的文字创建了一个大型数据集，名为Chinese Text in the Wild（CTW）。该数据集包含32,285张带有1,018,402个中文字符的图像，远远超出了之前的数据集，这些图片来自腾讯街景，从中国数十个不同的城市获取，没有任何特殊目的。由于其多样性和复杂性，该数据库存在极大的挑战性。它包含平面文本，凸起文本，城市文本，农村文本，低亮度文本，远处文本，部分遮挡文本等。对于每个图像，我们注释其所有中文。对每一个中文字符，我们注释它的底层字符，边界框和6个属性，以指示它是否被遮挡，复杂背景，扭曲，3D文字，艺术字和手写体。  </p>
+<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><h3 id="图像选择"><a href="#图像选择" class="headerlink" title="图像选择"></a>图像选择</h3><p>图像大小2048*2048；去掉一些重复的图像，最终选择32285张图像。</p>
+<h3 id="Annotation"><a href="#Annotation" class="headerlink" title="Annotation"></a>Annotation</h3><p>对于一幅图像，首先用一个框选中一行文字，然后再框出每一个汉字，接着缩小这个框，显示其对应的汉字并判断之前的6个属性。如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/48168546.jpg" alt="1"><br>之前我们设定了六种属性，分别为是否被遮挡，背景是否清晰，是否扭曲，是否为3D文字，是艺术字还是标准的字体，是手写体还是印刷体，判断每个汉字是否具有这6种属性，结果见下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/35224312.jpg" alt="2"><br>最后以数据集中的两幅图像为例，显示其文字识别情况，如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/74631391.jpg" alt="3"></p>
+<h3 id="数据集的划分"><a href="#数据集的划分" class="headerlink" title="数据集的划分"></a>数据集的划分</h3><p>以8：1：1的比例将数据集分为训练集（25887张图像，812872个汉字），识别测试集（3269张图像，103519个汉字），检测测试集（3129张图像，102001个汉字）。</p>
+<h3 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h3><p>32285张图像中一共包含3850种汉字。频率最高的50个汉字如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/32689871.jpg" alt="4"><br>在训练集和测试集中包含特定数量汉字的图像和包含特定类别汉字的图像统计如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/57429005.jpg" alt="5"><br>在训练集和测试集中，不同字体大小的汉字数量如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/63000198.jpg" alt="6"><br>在所有字体大小、大、中、小(大是字体大小&gt;=32、中是字体大小在[16，32)之间、小是字体大小&lt;16)这四类中分析6中属性所占的比例如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/17185564.jpg" alt="7"><br>从中我们发现，字体比较大的汉字属性复杂的可能性越大。<br>数据集的多样性如下表，a-j分别为平面文本，凸起文本，城市文本，农村文本，水平文本、竖直文本，远处文本，近处文本，低亮度文本，部分遮挡文本。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/1660170.jpg" alt="8"></p>
+<h2 id="基本算法和实验结果"><a href="#基本算法和实验结果" class="headerlink" title="基本算法和实验结果"></a>基本算法和实验结果</h2><h3 id="汉字识别"><a href="#汉字识别" class="headerlink" title="汉字识别"></a>汉字识别</h3><p>最终将汉字分为1001类，1000类出现频率最高的汉字和其他，随机从测试集中选择20种汉字，选用几种已有的网络进行实验，实验结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/99636623.jpg" alt="9"><br>并给出这几种网络对出现频率前十的汉字的top-1精确率，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/88051965.jpg" alt="10"><br>从上述结果中可以看到Google Inception取得的正确率最高，使用该网络对不同字体大小和不同属性的汉字进行实验，得到的结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/71232140.jpg" alt="11"></p>
+<h3 id="汉字检测"><a href="#汉字检测" class="headerlink" title="汉字检测"></a>汉字检测</h3><p>我们使用YOLOv2算法来检测图像中的汉字，每个边框中包含一个汉字。对于训练集我们用YOLOv2设置输入分辨率为672*672，这样2048<em>2028的图像就被分为196个子图，每个分辨率为168\</em>168，其中有23-24个像素是重叠的，然后这个672*672的子图作为下一次YOLOv2的输入。对于测试集，由于字符的大小不同，使用多尺度方案。首先，设置输入分辨率为1216*1216，然后分成16个子图，每个大小为608*608，重叠像素为128；同时将输入图像分为64个小的子图，每个大小为304*304，重叠像素为54-55；之后这80个子图再重新调整大小作为分辨率1216*1216的下一次YOLOv2算法的下一次输入。最后用非极大抑制来避免重复检测。<br>出现频率前10的汉字的AP百分比如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/7538790.jpg" alt="12"><br>给出不同字体大小的查准率和查全率曲线，如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/45495446.jpg" alt="13"><br>给出不同属性和不同字体大小的汉字使用YOLOv2算法后的查全率曲线如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/23508969.jpg" alt="14"><br>使用YOLOv2算法检测的部分结果如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/75725245.jpg" alt="15"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要介绍了户外文字识别方法及其数据库。采用了几种已有的方法来完成两个任务：识别选定区域的文字和从图像中检测出文字所在的位置，我们相信这个数据库可以为今后的文字识别和检测功能提供激励作用。</p>
+<p>原文链接：<a href="https://arxiv.org/pdf/1803.00085.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1803.00085.pdf</a><br>数据集和源程序下载链接：<a href="https://ctwdataset.github.io/" target="_blank" rel="noopener">https://ctwdataset.github.io/</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -330,7 +290,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">数据集</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">图像选择</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">数据集的划分</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">统计</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">基本算法和实验结果</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">汉字识别</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">汉字检测</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据集"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">数据集</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#图像选择"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">图像选择</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Annotation"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Annotation</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据集的划分"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">数据集的划分</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#统计"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">统计</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#基本算法和实验结果"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">基本算法和实验结果</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#汉字识别"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">汉字识别</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#汉字检测"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">汉字检测</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">总结</span></a></li></ol>
         
         </div>
       </aside>

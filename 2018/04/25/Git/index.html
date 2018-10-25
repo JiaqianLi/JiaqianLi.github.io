@@ -161,6 +161,13 @@ var _hmt = _hmt || [];
 
                         
                         <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -169,13 +176,6 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -231,39 +231,14 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=1296583188&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>准备工作</h2>
-<p>以win10系统为例<br>
-首先在Github上创建用户名，网址是<a href="http://www.github.com" target="_blank" rel="noopener">https://www.github.com</a><br>
-然后下载并安装Git，网址是<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a>，下载与自己电脑对应的版本即可</p>
-<h2>将项目上传到Github</h2>
-<p>打开你的待上传项目，然后在该目录下右键，选择Git Bash Here，如下图：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/52250520.jpg" alt="1"></p>
-<h3>创建SSH Key</h3>
-<p>（1）在打开的窗口中输入以下命令：<br>
-ssh-keygen -t rsa -C <a href="mailto:%22youremail@example.com" target="_blank" rel="noopener">&quot;youremail@example.com</a>&quot;<br>
-把邮件地址换成你自己注册Github时的邮件地址，然后一路回车，使用默认值即可，然后根据它显示的路径找到.ssh的一个文件夹，里面有两个文件，一个id_rsa为私钥，不能泄露；另一个id_rsa.pub为公钥，可以用记事本打开；<br>
-（2）登录Github，打开&quot;Account settings&quot;,“SSH Keys&quot;页面：<br>
-（3）点&quot;Add SSH Key”，填写任意的Title，在Key文本框粘贴id_rsa.pub文件的内容<br>
-（4）点&quot;Add Key&quot;，你就可以看到已添加的Key<br>
-这是因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
-<h3>上传项目</h3>
-<p>有了这些准备工作，接下来把你的项目上传到Github上就很简单啦！<br>
-（1）在Github网站中，选择个人中心，然后点一个“+”，选择&quot;New repository&quot; ，然后给你要上传的项目等添加标题、描述等信息，然后创建就可以了。</p>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/99272135.jpg" alt="2"><br>
-（2）在之前的Git Bash Here命令框中依次输入以下语句并回车：<br>
-①git init<br>
-表示初始化<br>
-②git add .<br>
-添加项目<br>
-③git commit -m &quot;描述你做了什么&quot;<br>
-把文件放到Git仓库，引号里面可以自己定义你具体做了什么内容，比如我在原来项目的基础上又新加了一些内容，就可以写成：git commit -m “add a new file&quot;<br>
-④git remote add origin <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a><strong><strong>/</strong></strong>.git<br>
-然后就需要把你本地计算机上的项目与Github联系起来，后面的网址可以在你之前创建完New repository之后跳转的页面上找到，一般第一个”*“里的是你的用户名，后一个”*&quot;是你的项目名称<br>
-⑤git push origin master<br>
-最后一步就可以把你的项目上传啦</p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=1296583188&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>以win10系统为例<br>首先在Github上创建用户名，网址是<a href="http://www.github.com" target="_blank" rel="noopener">https://www.github.com</a><br>然后下载并安装Git，网址是<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a>，下载与自己电脑对应的版本即可</p>
+<h2 id="将项目上传到Github"><a href="#将项目上传到Github" class="headerlink" title="将项目上传到Github"></a>将项目上传到Github</h2><p>打开你的待上传项目，然后在该目录下右键，选择Git Bash Here，如下图：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/52250520.jpg" alt="1"></p>
+<h3 id="创建SSH-Key"><a href="#创建SSH-Key" class="headerlink" title="创建SSH Key"></a>创建SSH Key</h3><p>（1）在打开的窗口中输入以下命令：<br>ssh-keygen -t rsa -C “youremail@example.com”<br>把邮件地址换成你自己注册Github时的邮件地址，然后一路回车，使用默认值即可，然后根据它显示的路径找到.ssh的一个文件夹，里面有两个文件，一个id_rsa为私钥，不能泄露；另一个id_rsa.pub为公钥，可以用记事本打开；<br>（2）登录Github，打开”Account settings”,”SSH Keys”页面：<br>（3）点”Add SSH Key”，填写任意的Title，在Key文本框粘贴id_rsa.pub文件的内容<br>（4）点”Add Key”，你就可以看到已添加的Key<br>这是因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<h3 id="上传项目"><a href="#上传项目" class="headerlink" title="上传项目"></a>上传项目</h3><p>有了这些准备工作，接下来把你的项目上传到Github上就很简单啦！<br>（1）在Github网站中，选择个人中心，然后点一个“+”，选择”New repository” ，然后给你要上传的项目等添加标题、描述等信息，然后创建就可以了。</p>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/99272135.jpg" alt="2"><br>（2）在之前的Git Bash Here命令框中依次输入以下语句并回车：<br>①git init<br>表示初始化<br>②git add .<br>添加项目<br>③git commit -m “描述你做了什么”<br>把文件放到Git仓库，引号里面可以自己定义你具体做了什么内容，比如我在原来项目的基础上又新加了一些内容，就可以写成：git commit -m “add a new file”<br>④git remote add origin <a href="https://github.com/****/****.git" target="_blank" rel="noopener">https://github.com/****/****.git</a><br>然后就需要把你本地计算机上的项目与Github联系起来，后面的网址可以在你之前创建完New repository之后跳转的页面上找到，一般第一个”*“里的是你的用户名，后一个”*“是你的项目名称<br>⑤git push origin master<br>最后一步就可以把你的项目上传啦</p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -308,7 +283,7 @@ ssh-keygen -t rsa -C <a href="mailto:%22youremail@example.com" target="_blank" r
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">准备工作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">将项目上传到Github</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">创建SSH Key</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">上传项目</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#准备工作"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">准备工作</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#将项目上传到Github"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">将项目上传到Github</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#创建SSH-Key"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">创建SSH Key</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#上传项目"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">上传项目</span></a></li></ol></li></ol>
         
         </div>
       </aside>
