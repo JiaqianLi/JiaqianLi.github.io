@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ECNU Computer Vision Group - JiaqianLi">
+    <meta name="keyword" content="华东师范大学18级研究生 图形图像处理与计算机视觉方向">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          基于变分法的感知色彩校正 - 李佳倩的博客 | LJQ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jiaqianlee.com/2018/11/01/ACE/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('ACE-BG.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#ACE" title="ACE">ACE</a>
+                            
+                              <a class="tag" href="/tags/#变分法" title="变分法">变分法</a>
+                            
+                              <a class="tag" href="/tags/#色彩校正" title="色彩校正">色彩校正</a>
+                            
+                        </div>
+                        <h1>基于变分法的感知色彩校正</h1>
+                        <h2 class="subheading">Perceptual Color Correction Through Variational Techniques</h2>
+                        <span class="meta">
+                            Posted by Jiaqian Li on
+                            2018-11-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LJQ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1318610333&auto=1&height=66"></iframe></div>
+
+<blockquote>
+<p>数学虐我千百遍<br>我待数学如初恋</p>
+</blockquote>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文提出一种基于变分技术的图像感知色彩校正，提出了一个新的图像泛函，其最小值可以产生感知色彩增强后的图，这个变分公式使得局部对比度调整和数据的联系更灵活，展示了一个将梯度下降的数值实现运用到能量泛函和自动色彩增强（ACE）方程的模型。同时，使用欧拉-拉格朗日方程进行数值近似，将模型复杂度从\(O({N^2})\)减少到\(O(N\log (N))\)。</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>变分法适用于直方图均衡和匹配，然而最小化能量泛函进行对比度修正没有考虑到人类感知系统中的空间、局部和非线性特征，因此本文提出了关于ACE的变分公式。<br>本文的主要贡献：<br>1.考虑ACE的离散形式,可以作为某一特定能量泛函的梯度下降得到，一方面，通过研究与ACE相关的泛函推广，可以知道变分法可以用于基于人类感知性质的图像增强，另一方面ACE能量泛函的特殊形式揭示了离散框架中固有模型的显式特征；<br>2.这个公式可以更好的研究ACE的全局和局部表现，并通过不同的方式控制其影响；在变分中，ACE更容易结合数据的局部联系来避免过度增强，最后加入正则机制；<br>3.用梯度下降技术来最小化ACE泛函及用欧拉-拉格朗日方程数值近似使得模型的复杂度从\(O({N^2})\)降到\(O(N\log (N))\)。</p>
+<h1 id="基于变分法的全局直方图均衡"><a href="#基于变分法的全局直方图均衡" class="headerlink" title="基于变分法的全局直方图均衡"></a>基于变分法的全局直方图均衡</h1><p>\(\psi :[0,1] \to R\)是个可微函数，考虑以下泛函：<br><img src="/2018/11/01/ACE/1.png" data-action="zoom"><br>则能量函数E(I)的变分如下：<br><img src="/2018/11/01/ACE/2.png" data-action="zoom"><br><img src="/2018/11/01/ACE/3.png" data-action="zoom"><br>令\(I(x) \equiv \lambda \),定义<br><img src="/2018/11/01/ACE/4.png" data-action="zoom"><br>则（2）可以写成：<br><img src="/2018/11/01/ACE/5.png" data-action="zoom"><br>若I为静态图像，且\(\delta E(I) = 0\)，则<br><img src="/2018/11/01/ACE/6.png" data-action="zoom"><br>取\(\psi ‘(\lambda ) = 4\lambda  - 2\),若\(\psi (\lambda ) = 2{\lambda ^2} - 2\lambda  + K\),K为任意常数，对于任意的\(\lambda  \in [0,1]\),\({H_I}(\lambda ) = \lambda \),这就是规范直方图均衡化（uniform histogram equalization）。取K=1/2，可得\(\psi (\lambda ) = 2{(\lambda  - \frac{1}{2})^2}\),代入（1）可以得到如下泛函，其最小值对应恒定的直方图均衡<br><img src="/2018/11/01/ACE/7.png" data-action="zoom"><br>如果把图像I的平均对比度记为：<br><img src="/2018/11/01/ACE/8.png" data-action="zoom"><br>因此，最小化能量函数E（I）就是最大化图像平均对比度同时最小化其偏差至理论均值1/2。<br>记原始图像为\({I_0}\),能量泛函的梯度下降为：<br><img src="/2018/11/01/ACE/9.png" data-action="zoom"><br>上式可求得其确定的解。使用演化等式而不是直接计算是因为（12）可以将图像\({I_0}\)的直方图逐渐转为均衡，可以随时在我们想要的时候停止，因为最后的直方图均衡结果往往看起来不真实或者过饱和。<br>上述式子存在两个缺点：1.演化过程保存了水平线的顺序，且没考虑到局部特征，不遵从基本的人类视觉感知特性；2.计算复杂度为\(O({N^2})\)，N为整幅图的像素个数。</p>
+<h1 id="ACE基础公式"><a href="#ACE基础公式" class="headerlink" title="ACE基础公式"></a>ACE基础公式</h1><h1 id="基于变分法的局部对比度增强"><a href="#基于变分法的局部对比度增强" class="headerlink" title="基于变分法的局部对比度增强"></a>基于变分法的局部对比度增强</h1><h1 id="ACE变分公式"><a href="#ACE变分公式" class="headerlink" title="ACE变分公式"></a>ACE变分公式</h1><h1 id="数值近似（优化）"><a href="#数值近似（优化）" class="headerlink" title="数值近似（优化）"></a>数值近似（优化）</h1>
+
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+                <div id="gitalk-container"></div>     <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                        clientID: '98e7cbcd4e5f0c3b1319',
+                        clientSecret: 'd506d8485b483357c399e2cc572840d73c8df3c6',
+                        repo: 'JiaqianLi.github.io',
+                        owner: 'JiaqianLi',
+                        admin: ['JiaqianLi'],
+                        id: '2018/11/01/ACE/',
+                        distractionFreeMode: true,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/10/22/enhancement/" data-toggle="tooltip" data-placement="top" title="基于图像分类的动态图像增强">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+                <p></p>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#摘要"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基于变分法的全局直方图均衡"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">基于变分法的全局直方图均衡</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ACE基础公式"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ACE基础公式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基于变分法的局部对比度增强"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">基于变分法的局部对比度增强</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ACE变分公式"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ACE变分公式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数值近似（优化）"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">数值近似（优化）</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ACE" title="ACE">ACE</a>
+                        
+                          <a class="tag" href="/tags/#变分法" title="变分法">变分法</a>
+                        
+                          <a class="tag" href="/tags/#色彩校正" title="色彩校正">色彩校正</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://cv-junchengli.github.io/" target="_blank">junchengli</a></li>
+                    
+                        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+                    
+                        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+                    
+                        <li><a href="https://me.csdn.net/kirito_acmer" target="_blank">SLY&#39;s Blog</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+                    
+                        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+                    
+                        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!--  <script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>  -->
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/JiaqianLi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jiaqian Li 2018 
+                </p>
+                <p class="copyright text-muted">
+                    <!-- <a target="_blank" title="web analytic"><img alt="web analytic" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" style="border-width:0" /></a> -->
+                    <!-- <a><img alt="web trackers" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" 
+                    style="border-width:0"/></a> -->
+
+                    <!-- GoStats Simple HTML Based Code -->
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
+                    <!-- End GoStats Simple HTML Based Code -->
+
+                    <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
+                    <!-- <span id="busuanzi_container_site_pv">
+					    <span id="busuanzi_value_site_pv"></span>
+					</span> -->
+					<!-- <a target="_blank" title="webstats program"><img alt="webstats program" 
+					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
+					style="border-width:0" /></a> -->
+					visitors since 2018/08/20, 
+                    <span class="post-count">39.2k words altogether</span>
+                </p>
+                  
+                </div>
+            </div>
+        </div>
+    
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jiaqianlee.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-124157944-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '2640a6444407cd5de76cf21291f919ba';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://jiaqianlee.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
