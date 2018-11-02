@@ -238,14 +238,61 @@ var _hmt = _hmt || [];
                 post-container">
 
                 <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=1318610333&auto=1&height=66"></iframe></div>
-
 <blockquote>
-<p>数学虐我千百遍<br>我待数学如初恋</p>
+<p>数学虐我千百遍<br>
+我待数学如初恋</p>
 </blockquote>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>本文提出一种基于变分技术的图像感知色彩校正，提出了一个新的图像泛函，其最小值可以产生感知色彩增强后的图，这个变分公式使得局部对比度调整和数据的联系更灵活，展示了一个将梯度下降的数值实现运用到能量泛函和自动色彩增强（ACE）方程的模型。同时，使用欧拉-拉格朗日方程进行数值近似，将模型复杂度从\(O({N^2})\)减少到\(O(N\log (N))\)。</p>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>变分法适用于直方图均衡和匹配，然而最小化能量泛函进行对比度修正没有考虑到人类感知系统中的空间、局部和非线性特征，因此本文提出了关于ACE的变分公式。<br>本文的主要贡献：<br>1.考虑ACE的离散形式,可以作为某一特定能量泛函的梯度下降得到，一方面，通过研究与ACE相关的泛函推广，可以知道变分法可以用于基于人类感知性质的图像增强，另一方面ACE能量泛函的特殊形式揭示了离散框架中固有模型的显式特征；<br>2.这个公式可以更好的研究ACE的全局和局部表现，并通过不同的方式控制其影响；在变分中，ACE更容易结合数据的局部联系来避免过度增强，最后加入正则机制；<br>3.用梯度下降技术来最小化ACE泛函及用欧拉-拉格朗日方程数值近似使得模型的复杂度从\(O({N^2})\)降到\(O(N\log (N))\)。</p>
-<h1 id="基于变分法的全局直方图均衡"><a href="#基于变分法的全局直方图均衡" class="headerlink" title="基于变分法的全局直方图均衡"></a>基于变分法的全局直方图均衡</h1><p>\(\psi :[0,1] \to R\)是个可微函数，考虑以下泛函：<br><img src="/2018/11/01/ACE/1.png" data-action="zoom"><br>则能量函数E(I)的变分如下：<br><img src="/2018/11/01/ACE/2.png" data-action="zoom"><br><img src="/2018/11/01/ACE/3.png" data-action="zoom"><br>令\(I(x) \equiv \lambda \),定义<br><img src="/2018/11/01/ACE/4.png" data-action="zoom"><br>则（2）可以写成：<br><img src="/2018/11/01/ACE/5.png" data-action="zoom"><br>若I为静态图像，且\(\delta E(I) = 0\)，则<br><img src="/2018/11/01/ACE/6.png" data-action="zoom"><br>取\(\psi ‘(\lambda ) = 4\lambda  - 2\),若\(\psi (\lambda ) = 2{\lambda ^2} - 2\lambda  + K\),K为任意常数，对于任意的\(\lambda  \in [0,1]\),\({H_I}(\lambda ) = \lambda \),这就是规范直方图均衡化（uniform histogram equalization）。取K=1/2，可得\(\psi (\lambda ) = 2{(\lambda  - \frac{1}{2})^2}\),代入（1）可以得到如下泛函，其最小值对应恒定的直方图均衡<br><img src="/2018/11/01/ACE/7.png" data-action="zoom"><br>如果把图像I的平均对比度记为：<br><img src="/2018/11/01/ACE/8.png" data-action="zoom"><br>因此，最小化能量函数E（I）就是最大化图像平均对比度同时最小化其偏差至理论均值1/2。<br>记原始图像为\({I_0}\),能量泛函的梯度下降为：<br><img src="/2018/11/01/ACE/9.png" data-action="zoom"><br>上式可求得其确定的解。使用演化等式而不是直接计算是因为（12）可以将图像\({I_0}\)的直方图逐渐转为均衡，可以随时在我们想要的时候停止，因为最后的直方图均衡结果往往看起来不真实或者过饱和。<br>上述式子存在两个缺点：1.演化过程保存了水平线的顺序，且没考虑到局部特征，不遵从基本的人类视觉感知特性；2.计算复杂度为\(O({N^2})\)，N为整幅图的像素个数。</p>
-<h1 id="ACE基础公式"><a href="#ACE基础公式" class="headerlink" title="ACE基础公式"></a>ACE基础公式</h1><h1 id="基于变分法的局部对比度增强"><a href="#基于变分法的局部对比度增强" class="headerlink" title="基于变分法的局部对比度增强"></a>基于变分法的局部对比度增强</h1><h1 id="ACE变分公式"><a href="#ACE变分公式" class="headerlink" title="ACE变分公式"></a>ACE变分公式</h1><h1 id="数值近似（优化）"><a href="#数值近似（优化）" class="headerlink" title="数值近似（优化）"></a>数值近似（优化）</h1>
+<h1>摘要</h1>
+<p>本文提出一种基于变分技术的图像感知色彩校正，提出了一个新的图像泛函，其最小值可以产生感知色彩增强后的图，这个变分公式使得局部对比度调整和数据的联系更灵活，展示了一个将梯度下降的数值实现运用到能量泛函和自动色彩增强（ACE）方程的模型。同时，使用欧拉-拉格朗日方程进行数值近似，将模型复杂度从\(O({N^2})\)减少到\(O(N\log (N))\)。</p>
+<h1>介绍</h1>
+<p>变分法适用于直方图均衡和匹配，然而最小化能量泛函进行对比度修正没有考虑到人类感知系统中的空间、局部和非线性特征，因此本文提出了关于ACE的变分公式。<br>
+本文的主要贡献：<br>
+1.考虑ACE的离散形式,可以作为某一特定能量泛函的梯度下降得到，一方面，通过研究与ACE相关的泛函推广，可以知道变分法可以用于基于人类感知性质的图像增强，另一方面ACE能量泛函的特殊形式揭示了离散框架中固有模型的显式特征；<br>
+2.这个公式可以更好的研究ACE的全局和局部表现，并通过不同的方式控制其影响；在变分中，ACE更容易结合数据的局部联系来避免过度增强，最后加入正则机制；<br>
+3.用梯度下降技术来最小化ACE泛函及用欧拉-拉格朗日方程数值近似使得模型的复杂度从\(O({N^2})\)降到\(O(N\log (N))\)。</p>
+<h1>基于变分法的全局直方图均衡</h1>
+<p>\(\psi :[0,1] \to R\)是个可微函数，考虑以下泛函：<br>
+<img src="/2018/11/01/ACE/1.png" data-action="zoom"><br>
+则能量函数E(I)的变分如下：<br>
+<img src="/2018/11/01/ACE/2.png" data-action="zoom"><br>
+<img src="/2018/11/01/ACE/3.png" data-action="zoom"><br>
+令\(I(x) \equiv \lambda \),定义<br>
+<img src="/2018/11/01/ACE/4.png" data-action="zoom"><br>
+则（2）可以写成：<br>
+<img src="/2018/11/01/ACE/5.png" data-action="zoom"><br>
+若I为静态图像，且\(\delta E(I) = 0\)，则<br>
+<img src="/2018/11/01/ACE/6.png" data-action="zoom"><br>
+取\(\psi '(\lambda ) = 4\lambda  - 2\),若\(\psi (\lambda ) = 2{\lambda ^2} - 2\lambda  + K\),K为任意常数，对于任意的\(\lambda  \in [0,1]\),\({H_I}(\lambda ) = \lambda \),这就是规范直方图均衡化（uniform histogram equalization）。取K=1/2，可得\(\psi (\lambda ) = 2{(\lambda  - \frac{1}{2})^2}\),代入（1）可以得到如下泛函，其最小值对应恒定的直方图均衡<br>
+<img src="/2018/11/01/ACE/7.png" data-action="zoom"><br>
+如果把图像I的平均对比度记为：<br>
+<img src="/2018/11/01/ACE/8.png" data-action="zoom"><br>
+因此，最小化能量函数E（I）就是最大化图像平均对比度同时最小化其偏差至理论均值1/2。<br>
+记原始图像为\({I_0}\),能量泛函的梯度下降为：<br>
+<img src="/2018/11/01/ACE/9.png" data-action="zoom"><br>
+上式可求得其确定的解。使用演化等式而不是直接计算是因为（12）可以将图像\({I_0}\)的直方图逐渐转为均衡，可以随时在我们想要的时候停止，因为最后的直方图均衡结果往往看起来不真实或者过饱和。<br>
+上述式子存在两个缺点：1.演化过程保存了水平线的顺序，且没考虑到局部特征，不遵从基本的人类视觉感知特性；2.计算复杂度为\(O({N^2})\)，N为整幅图的像素个数。<br>
+图一展示了一张比较暗的图像，经过全局直方图均衡后的结果。<br>
+<img src="/2018/11/01/ACE/14.png" data-action="zoom"></p>
+<h1>ACE基本形式</h1>
+<p>使用核来局部化定量，对整幅图像求和来表示，因此需要精确化图像域。将定义在\({ 1, \ldots W}  \times { 1, \ldots H} \)的图像I扩展到\({  - W + 1, \ldots W}  \times {  - H + 1, \ldots H} \),周期为\(Z \times Z\),因此图像I的域为\({T_d}: = (Z \times Z)/(2WZ \times 2HZ)\)。<br>
+在ACE中，\(x \in {T_d}\)代表一个确定的像素target，其强度I(x)重新计算成亮度L(x)，y表示图像中不同于x的一般像素点。给定常数\(\alpha  &gt; 1\),建立如下奇函数\({S_\alpha }:[ - 1,1] \to [ - 1,1]\):<br>
+<img src="/2018/11/01/ACE/10.png" data-action="zoom"><br>
+\(\alpha \)和\({S_\alpha }\)称为斜率和斜率函数<br>
+引入一个对称的权重函数\(\omega :{T_d} \times {T_d} \to {R^ + }\),且对于任意的\(x,y \in {T_d}\)都有\(\omega (x,y) = \omega (y,x)\),\(\omega (x,y)\)表示像素x,y之间的共同色彩影响权重。<br>
+用ACE计算目标像素x的亮度需要两步，第一步计算色度空间调整<br>
+<img src="/2018/11/01/ACE/11.png" data-action="zoom"><br>
+然后R(x)经过动态色度再现缩放（dynamic tone reproduction scaling）变为归一化的动态范围，计算目标像素x的亮度：<br>
+<img src="/2018/11/01/ACE/12.png" data-action="zoom"><br>
+其中\(M = {\max <em>{x \in {T_d}}}{ R(x)} \)<br>
+分析之前的公式发现ACE利用目标像素和其他像素之间的强度差异实现了颜色计算的空间性质。这种差异性的使用是联合实现空间对比度的可微性和灰度世界gray world(GW)原则最自然的操作。考虑一张图象只有两个像素点x和y，定义\(Dxy = I(x) - I(y)\),则\(Dxy =  - Dyx\),其均值为0，由于任何奇函数的均值都为0，因此\({S</em>\alpha }\)的奇函数特性是ACE的重要特征。斜率函数是一个非线性变换，若强度差异较小，则经过映射可以增大对比度，反之，若强度差异较大，则函数饱和。<br>
+在ACE中，权值函数\(\omega \)实现局部性，实验证明它必须是一个单调递减函数\({\left| {x - y} \right|<em>{ {T_d}}}\),当\(\omega (x,y) = 1/{\left| {x - y} \right|</em>{ {T_d}}},y \in {T_d}\backslash { x} \)时，即两个像素欧式距离的倒数，能取得较好的效果。<br>
+由于斜率函数的存在，ACE增加了色彩动态的百分比且直方图的平坦性，局部和全局对比度可以独立改变。其主要缺点就是计算复杂度为\(O({N^2})\)。ACE滤波后的图如下：<br>
+<img src="/2018/11/01/ACE/13.png" data-action="zoom"><br>
+可以看到局部滤波器将暗区调整到一个更平衡且视觉效果更好的图像。</p>
+<h1>基于变分法的局部对比度增强</h1>
+<h1>ACE变分公式</h1>
+<h1>数值近似（优化）</h1>
+
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
                 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
@@ -285,7 +332,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#摘要"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基于变分法的全局直方图均衡"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">基于变分法的全局直方图均衡</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ACE基础公式"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ACE基础公式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#基于变分法的局部对比度增强"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">基于变分法的局部对比度增强</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ACE变分公式"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ACE变分公式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#数值近似（优化）"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">数值近似（优化）</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">基于变分法的全局直方图均衡</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ACE基本形式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">基于变分法的局部对比度增强</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">ACE变分公式</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">数值近似（优化）</span></a></li></ol>
         
         </div>
       </aside>
@@ -454,7 +501,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">39.2k words altogether</span>
+                    <span class="post-count">39.9k words altogether</span>
                 </p>
                   
                 </div>

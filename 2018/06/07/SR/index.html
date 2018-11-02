@@ -233,17 +233,53 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28815250&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
-
-<p>初学者可能往往会把图像分辨率和超分辨率搞混淆，先来看一下他们的概念。  </p>
-<h1 id="分辨率"><a href="#分辨率" class="headerlink" title="分辨率"></a>分辨率</h1><p>图像分辨率指图像中存储的信息量，是每英寸图像内有多少个像素点，分辨率的单位为PPI(Pixels Per Inch)，通常叫做像素每英寸。一般情况下，图像分辨率越高，图像中包含的细节就越多，信息量也越大。图像分辨率分为<strong>空间分辨率和时间分辨率</strong>。通常，分辨率被表示成每一个方向上的像素数量，例如64*64的二维图像。但分辨率的高低其实并不等同于像素数量的多少，例如一个通过插值放大了5倍的图像并不表示它包含的细节增加了多少。图像超分辨率重建关注的是恢复图像中丢失的细节，即高频信息。<br>在大量的电子图像应用领域，人们经常期望得到高分辨率（简称HR）图像。但由于设备、传感器等原因，我们得到的图像往往是低分辨率图像（LR）。<br>增加空间分辨率最直接的解决方法就是通过传感器制造技术减少像素尺寸（例如增加每单元面积的像素数量）；另外一个增加空间分辨率的方法是增加芯片的尺寸，从而增加图像的容量。因为很难提高大容量的偶合转换率，所以这种方法一般不认为是有效的，因此，引出了图像超分辨率技术。     </p>
-<h1 id="图像超分辨率"><a href="#图像超分辨率" class="headerlink" title="图像超分辨率"></a>图像超分辨率</h1><p>图像超分辨率（Image Super Resolution）是指由一幅低分辨率图像或图像序列恢复出高分辨率图像。图像超分辨率技术分为超分辨率复原和超分辨率重建。目前， 图像超分辨率研究可分为 3个主要范畴： 基于插值、 基于重建和基于学习的方法。<br>超分辨率(Super-Resolution)即通过硬件或软件的方法提高原有图像的分辨率，通过一系列低分辨率的图像来得到一幅高分辨率的图像过程就是<strong>超分辨率重建</strong>。超分辨率重建的核心思想就是用时间带宽(获取同一场景的多帧图像序列)换取空间分辨率,实现时间分辨率向空间分辨率的转换。     </p>
-<h2 id="与其他图像处理技术的关系"><a href="#与其他图像处理技术的关系" class="headerlink" title="与其他图像处理技术的关系"></a>与其他图像处理技术的关系</h2><p><strong>图像修复技术与图像超分辨率技术比较：</strong><br>图像修复的目标是恢复一个被模糊或者噪声破坏的图像，但是它不改变图像的尺寸。事实上图像修复和SR复原在理论是完全相关的，超分辨率技术可以看作是第二代图像修复技术，主要区别是图像修复技术在处理后图像中的像素数并不增加。<br><strong>图像插值与图像超分辨率的比较：</strong><br>图像插值，即增加单幅图像的尺寸。一般的插值并不能恢复LR采样过程中丢失的高频信息，但是图像超分辨率可以，因此图像插值方法不能被认作是SR技术。<br><strong>图像锐化与图像超分辨率的比较：</strong><br>图像锐化可以提升高频信息，但仅增强已有的高频成分；超分辨率技术能估计出原始图像中没有表现出来的高分辨率细节。<br><strong>图像拼接与图像超分辨率的比较：</strong><br>图像拼接虽然将多幅图像结合成更大的图像，包含了更多的像素，但没有提供更多的细节信息，所以不能算是超分辨率技术。    </p>
-<h2 id="技术分类"><a href="#技术分类" class="headerlink" title="技术分类"></a>技术分类</h2><h3 id="A-所处领域"><a href="#A-所处领域" class="headerlink" title="A.所处领域"></a>A.所处领域</h3><p>（1）基于频域的方法<br>主要是傅里叶变换及其逆变换。由于图像细节是通过高频信息反映出来的，所以消除低分辨率图像里的频谱混叠就可以获得更多被掩盖掉的高频信息，从而增加图像细节，提高图像的分辨率。<br>优点：原理清晰，理论推导方便，计算复杂度较低；<br>缺点：只适用于空间不变噪声的情况，只能处理图像中仅有整体运动而没有局部运动的情况，难于在处理过程中利用先验信息。<br>（2）基于空域的方法<br>空域的方法常利用图像局部的信息进行，增加像素的数量和紧密程度，从而增加图像细节，提高图像的分辨率。<br>优点：种类多，可将各种退化因素综合考虑，灵活性强；<br>缺点：设计复杂，计算复杂度较高。    </p>
-<h3 id="B-根据所用低分辨率图像的数量"><a href="#B-根据所用低分辨率图像的数量" class="headerlink" title="B.根据所用低分辨率图像的数量"></a>B.根据所用低分辨率图像的数量</h3><p>（1）基于单幅图像的超分辨率（SISR）<br>输出是单幅图像。 包含：图像放大（图像尺寸或像素的增加）、超分辨率复原（利用点扩散函数和目标的先验知识，在图像系统的衍射极限之外复原图像信息）。<br>（2）基于多幅图像的超分辨率（MISR）<br> 输出的可以是单幅图像也可以是一个图像系列（常为视频）。其基本前提是通过同一场景可以获取多幅LR细节图像，每一幅LR图像都会为HR图像的复原提供一些不同的信息，如果能够合成这些HR图像，那么SR图像复原是可以实现的。     </p>
-<h3 id="C-根据技术本身的特点"><a href="#C-根据技术本身的特点" class="headerlink" title="C.根据技术本身的特点"></a>C.根据技术本身的特点</h3><p>（1）基于重建的超分辨率<br>基于重建的超分辨率复原方法是对图像的获取过程建立观测模型，然后通过求解观测模型的逆问题来实现超分辨率重建。观测模型描述了成像系统从高分辨率场景 （图像）获取低分辨率观测图像的过程。<br>从本质上讲，利用单幅或多幅LR观测图像获取HR观测图像是求解观测问题的逆问题，它是一个病态反问题。<br>关键步骤：<strong>配准、重建</strong>。 配准是将多幅同一场景的LR图像在空间上进行亚像素精度对齐, 得到高低分辨率图像彼此之间的运动偏移量, 构建观测模型中的空间运动参数。重建是采用不同的先验约束条件 (平滑性、非负性和能量有限性等) 和最优化求解方法进行HR图像的求解。<br>典型方法：非均匀插值法、迭代反投影法、最大后验概率法（目前实际应用和科学研究中运用最多的一种方法）、凸集投影法。</p>
-<p>（2）基于学习的超分辨率<br>借助预先的训练学习（从数据库）来寻找或建立低分辨率图像与其对应的高分辨率图像之间的映射关系，提取高频信息，从而在给定低分辨率图像的情况下，通过优化方法获得相应的高分辨率图像。<br>浅层学习：特征提取–&gt;学习–&gt;重建<br>深度学习：特征提取–&gt;非线性映射–&gt;图像重建      </p>
-<p>参考链接：<br><a href="https://blog.csdn.net/qin605/article/details/70185795" target="_blank" rel="noopener">https://blog.csdn.net/qin605/article/details/70185795</a></p>
+                <div align="middle">
+    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=28815250&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
+</div>
+<p>初学者可能往往会把图像分辨率和超分辨率搞混淆，先来看一下他们的概念。</p>
+<h1>分辨率</h1>
+<p>图像分辨率指图像中存储的信息量，是每英寸图像内有多少个像素点，分辨率的单位为PPI(Pixels Per Inch)，通常叫做像素每英寸。一般情况下，图像分辨率越高，图像中包含的细节就越多，信息量也越大。图像分辨率分为<strong>空间分辨率和时间分辨率</strong>。通常，分辨率被表示成每一个方向上的像素数量，例如64*64的二维图像。但分辨率的高低其实并不等同于像素数量的多少，例如一个通过插值放大了5倍的图像并不表示它包含的细节增加了多少。图像超分辨率重建关注的是恢复图像中丢失的细节，即高频信息。<br>
+在大量的电子图像应用领域，人们经常期望得到高分辨率（简称HR）图像。但由于设备、传感器等原因，我们得到的图像往往是低分辨率图像（LR）。<br>
+增加空间分辨率最直接的解决方法就是通过传感器制造技术减少像素尺寸（例如增加每单元面积的像素数量）；另外一个增加空间分辨率的方法是增加芯片的尺寸，从而增加图像的容量。因为很难提高大容量的偶合转换率，所以这种方法一般不认为是有效的，因此，引出了图像超分辨率技术。</p>
+<h1>图像超分辨率</h1>
+<p>图像超分辨率（Image Super Resolution）是指由一幅低分辨率图像或图像序列恢复出高分辨率图像。图像超分辨率技术分为超分辨率复原和超分辨率重建。目前， 图像超分辨率研究可分为 3个主要范畴： 基于插值、 基于重建和基于学习的方法。<br>
+超分辨率(Super-Resolution)即通过硬件或软件的方法提高原有图像的分辨率，通过一系列低分辨率的图像来得到一幅高分辨率的图像过程就是<strong>超分辨率重建</strong>。超分辨率重建的核心思想就是用时间带宽(获取同一场景的多帧图像序列)换取空间分辨率,实现时间分辨率向空间分辨率的转换。</p>
+<h2>与其他图像处理技术的关系</h2>
+<p><strong>图像修复技术与图像超分辨率技术比较：</strong><br>
+图像修复的目标是恢复一个被模糊或者噪声破坏的图像，但是它不改变图像的尺寸。事实上图像修复和SR复原在理论是完全相关的，超分辨率技术可以看作是第二代图像修复技术，主要区别是图像修复技术在处理后图像中的像素数并不增加。<br>
+<strong>图像插值与图像超分辨率的比较：</strong><br>
+图像插值，即增加单幅图像的尺寸。一般的插值并不能恢复LR采样过程中丢失的高频信息，但是图像超分辨率可以，因此图像插值方法不能被认作是SR技术。<br>
+<strong>图像锐化与图像超分辨率的比较：</strong><br>
+图像锐化可以提升高频信息，但仅增强已有的高频成分；超分辨率技术能估计出原始图像中没有表现出来的高分辨率细节。<br>
+<strong>图像拼接与图像超分辨率的比较：</strong><br>
+图像拼接虽然将多幅图像结合成更大的图像，包含了更多的像素，但没有提供更多的细节信息，所以不能算是超分辨率技术。</p>
+<h2>技术分类</h2>
+<h3>A.所处领域</h3>
+<p>（1）基于频域的方法<br>
+主要是傅里叶变换及其逆变换。由于图像细节是通过高频信息反映出来的，所以消除低分辨率图像里的频谱混叠就可以获得更多被掩盖掉的高频信息，从而增加图像细节，提高图像的分辨率。<br>
+优点：原理清晰，理论推导方便，计算复杂度较低；<br>
+缺点：只适用于空间不变噪声的情况，只能处理图像中仅有整体运动而没有局部运动的情况，难于在处理过程中利用先验信息。<br>
+（2）基于空域的方法<br>
+空域的方法常利用图像局部的信息进行，增加像素的数量和紧密程度，从而增加图像细节，提高图像的分辨率。<br>
+优点：种类多，可将各种退化因素综合考虑，灵活性强；<br>
+缺点：设计复杂，计算复杂度较高。</p>
+<h3>B.根据所用低分辨率图像的数量</h3>
+<p>（1）基于单幅图像的超分辨率（SISR）<br>
+输出是单幅图像。 包含：图像放大（图像尺寸或像素的增加）、超分辨率复原（利用点扩散函数和目标的先验知识，在图像系统的衍射极限之外复原图像信息）。<br>
+（2）基于多幅图像的超分辨率（MISR）<br>
+输出的可以是单幅图像也可以是一个图像系列（常为视频）。其基本前提是通过同一场景可以获取多幅LR细节图像，每一幅LR图像都会为HR图像的复原提供一些不同的信息，如果能够合成这些HR图像，那么SR图像复原是可以实现的。</p>
+<h3>C.根据技术本身的特点</h3>
+<p>（1）基于重建的超分辨率<br>
+基于重建的超分辨率复原方法是对图像的获取过程建立观测模型，然后通过求解观测模型的逆问题来实现超分辨率重建。观测模型描述了成像系统从高分辨率场景 （图像）获取低分辨率观测图像的过程。<br>
+从本质上讲，利用单幅或多幅LR观测图像获取HR观测图像是求解观测问题的逆问题，它是一个病态反问题。<br>
+关键步骤：<strong>配准、重建</strong>。 配准是将多幅同一场景的LR图像在空间上进行亚像素精度对齐, 得到高低分辨率图像彼此之间的运动偏移量, 构建观测模型中的空间运动参数。重建是采用不同的先验约束条件 (平滑性、非负性和能量有限性等) 和最优化求解方法进行HR图像的求解。<br>
+典型方法：非均匀插值法、迭代反投影法、最大后验概率法（目前实际应用和科学研究中运用最多的一种方法）、凸集投影法。</p>
+<p>（2）基于学习的超分辨率<br>
+借助预先的训练学习（从数据库）来寻找或建立低分辨率图像与其对应的高分辨率图像之间的映射关系，提取高频信息，从而在给定低分辨率图像的情况下，通过优化方法获得相应的高分辨率图像。<br>
+浅层学习：特征提取–&gt;学习–&gt;重建<br>
+深度学习：特征提取–&gt;非线性映射–&gt;图像重建</p>
+<p>参考链接：<br>
+<a href="https://blog.csdn.net/qin605/article/details/70185795" target="_blank" rel="noopener">https://blog.csdn.net/qin605/article/details/70185795</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -288,7 +324,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#分辨率"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">分辨率</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#图像超分辨率"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">图像超分辨率</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#与其他图像处理技术的关系"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">与其他图像处理技术的关系</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#技术分类"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">技术分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#A-所处领域"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">A.所处领域</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#B-根据所用低分辨率图像的数量"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">B.根据所用低分辨率图像的数量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#C-根据技术本身的特点"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">C.根据技术本身的特点</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">分辨率</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">图像超分辨率</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">与其他图像处理技术的关系</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">技术分类</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.1.</span> <span class="toc-nav-text">A.所处领域</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.2.</span> <span class="toc-nav-text">B.根据所用低分辨率图像的数量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.3.</span> <span class="toc-nav-text">C.根据技术本身的特点</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -453,7 +489,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">39.2k words altogether</span>
+                    <span class="post-count">39.9k words altogether</span>
                 </p>
                   
                 </div>

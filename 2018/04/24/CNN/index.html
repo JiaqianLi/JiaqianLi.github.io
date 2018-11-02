@@ -233,35 +233,59 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=1293951677&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
-
-
-
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>训练一个庞大的深层卷积神经网络，将ImageNet LSVRC-2010比赛中的120万张1000种不同类别的高分辨率图像进行分类。在测试数据上，top-1和top-5的误差率分别为37.5%和17%，这比以往的先进水平都要好得多。它具有6000万个参数和650,000个神经元，该神经网络由五个卷积层，其中一些有池化层，和三个全连接层且有1000-way的softmax回归模型。使用非饱和神经元和GPU加速加快训练速度，并采用dropout正则化方法来减少全连接层中的过拟合，取得了不错的实验效果。同时，在ILSVRC-2012比赛中加入了该模型的一个变式，以15.3%的top-5误差率胜过第二的26.2%。 </p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>本文的具体贡献如下：我们训练了一个最大的卷积神经网络来训练在ILSVRC-2010和ILSVRC-2012中使用的ImageNet中的子集，并取得了迄今为止最好的结果。我们使用高度优化的GPU实现二维卷积和一些其他固有的方式来训练卷积神经网络，并将其公开。在第3部分介绍了减少训练时间、提高性能的方法；在第4部分介绍了减少过拟合的方法；最后的神经网络由5个卷积层和3个全连接层，其深度至关重要，移除任意一个卷积层会使结果表现不佳。</p>
-<h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>ImageNet是一个包含超过1500万张带标签的高分辨率图像的数据集，大约有22,000个类别。从2010年开始，作为Pascal视觉对象挑战赛的一部分，每年都会举办一场ImageNet大规模视觉识别挑战赛（ILSVRC）。ILSVRC使用ImageNet的一个子集，包含1000种类别，每种类别1000张图像。 总共大约120万张训练图像，50,000张验证图像，以及150,000张测试图像。<br>在ImageNet上，我们往往使用两种误差率，top-1和top-5，其中 ，top-5是指测试图像上正确标签不属于模型认为最有可能的五个标签的百分比。 </p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><h3 id="ReLU-非线性变换"><a href="#ReLU-非线性变换" class="headerlink" title="ReLU 非线性变换"></a>ReLU 非线性变换</h3><blockquote>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/79433674.jpg" alt="1">  </p>
+                <div align="middle">
+    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=1293951677&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
+</div>
+<h2>摘要</h2>
+<p>训练一个庞大的深层卷积神经网络，将ImageNet LSVRC-2010比赛中的120万张1000种不同类别的高分辨率图像进行分类。在测试数据上，top-1和top-5的误差率分别为37.5%和17%，这比以往的先进水平都要好得多。它具有6000万个参数和650,000个神经元，该神经网络由五个卷积层，其中一些有池化层，和三个全连接层且有1000-way的softmax回归模型。使用非饱和神经元和GPU加速加快训练速度，并采用dropout正则化方法来减少全连接层中的过拟合，取得了不错的实验效果。同时，在ILSVRC-2012比赛中加入了该模型的一个变式，以15.3%的top-5误差率胜过第二的26.2%。</p>
+<h2>介绍</h2>
+<p>本文的具体贡献如下：我们训练了一个最大的卷积神经网络来训练在ILSVRC-2010和ILSVRC-2012中使用的ImageNet中的子集，并取得了迄今为止最好的结果。我们使用高度优化的GPU实现二维卷积和一些其他固有的方式来训练卷积神经网络，并将其公开。在第3部分介绍了减少训练时间、提高性能的方法；在第4部分介绍了减少过拟合的方法；最后的神经网络由5个卷积层和3个全连接层，其深度至关重要，移除任意一个卷积层会使结果表现不佳。</p>
+<h2>数据集</h2>
+<p>ImageNet是一个包含超过1500万张带标签的高分辨率图像的数据集，大约有22,000个类别。从2010年开始，作为Pascal视觉对象挑战赛的一部分，每年都会举办一场ImageNet大规模视觉识别挑战赛（ILSVRC）。ILSVRC使用ImageNet的一个子集，包含1000种类别，每种类别1000张图像。 总共大约120万张训练图像，50,000张验证图像，以及150,000张测试图像。<br>
+在ImageNet上，我们往往使用两种误差率，top-1和top-5，其中 ，top-5是指测试图像上正确标签不属于模型认为最有可能的五个标签的百分比。</p>
+<h2>架构</h2>
+<h3>ReLU 非线性变换</h3>
+<blockquote>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/79433674.jpg" alt="1"></p>
 </blockquote>
-<p>从图中可以看到，具有ReLUs（实线）的四层卷积神经网络在CIFAR-10上epoch=5时就把训练错误率降到25%，比tanh（虚线）的等效网络快六倍左右。 每个网络的学习率都是独立选择的，以尽可能快地进行训练。，没有采用任何形式的正则化。 这里展示效果会随网络架构而变化，但具有ReLUs的网络比其他同等饱和神经元的速度快好几倍。<br>相比于Sigmoid和Tanh激活函数，ReLU激活函数能极大加速随机梯度下降法的收敛速度，而且不存在梯度消失的问题。  </p>
-<h3 id="多GPU训练"><a href="#多GPU训练" class="headerlink" title="多GPU训练"></a>多GPU训练</h3><p>120万的训练样本过于庞大，所以使用两个CPU并行处理，它们可以直接读取和写入彼此的内存，而不需要通过主机内存。这种并行化机制将每个内核（或神经元）的一半各放在两个GPU上，另外还有一个技巧是GPU只在某些层进行通信。如，第3层的内核从第2层的所有内核映射中获取输入。但第4层的内核只从属于同一GPU上的第3层内核映射中获取输入。 选择连通性模式是交叉验证的问题，但这使我们能精确调整通信量，直到计算量能被我们接受。  </p>
-<h3 id="局部响应归一化"><a href="#局部响应归一化" class="headerlink" title="局部响应归一化"></a>局部响应归一化</h3><p>ReLUs具有理想的属性，不需要输入归一化来防止饱和，局部归一化有助于模型的泛化。<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/32923932.jpg" alt="2"><br>其中，a_(x,y)表示点（x,y）处运用卷积和ReLU非线性后的结果，b_(x,y)是响应归一化的结果，其总和在相同空间位置处的n个“相邻”核映射上运行，n是该层的映射总数。内核映射的排列顺序是任意的，且在训练开始前就确定好了。这种响应归一化实现了实现了一种由真实神经元中激发的侧抑制，在使用不同内核计算的神经元输出之间创造竞争环境。将剩余的参数设置成确定的超参数n=5,k=2,alpha=10^-4,beta=0.75。   </p>
-<h3 id="重叠池化"><a href="#重叠池化" class="headerlink" title="重叠池化"></a>重叠池化</h3><p>CNN中的池化层汇总了相同内核映射中相邻神经元组的输出。通常通过相邻池化单元汇总使得邻近关系不重叠。准确地说，一个池化层可以被认为是由一个间隔为s个像素的池化单元组成的网格，每个都以池化单元的位置为中心的大小为z×z的邻域。如果s=z，就是CNN中传统的局部池化；如果s&lt;z，我们可以得到重叠池化，与s=2,z=2相比，令s=2,z=3可以使top-1,top-5分别下降0.4%和0.3%。同时，在训练过程中可以发现，重叠池化较难产生过拟合。</p>
-<h3 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h3><blockquote>
+<p>从图中可以看到，具有ReLUs（实线）的四层卷积神经网络在CIFAR-10上epoch=5时就把训练错误率降到25%，比tanh（虚线）的等效网络快六倍左右。 每个网络的学习率都是独立选择的，以尽可能快地进行训练。，没有采用任何形式的正则化。 这里展示效果会随网络架构而变化，但具有ReLUs的网络比其他同等饱和神经元的速度快好几倍。<br>
+相比于Sigmoid和Tanh激活函数，ReLU激活函数能极大加速随机梯度下降法的收敛速度，而且不存在梯度消失的问题。</p>
+<h3>多GPU训练</h3>
+<p>120万的训练样本过于庞大，所以使用两个CPU并行处理，它们可以直接读取和写入彼此的内存，而不需要通过主机内存。这种并行化机制将每个内核（或神经元）的一半各放在两个GPU上，另外还有一个技巧是GPU只在某些层进行通信。如，第3层的内核从第2层的所有内核映射中获取输入。但第4层的内核只从属于同一GPU上的第3层内核映射中获取输入。 选择连通性模式是交叉验证的问题，但这使我们能精确调整通信量，直到计算量能被我们接受。</p>
+<h3>局部响应归一化</h3>
+<p>ReLUs具有理想的属性，不需要输入归一化来防止饱和，局部归一化有助于模型的泛化。<br>
+<img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/32923932.jpg" alt="2"><br>
+其中，a_(x,y)表示点（x,y）处运用卷积和ReLU非线性后的结果，b_(x,y)是响应归一化的结果，其总和在相同空间位置处的n个“相邻”核映射上运行，n是该层的映射总数。内核映射的排列顺序是任意的，且在训练开始前就确定好了。这种响应归一化实现了实现了一种由真实神经元中激发的侧抑制，在使用不同内核计算的神经元输出之间创造竞争环境。将剩余的参数设置成确定的超参数n=5,k=2,alpha=10^-4,beta=0.75。</p>
+<h3>重叠池化</h3>
+<p>CNN中的池化层汇总了相同内核映射中相邻神经元组的输出。通常通过相邻池化单元汇总使得邻近关系不重叠。准确地说，一个池化层可以被认为是由一个间隔为s个像素的池化单元组成的网格，每个都以池化单元的位置为中心的大小为z×z的邻域。如果s=z，就是CNN中传统的局部池化；如果s&lt;z，我们可以得到重叠池化，与s=2,z=2相比，令s=2,z=3可以使top-1,top-5分别下降0.4%和0.3%。同时，在训练过程中可以发现，重叠池化较难产生过拟合。</p>
+<h3>整体结构</h3>
+<blockquote>
 <p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/61638855.jpg" alt="3"></p>
 </blockquote>
-<h2 id="减少过拟合"><a href="#减少过拟合" class="headerlink" title="减少过拟合"></a>减少过拟合</h2><h3 id="数据增广"><a href="#数据增广" class="headerlink" title="数据增广"></a>数据增广</h3><p>减少过拟合图像数据的最简单、最常用的方法是使用标签保留转换。我们采用两种不同形式的数据增广，这两种形式都允许通过很少的计算从原始图像产生变换后的图像，所以变换后的图像不需要存储在磁盘上。在实现的过程中，转换后的图像是在CPU上的用Python生成的，而GPU正在训练上一批图像因此，这个数据增广方案实际是计算上免费的。<br>第一种形式包括生成图像转换和水平翻转。在256<em>256图像中随机提取224\</em>224块（及其水平翻转），用这些块在网络中训练，因此输入数据为224*224*3，使训练规模扩大了2048倍，有效防止了过拟合。在测试时，通过提取5个224×224块（四个角和中心）以及它们的水平翻转（共计10个块）来进行预测，用softmax层来预测它们的平均值。<br>第二种形式是改变图像中RGB通道的强度。在整个ImageNet训练集的RGB像素集上执行PCA，对每个训练图像，成倍增加已有主成分，比例大小为对应特征值乘以一个从均值为0、标准差为0.1的高斯分布中提取的随机变量。这个方案表现了自然图像的重要属性，即物体的属性是不会随光照强度和颜色变换而变化的，该方案使top-1误差率降低1%以上。</p>
-<h3 id="dropout"><a href="#dropout" class="headerlink" title="dropout"></a>dropout</h3><p>dropout技术是以一定概率将每个隐层神经元的输出置为零。以这种方式 “dropped out” 的神经元既不会前向传播，也不参与反向传播，所以每进行一次迭代，神经网络就尝试一个不同的结构，但是所有这些结构之间共享权重。由于神经元不能依赖于其他特定神经元而存在，所以这种技术降低了神经元复杂的互适应关系。因此，网络被迫学习更具有鲁棒性。在测试时，将所有神经元的输出乘以0.5，这对于采用指数衰减网络产生的预测分布的几何平均数是一个合理的近似。</p>
-<h2 id="学习过程"><a href="#学习过程" class="headerlink" title="学习过程"></a>学习过程</h2><p>本文采用了随机梯度下降法(SGD)和一批大小为128、动量为0.9、权重衰减为0.0005的样例来训练网络，更新权重方式如下：</p>
+<h2>减少过拟合</h2>
+<h3>数据增广</h3>
+<p>减少过拟合图像数据的最简单、最常用的方法是使用标签保留转换。我们采用两种不同形式的数据增广，这两种形式都允许通过很少的计算从原始图像产生变换后的图像，所以变换后的图像不需要存储在磁盘上。在实现的过程中，转换后的图像是在CPU上的用Python生成的，而GPU正在训练上一批图像因此，这个数据增广方案实际是计算上免费的。<br>
+第一种形式包括生成图像转换和水平翻转。在256*256图像中随机提取224*224块（及其水平翻转），用这些块在网络中训练，因此输入数据为224*224*3，使训练规模扩大了2048倍，有效防止了过拟合。在测试时，通过提取5个224×224块（四个角和中心）以及它们的水平翻转（共计10个块）来进行预测，用softmax层来预测它们的平均值。<br>
+第二种形式是改变图像中RGB通道的强度。在整个ImageNet训练集的RGB像素集上执行PCA，对每个训练图像，成倍增加已有主成分，比例大小为对应特征值乘以一个从均值为0、标准差为0.1的高斯分布中提取的随机变量。这个方案表现了自然图像的重要属性，即物体的属性是不会随光照强度和颜色变换而变化的，该方案使top-1误差率降低1%以上。</p>
+<h3>dropout</h3>
+<p>dropout技术是以一定概率将每个隐层神经元的输出置为零。以这种方式 “dropped out” 的神经元既不会前向传播，也不参与反向传播，所以每进行一次迭代，神经网络就尝试一个不同的结构，但是所有这些结构之间共享权重。由于神经元不能依赖于其他特定神经元而存在，所以这种技术降低了神经元复杂的互适应关系。因此，网络被迫学习更具有鲁棒性。在测试时，将所有神经元的输出乘以0.5，这对于采用指数衰减网络产生的预测分布的几何平均数是一个合理的近似。</p>
+<h2>学习过程</h2>
+<p>本文采用了随机梯度下降法(SGD)和一批大小为128、动量为0.9、权重衰减为0.0005的样例来训练网络，更新权重方式如下：</p>
 <blockquote>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/1407883.jpg" alt="4">  </p>
+<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/1407883.jpg" alt="4"></p>
 </blockquote>
-<p>i是迭代次数，v是动量<br>用一个均值为0、标准差为0.01的高斯分布初始化了每一层的权重w,第二、第四和第五个卷积层以及全连接隐层的神经元偏置b都初始化为常数1，其余层的偏置b设为0。所有层都使用相同的学习率，在训练过程中手动调整，当验证错误率以当前学习率停止改进时，将学习率除以10。学习率初始化0.01，在终止前减少三次。使用这个网络对120万张图像进行了约90次的训练，需要在NVIDIA GTX 580 3GB GPU上花费了五到六天时间。</p>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>实验结果如下:  </p>
+<p>i是迭代次数，v是动量<br>
+用一个均值为0、标准差为0.01的高斯分布初始化了每一层的权重w,第二、第四和第五个卷积层以及全连接隐层的神经元偏置b都初始化为常数1，其余层的偏置b设为0。所有层都使用相同的学习率，在训练过程中手动调整，当验证错误率以当前学习率停止改进时，将学习率除以10。学习率初始化0.01，在终止前减少三次。使用这个网络对120万张图像进行了约90次的训练，需要在NVIDIA GTX 580 3GB GPU上花费了五到六天时间。</p>
+<h2>结果</h2>
+<p>实验结果如下:</p>
 <blockquote>
 <p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-15/19529161.jpg" alt="5"></p>
 </blockquote>
-<p>本文的创新点：<br>1.使用两个GPU并行加速处理<br>2.使用ReLU作为激活函数<br>3.采用dropout正则化和data augmentation来防止过拟合<br>4.使用深度卷积神经网络（5个卷积层和3个全连接层） </p>
+<p>本文的创新点：<br>
+1.使用两个GPU并行加速处理<br>
+2.使用ReLU作为激活函数<br>
+3.采用dropout正则化和data augmentation来防止过拟合<br>
+4.使用深度卷积神经网络（5个卷积层和3个全连接层）</p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -302,7 +326,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#摘要"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#数据集"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">数据集</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#架构"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">架构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ReLU-非线性变换"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">ReLU 非线性变换</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#多GPU训练"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">多GPU训练</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#局部响应归一化"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">局部响应归一化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#重叠池化"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">重叠池化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#整体结构"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">整体结构</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#减少过拟合"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">减少过拟合</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据增广"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">数据增广</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#dropout"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">dropout</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#学习过程"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">学习过程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结果"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">结果</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">摘要</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">数据集</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">架构</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">ReLU 非线性变换</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">多GPU训练</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">局部响应归一化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">重叠池化</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.5.</span> <span class="toc-nav-text">整体结构</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">减少过拟合</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">数据增广</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">dropout</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">学习过程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">结果</span></a></li></ol>
         
         </div>
       </aside>
@@ -467,7 +491,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">39.2k words altogether</span>
+                    <span class="post-count">39.9k words altogether</span>
                 </p>
                   
                 </div>
