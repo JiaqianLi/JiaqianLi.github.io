@@ -163,14 +163,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -233,51 +233,20 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle">
-    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=478303470&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object> 
-</div>
-<h2>介绍</h2>
-<p>VGGNet是2014年 ImageNet Large-ScaleVisual Recognition Challenge（ILSVRC）竞赛的第二名实现的卷积神经网络，第一名是GoogLeNet(谷歌为了纪念LeNet)。它的主要贡献是解决了网络结构设计的一个重要方面——深度。<br>
-至于为什么这个网络叫VGG，是因为Andrew Zisserman是牛津大学Visual Geometry Group（视觉几何组）的，所以叫VGG。</p>
-<h2>结构</h2>
-<p>网络的输入图像时224*224RGB的图像，预处理是对于每一个像素减去它们的均值。整体使用的卷积核大小均为3*3，这是表示左/右/上/下/中心这些模式的最小单元。在其中的一层结构使用1*1的卷积核，相当于输入通道的线性变换。空间池化采用5个池化层max-pooling，大小为2*2。<br>
-前面几层是卷积层的堆叠，卷积层的后面加了3个全连接层，前两个大小为4096，最后一个为1000，即1000种类别，最后一层是soft-max。所有隐藏层的激活函数都是ReLU，论文中会介绍好几种网络结构，只有其中一种使用了局部响应归一化Local Response Normalisation (LRN)。这种归一化并没有提高网络的性能，反而增加了内存的消耗和计算时间。</p>
-<p><strong>网络结构</strong><br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/6959709.jpg" alt="1"></p>
-<p>表1中主要介绍了从11层的网络A到19层的网络E6中不同的网络结构。<br>
-A：和AlexNet类似，使用了8个卷积层和3个全连接层，其中卷积层用的都是3<em>3的卷积核。<br>
-A-LRN：在第1层卷积的时候使用了局部响应归一化（LRN），实际并没有提高网络的性能。<br>
-B:在结构A的基础上，stage1和stage2中分别增加一个3</em>3的卷积层，一共是10个卷积层和3个全连接层。<br>
-C:在结构B的基础上，stage3,stage4,stage5分别增加一个1<em>1的卷积层，一共是13个卷积层和3个全连接层。<br>
-D:在结构C的基础上，stage3,stage4,stage5分别增加一个3</em>3的卷积层，一共是13个卷积层和3个全连接层。<br>
-E:在结构D的基础上，stage3,stage4,stage5分别增加一个3*3的卷积层，一共是16个卷积层和3个全连接层。</p>
-<p>各个网络所需的参数所占的内存大小，单位（M），如下：<br>
-<img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/77649881.jpg" alt="2"></p>
-<h2>测试</h2>
-<h3>单尺度评估的实验结果</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/85896007.jpg" alt="3"></p>
-<p>第一，我们发现使用局部响应归一化的A-LRN在A的基础上性能并没有很大提升，所以在B-E的网络结构中不再使用；<br>
-第二，我们发现top-1和top-5的错误率随着神经网络的深度增加而下降。C中使用1  *1的卷积核，增加了额外的非线性，性能比B有所提高；D中3*3的卷积核比C中1*1的效果好。<br>
-最后，在训练时使用scale jittering进行数据增强能有效降低错误率。关于scale jittering的介绍，参考了大牛的讲解，简单来说，就是crop size是固定的，而image size是随机可变的。举例来说，比如把crop size固定在224×224，而image的短边可以按比例缩放到[256, 512]区间的某个随机数值，然后随机偏移裁剪个224×224的图像区域。<br>
-数据增强比较常用的有2种方法：一是使用Scale Jittering，VGG和ResNet模型的训练都用了这种方法。二是尺度和长宽比增强变换，最早是Google提出来训练他们的Inception网络的。我们对其进行了改进，提出Supervised Data Augmentation方法。<br>
-具体可以参考<a href="https://zhuanlan.zhihu.com/p/23249000" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23249000</a></p>
-<h3>多尺度评估的实验结果</h3>
-<p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/11998082.jpg" alt="4"></p>
+                <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=478303470&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
+
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>VGGNet是2014年 ImageNet Large-ScaleVisual Recognition Challenge（ILSVRC）竞赛的第二名实现的卷积神经网络，第一名是GoogLeNet(谷歌为了纪念LeNet)。它的主要贡献是解决了网络结构设计的一个重要方面——深度。<br>至于为什么这个网络叫VGG，是因为Andrew Zisserman是牛津大学Visual Geometry Group（视觉几何组）的，所以叫VGG。</p>
+<h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><p>网络的输入图像时224*224RGB的图像，预处理是对于每一个像素减去它们的均值。整体使用的卷积核大小均为3*3，这是表示左/右/上/下/中心这些模式的最小单元。在其中的一层结构使用1<em>1的卷积核，相当于输入通道的线性变换。空间池化采用5个池化层max-pooling，大小为2\</em>2。<br>前面几层是卷积层的堆叠，卷积层的后面加了3个全连接层，前两个大小为4096，最后一个为1000，即1000种类别，最后一层是soft-max。所有隐藏层的激活函数都是ReLU，论文中会介绍好几种网络结构，只有其中一种使用了局部响应归一化Local Response Normalisation (LRN)。这种归一化并没有提高网络的性能，反而增加了内存的消耗和计算时间。</p>
+<p><strong>网络结构</strong><br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/6959709.jpg" alt="1">   </p>
+<p>表1中主要介绍了从11层的网络A到19层的网络E6中不同的网络结构。<br>A：和AlexNet类似，使用了8个卷积层和3个全连接层，其中卷积层用的都是3<em>3的卷积核。<br>A-LRN：在第1层卷积的时候使用了局部响应归一化（LRN），实际并没有提高网络的性能。<br>B:在结构A的基础上，stage1和stage2中分别增加一个3</em>3的卷积层，一共是10个卷积层和3个全连接层。<br>C:在结构B的基础上，stage3,stage4,stage5分别增加一个1<em>1的卷积层，一共是13个卷积层和3个全连接层。<br>D:在结构C的基础上，stage3,stage4,stage5分别增加一个3</em>3的卷积层，一共是13个卷积层和3个全连接层。<br>E:在结构D的基础上，stage3,stage4,stage5分别增加一个3*3的卷积层，一共是16个卷积层和3个全连接层。</p>
+<p>各个网络所需的参数所占的内存大小，单位（M），如下：<br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/77649881.jpg" alt="2"></p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="单尺度评估的实验结果"><a href="#单尺度评估的实验结果" class="headerlink" title="单尺度评估的实验结果"></a>单尺度评估的实验结果</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/85896007.jpg" alt="3">   </p>
+<p>第一，我们发现使用局部响应归一化的A-LRN在A的基础上性能并没有很大提升，所以在B-E的网络结构中不再使用；<br>第二，我们发现top-1和top-5的错误率随着神经网络的深度增加而下降。C中使用1  *1的卷积核，增加了额外的非线性，性能比B有所提高；D中3<em>3的卷积核比C中1\</em>1的效果好。<br>最后，在训练时使用scale jittering进行数据增强能有效降低错误率。关于scale jittering的介绍，参考了大牛的讲解，简单来说，就是crop size是固定的，而image size是随机可变的。举例来说，比如把crop size固定在224×224，而image的短边可以按比例缩放到[256, 512]区间的某个随机数值，然后随机偏移裁剪个224×224的图像区域。<br>数据增强比较常用的有2种方法：一是使用Scale Jittering，VGG和ResNet模型的训练都用了这种方法。二是尺度和长宽比增强变换，最早是Google提出来训练他们的Inception网络的。我们对其进行了改进，提出Supervised Data Augmentation方法。<br>具体可以参考<a href="https://zhuanlan.zhihu.com/p/23249000" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23249000</a></p>
+<h3 id="多尺度评估的实验结果"><a href="#多尺度评估的实验结果" class="headerlink" title="多尺度评估的实验结果"></a>多尺度评估的实验结果</h3><p><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/11998082.jpg" alt="4">  </p>
 <p>测试集同样使用scale jittering，若S为单一值，则 Q = {S − 32,S,S + 32}.若 S ∈ [Smin;Smax] ，则Q = {Smin,0.5(Smin + Smax),Smax}.</p>
-<h2>结论</h2>
-<p>本文主要展示了深度对于分类网络的重要性。<br>
-简单地对VGG和AlexNet做一个比较：<br>
-相同点：<br>
-最后3个全连接层的结构相同；都有5个stage，每个stage之间都使用maxpooling<br>
-不同点：<br>
-AlexNet每个stage只含有一个卷积层，且卷积核大小为7*7；VGG每个stage含有2-4个卷积层，卷积核大小为3*3。两个3<em>3的卷积层连在一起可视为5*5的filter,三个连在一起可视为7*7的filter，假设有C个通道，那么7</em>7的卷积需要7<em>7</em>C<em>C=49C2个参数，而3个3*3的只需要3</em>（3<em>3</em>C*C）=27C2个参数，由此可见，小的filter具有更少的参数，所以可以增大其Channel。<br>
-虽然VGG比AlexNet有更多的参数，更深的层次，但是VGG只需要很少的迭代次数就开始收敛，原因如下：<br>
-（a）深度和小的滤波器尺寸起到了隐式正则化的作用；<br>
-(b)VGG采用了一些预处理，对结构A全部随机初始化；后面深层的网络用结构A的参数作为前四个卷积层（应该是每个stage中的第一个Conv）和三个全连接层的初始化值，中间层随机初始化。同时，对初始化的层不减小其学习率，使其在学习过程中改变。使用随机初始化的层weights服从均值为0，方差为0.01的正态分布，biases为0.</p>
-<p>参考文章链接：<br>
-<a href="https://blog.csdn.net/wcy12341189/article/details/56281618" target="_blank" rel="noopener">https://blog.csdn.net/wcy12341189/article/details/56281618</a><br>
-<a href="https://www.jianshu.com/p/9c6d90e4f20e" target="_blank" rel="noopener">https://www.jianshu.com/p/9c6d90e4f20e</a><br>
-<a href="https://blog.csdn.net/Teeyohuang/article/details/75214758" target="_blank" rel="noopener">https://blog.csdn.net/Teeyohuang/article/details/75214758</a></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文主要展示了深度对于分类网络的重要性。<br>简单地对VGG和AlexNet做一个比较：<br>相同点：<br>最后3个全连接层的结构相同；都有5个stage，每个stage之间都使用maxpooling<br>不同点：<br>AlexNet每个stage只含有一个卷积层，且卷积核大小为7*7；VGG每个stage含有2-4个卷积层，卷积核大小为3*3。两个3<em>3的卷积层连在一起可视为5\</em>5的filter,三个连在一起可视为7*7的filter，假设有C个通道，那么7<em>7的卷积需要7</em>7<em>C</em>C=49C2个参数，而3个3*3的只需要3<em>（3</em>3<em>C</em>C）=27C2个参数，由此可见，小的filter具有更少的参数，所以可以增大其Channel。<br>虽然VGG比AlexNet有更多的参数，更深的层次，但是VGG只需要很少的迭代次数就开始收敛，原因如下：<br>（a）深度和小的滤波器尺寸起到了隐式正则化的作用；<br>(b)VGG采用了一些预处理，对结构A全部随机初始化；后面深层的网络用结构A的参数作为前四个卷积层（应该是每个stage中的第一个Conv）和三个全连接层的初始化值，中间层随机初始化。同时，对初始化的层不减小其学习率，使其在学习过程中改变。使用随机初始化的层weights服从均值为0，方差为0.01的正态分布，biases为0.</p>
+<p>参考文章链接：<br><a href="https://blog.csdn.net/wcy12341189/article/details/56281618" target="_blank" rel="noopener">https://blog.csdn.net/wcy12341189/article/details/56281618</a><br><a href="https://www.jianshu.com/p/9c6d90e4f20e" target="_blank" rel="noopener">https://www.jianshu.com/p/9c6d90e4f20e</a><br><a href="https://blog.csdn.net/Teeyohuang/article/details/75214758" target="_blank" rel="noopener">https://blog.csdn.net/Teeyohuang/article/details/75214758</a>       </p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
@@ -322,7 +291,7 @@ AlexNet每个stage只含有一个卷积层，且卷积核大小为7*7；VGG每�
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">单尺度评估的实验结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">多尺度评估的实验结果</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结论</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结构"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#测试"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">测试</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#单尺度评估的实验结果"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">单尺度评估的实验结果</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#多尺度评估的实验结果"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">多尺度评估的实验结果</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结论"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">结论</span></a></li></ol>
         
         </div>
       </aside>
@@ -487,7 +456,7 @@ AlexNet每个stage只含有一个卷积层，且卷积核大小为7*7；VGG每�
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">39.9k words altogether</span>
+                    <span class="post-count">40.1k words altogether</span>
                 </p>
                   
                 </div>
