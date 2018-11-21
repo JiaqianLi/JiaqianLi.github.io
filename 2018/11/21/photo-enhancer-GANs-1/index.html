@@ -237,7 +237,7 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=109174&auto=1&height=66"></iframe></div>  
+                <div align="middle"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=30496836&auto=1&height=66"></iframe></div>  
 
 <p>论文链接：<a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Deep_Photo_Enhancer_CVPR_2018_paper.pdf" target="_blank" rel="noopener">http://openaccess.thecvf.com/content_cvpr_2018/papers/Chen_Deep_Photo_Enhancer_CVPR_2018_paper.pdf</a><br>实验demo:<br><a href="http://www.cmlab.csie.ntu.edu.tw/project/Deep-Photo-Enhancer/" target="_blank" rel="noopener">http://www.cmlab.csie.ntu.edu.tw/project/Deep-Photo-Enhancer/</a></p>
 <blockquote>
@@ -247,8 +247,8 @@ var _hmt = _hmt || [];
 <p>本文提出了一种非配对学习的方法用于图像增强。给定一组具有所需特征的照片，本文的方法是学习一个增强器，将输入图像转化为具有这些特征的增强图像。<br>该方法基于two-way generative adversarial networks (GANs)并作了三方面的改进：            </p>
 <ul>
 <li>扩展了U-Net,加入全局特征global features，作为生成器；   </li>
-<li>用自适应的权值改进了Wasserstein GAN (WGAN)，与WGAN-GP相比，使其训练收敛更快、更好，且对参数不敏感；    </li>
-<li>在two-way GANs的生成器中使用individual batch normalization层，使得生成器更好地适应各自地输入分布。   </li>
+<li>用自适应的权值改进了Wasserstein GAN (WGAN)，与WGAN-GP相比，其训练收敛更快、更好，且对参数不敏感；    </li>
+<li>在two-way GANs的生成器中使用individual batch normalization层，使得生成器更好地适应各自的输入分布。   </li>
 </ul>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><hr>
 <p>图像增强方法试图解决色彩再现和图像清晰度的问题，目前有很多交互式的工具和半自动的方法，如直方图均衡、锐化、对比度调整、颜色映射等，甚至一些改进的方法，如局部和自适应性调整，都没有取得较好的效果。<br>本文提出的方法通过学习大量照片来进行图像增强，其输入只需要一系列具有所需特征的“good”照片。因此，图像增强问题看成是将输入图像转化为在训练照片集中嵌入所需特征的增强图像，采用类似于CycleGAN的two-way GAN结构来解决这个问题，由于GAN的训练具有不稳定性，我们做了一些改进：      </p>
