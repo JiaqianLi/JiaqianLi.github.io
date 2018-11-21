@@ -51,13 +51,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/GAN/</loc>
-        <lastmod>2018-10-02T13:07:58.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/Deconvolution/</loc>
         <lastmod>2018-10-02T13:08:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -149,13 +142,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
-        <lastmod>2018-10-24T13:57:54.178Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/</loc>
         <lastmod>2018-10-24T13:57:54.178Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -193,6 +179,27 @@
     <url>
         <loc>http://jiaqianlee.com/tags/%E8%89%B2%E5%BD%A9%E6%A0%A1%E6%AD%A3/</loc>
         <lastmod>2018-11-12T11:44:44.469Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/GAN/</loc>
+        <lastmod>2018-11-20T14:37:15.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
+        <lastmod>2018-11-20T14:37:15.360Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2018-11-20T14:37:15.360Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
