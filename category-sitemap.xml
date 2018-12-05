@@ -56,13 +56,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/categories/%E5%87%B8%E4%BC%98%E5%8C%96/</loc>
-        <lastmod>2018-10-25T06:29:45.949Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
         <lastmod>2018-11-21T12:07:43.266Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -72,6 +65,13 @@
     <url>
         <loc>http://jiaqianlee.com/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
         <lastmod>2018-11-21T12:07:43.266Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E5%87%B8%E4%BC%98%E5%8C%96/</loc>
+        <lastmod>2018-12-05T14:41:30.318Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
