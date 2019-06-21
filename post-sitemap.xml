@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/2018/12/05/ADMM/</loc>
-        <lastmod>2018-12-05T15:18:32.504Z</lastmod>
+        <loc>http://jiaqianlee.com/2019/06/21/Enhance-Review/</loc>
+        <lastmod>2019-06-21T08:26:32.174Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>http://jiaqianlee.com/2018/11/21/photo-enhancer-GANs-1/</loc>
-        <lastmod>2018-12-05T14:43:29.573Z</lastmod>
+        <lastmod>2019-06-21T08:14:24.858Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/2018/12/05/ADMM/</loc>
+        <lastmod>2018-12-05T15:18:32.504Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

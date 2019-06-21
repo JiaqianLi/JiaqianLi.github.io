@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ECNU Computer Vision Group - JiaqianLi">
+    <meta name="keyword" content="华东师范大学18级研究生 图形图像处理与计算机视觉方向">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          基于深度学习的图像增强综述 - 李佳倩的博客 | LJQ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jiaqianlee.com/2019/06/21/Enhance-Review/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#enhancement" title="enhancement">enhancement</a>
+                            
+                        </div>
+                        <h1>基于深度学习的图像增强综述</h1>
+                        <h2 class="subheading">总结了几篇自己看过的论文</h2>
+                        <span class="meta">
+                            Posted by Jiaqian Li on
+                            2019-06-21
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LJQ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>距离上一次写博客过去半年了，好快呀，研一就过去了，课都上完了，从此走上科研道理。            </p>
+</blockquote>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>图像增强的定义非常广泛，一般来说，图像增强是有目的地强调图像的整体或局部特性，例如改善图像的颜色、亮度和对比度等，将原来不清晰的图像变得清晰或强调某些感兴趣的特征，扩大图像中不同物体特征之间的差别，抑制不感兴趣的特征，提高图像的视觉效果。传统的图像增强已经被研究了很长时间，现有的方法可大致分为三类，空域方法是直接对像素值进行处理，如直方图均衡，伽马变换；频域方法是在某种变换域内操作，如小波变换；混合域方法是结合空域和频域的一些方法。传统的方法一般比较简单且速度比较快，但是没有考虑到图像中的上下文信息等，所以取得效果不是很好。<br>近年来，卷积神经网络在很多低层次的计算机视觉任务中取得了巨大突破，包括图像超分辨、去模糊、去雾、去噪、图像增强等。对比于传统方法，基于CNN的一些方法极大地改善了图像增强的质量。现有的方法大多是有监督的学习，对于一张原始图像和一张目标图像，学习它们之间的映射关系，来得到增强后的图像。但是这样的数据集比较少，很多都是人为调整的，因此需要自监督或弱监督的方法来解决这一问题。本文介绍了近年来比较经典的图像增强模型，并分析其优缺点。      </p>
+<h2 id="DSLR-Quality-Photos-on-Mobile-Devices-with-Deep-Convolutional-Networks"><a href="#DSLR-Quality-Photos-on-Mobile-Devices-with-Deep-Convolutional-Networks" class="headerlink" title="DSLR-Quality Photos on Mobile Devices with Deep Convolutional Networks"></a>DSLR-Quality Photos on Mobile Devices with Deep Convolutional Networks</h2><p>这是ICCV2017年的一篇文章，Ignatov等人自己构建了一个大的数据集（DPED），包含6K多张照片，使用三部手机和一部单反在多种户外条件下同时拍摄得到。然后作者针对这三个成对的数据集，提出了一种新的图像增强算法。通过学习手机拍摄的照片和单反照片之间的映射关系来将手机拍摄的照片提升到单反水平，这是一个端到端的训练，不需要额外的监督和人为添加特征。其网络结构采用的是GAN模型，如下：<br><img src="/2019/06/21/Enhance-Review/1.png" data-action="zoom"><br>如图所示，GAN主要由两个网络组成，一个生成网络G和一个判别网络D，整个网络是一个对抗的过程，G不断生成能欺骗D的数据，D不断提高自己辨别真假的能力，直到达到一个均衡状态。这里的输入图像是手机拍摄的照片，目标图像是单反拍摄的照片，它们是一一对映的关系。生成器CNN结构，首先输入一张图像，经过一个卷积层预处理后，使用了4个残差块，再经过3个卷积层得到增强后的图像；判别器CNN用于判断增强后的图像和目标图像的真假，生成器生成的图像要尽可能地欺骗判别器，这样就表明生成的图像与目标图像越接近，也就是增强后的图像效果越好。<br>图像增强的主要难点之一是输入图像与输出图像不能密集匹配（pixel-to-pixel），因此标准的均方误差不太适用，本文的另一个贡献是提出了复合的损失函数，包含内容、纹理和色彩三部分。<br>色彩损失用于衡量增强后图像与目标图像的色彩差异，对图像先做高斯模糊再计算它们的欧式距离，这样的好处是可以消除纹理和内容的影响来评估两图像间的亮度、对比度和主要颜色差异，可以写成如下形式：<br><img src="/2019/06/21/Enhance-Review/2.png" data-action="zoom"><br>其中，Xb, Yb分别是为X,Y经过模糊的图像，如下：<br><img src="/2019/06/21/Enhance-Review/3.png" data-action="zoom"><br>二维高斯模糊算子可以写成如下形式，其中A=0.053, μ=0, σ=3，<br><img src="/2019/06/21/Enhance-Review/4.png" data-action="zoom"><br>使用生成对抗网络（GANs）来衡量纹理质量，因此纹理损失定义为：<br><img src="/2019/06/21/Enhance-Review/5.png" data-action="zoom"><br>FW ,D分别表示生成和判别网络。<br>计算预训练好的VGG19网络ReLU层后激活的feature map的欧式距离作为内容损失，可以保留语义信息，定义为：<br><img src="/2019/06/21/Enhance-Review/6.png" data-action="zoom"><br>此外，还使用全变分（TV）来增强生成图像的空间平滑性，由于它占的权重比较小，不会影响图像的高频部分，且可以抑制一定程度的椒盐噪声，定义为：<br><img src="/2019/06/21/Enhance-Review/7.png" data-action="zoom"><br>总的损失函数为：<br><img src="/2019/06/21/Enhance-Review/8.png" data-action="zoom"><br>最终要优化的目标函数如下，W为网络要学习的参数，L为总的损失函数，<br><img src="/2019/06/21/Enhance-Review/9.png" data-action="zoom"><br>最后的结果如下：<br><img src="/2019/06/21/Enhance-Review/10.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/11.png" data-action="zoom"><br>这篇文章提出了一个照片增强的算法，将手机照片提升到单反水平，使用的数据集DPED均为自然图像，有实际的应用价值。但也存在一些问题，有一些复原后的图像存在色彩偏差或者对比度过高，显得不太自然。此外，文中使用GAN在复原高频信息时不可避免地会放大噪声。最大的缺点是它对每种不同手机的数据集都要重新训练，是一个强监督的过程，通用性不强，后续的工作也对这一算法进行了改进，提出了一种弱监督的方法。</p>
+<h2 id="WESPE-Weakly-Supervised-Photo-Enhancer-for-Digital-Cameras"><a href="#WESPE-Weakly-Supervised-Photo-Enhancer-for-Digital-Cameras" class="headerlink" title="WESPE: Weakly Supervised Photo Enhancer for Digital Cameras"></a>WESPE: Weakly Supervised Photo Enhancer for Digital Cameras</h2><p>这是CVPR Workshops2018上的一篇文章，是基于上一篇论文的改进，同一个作者写的。上一篇论文中最大的局限性是它对每一个数据集都要重新训练一个模型，不具有通用性，因此这篇文章中，作者提出一个新的弱监督的网络模型WESPE，输入数据和输出数据分别为低质量图像和高质量的图像，但它们在内容上不需要对应，使用一个传递性的CNN-GAN结构来学习它们之间的映射关系，其网络结构如下：<br><img src="/2019/06/21/Enhance-Review/12.png" data-action="zoom"><br>我们的目标是要学习源图像X到目标图像Y映射关系，如图所示，这个网络包含一个生成器映射G：\(X \to Y\)和一个逆生成映射F:\(Y \to X\)，这里的G可以看成图像增强器，F可视为退化器，为了保证x与\(\widetilde x{\text{  =  }}\left( {F \circ G} \right)(x))内容的一致性，使用VGG19计算内容损失，这样就可以避免成对的需要内容完全一致的数据集。右侧的两个判别器Dc, Dt分别用于判别增强后图像与目标图像在颜色和纹理上的差异，最后计算TV损失来得到较平滑的图像。<br>内容一致性损失，计算原图x与 \(\widetilde x{\text{ }} = F(\widetilde y) = \left( {F \circ G} \right)(x)) 在VGG19上某一高维feature map的L2范数，计算公式如下：<br><img src="/2019/06/21/Enhance-Review/13.png" data-action="zoom"><br>判别器颜色损失，计算增强后的图像与目标图像高斯模糊后的差异，如下：<br><img src="/2019/06/21/Enhance-Review/14.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/15.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/16.png" data-action="zoom"><br>判别器纹理损失，比较增强后图像与目标图像在灰度状态下的损失，定义为：<br><img src="/2019/06/21/Enhance-Review/22.png" data-action="zoom"><br>TV损失，为了使生成后的图像比较平滑，定义为：<br><img src="/2019/06/21/Enhance-Review/17.png" data-action="zoom"><br>总的损失为：<br><img src="/2019/06/21/Enhance-Review/18.png" data-action="zoom"><br>实验结果如下：<br><img src="/2019/06/21/Enhance-Review/19.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/20.png" data-action="zoom"><br>本文提出的算法WESPE是一种弱监督的方式，因此它可以适用于任何户外的数据集，不需要成对的增强图像来训练，还用到的数据集有以下几种：<br><img src="/2019/06/21/Enhance-Review/21.png" data-action="zoom"><br>总的来说，这篇文章最大的贡献是提出了这种弱监督的方式来增强低质量的图像，虽然它的PSNR和SSIM结果跟强监督的相比还存在一定的差距，但它的创新点还是很有借鉴意义的。       </p>
+<h2 id="Deep-Photo-Enhancer-Unpaired-Learning-for-Image-Enhancement-from-Photographs-with-GANs"><a href="#Deep-Photo-Enhancer-Unpaired-Learning-for-Image-Enhancement-from-Photographs-with-GANs" class="headerlink" title="Deep Photo Enhancer: Unpaired Learning for Image Enhancement from Photographs with GANs"></a>Deep Photo Enhancer: Unpaired Learning for Image Enhancement from Photographs with GANs</h2><p>这是CVPR2018的一篇文章，作者首次提出了用GANs实现无监督的照片增强，但这里的无监督并不是完全不需要数据对，同上一篇论文一样，是指用到的数据集并不是在内容上一致的。本文中使用的two-way GAN与CycleGAN的结构相似，在MIT-Adobe 5K数据集上取得了较好的结果，超过了第一篇论文的方法。首先看一下two-way GAN与1-way GAN结构的差别：<br><img src="/2019/06/21/Enhance-Review/23.png" data-action="zoom"><br>图中(a)为标准的GAN，X代表源域，Y表示目标域，给定输入x，经过生成器Gx得到增强后的图像y’，判别器Dy用于区分增强后的图像y’和目标图像y。为了得到更好的结果，加强循环一致性，就提出了这种two-way GAN，(b)通常包含一个前向映射\(X \to Y\)和一个后向映射\(Y \to X\)。前向映射中，x先经过生成器Gx得到增强后的图像y’，得到y’后再经过一个生成器G’y映射到源域x’’，检查x与x’’的一致性；判别器区分y与y’。在反向过程中，y先经过生成器Gy得到退化的图像x’，x’再经过一个生成器G’x得到增强后的图y’’，检查y与y’’的一致性；判别器区分x与x’。<br>GAN中的生成器Gx也就是最后的照片增强器，在U-Net的基础上加入全局特征，作者认为全局特征包含一些高维特征，如场景类别、目标类别、整体的光照条件等，有利于单个像素的局部调整。完整的网络结构如下：<br><img src="/2019/06/21/Enhance-Review/24.png" data-action="zoom"><br>文中作者对比了多种GAN方法，WGAN-GP效果最好，但它的表现依赖于梯度惩罚项的参数，因此作者提出了一种自适应的方法AWGAN(Adaptive WGAN)，通过实验证明了将AWGAN扩展到2-way GAN中比1-way GAN效果更好。为了使生成器能适应不同的数据分布，使用独立的batch normalization层，也就是说除了批归一化层，其余所有的生成器共享相同的层和参数。<br>目标函数包含三部分损失，第一部分为恒等映射，保证输入图像x与增强后的图y内容相似，但因为是2-way GAN存在配对的映射y到x’，定义为I：<br><img src="/2019/06/21/Enhance-Review/25.png" data-action="zoom"><br>第二部分为循环一致性损失C，定义为：<br><img src="/2019/06/21/Enhance-Review/26.png" data-action="zoom"><br>第三部分是生成对抗损失，判别器AD,生成器AG，定义为：<br><img src="/2019/06/21/Enhance-Review/27.png" data-action="zoom"><br>训练判别器时，加上梯度惩罚项P，<br><img src="/2019/06/21/Enhance-Review/28.png" data-action="zoom"><br>这一项满足了Wasserstein distance的1-Lipschitz约束。<br>最终要优化的为：<br><img src="/2019/06/21/Enhance-Review/29.png" data-action="zoom"><br>其中λ ̃为使用AWGAN得到的自适应权重参数。<br>生成器损失优化下式得到：<br><img src="/2019/06/21/Enhance-Review/30.png" data-action="zoom"><br>本文中采用的数据集为MIT Adobe 5K，作者将它划分为三部分，第一部分为2250张图像及其对应的修饰后图像用于有监督的训练；第二部分是第一部分中2250张图像及另外的修饰后的图像，这样就保证了输入图像与输出图像内容上是不同的，用于无监督训练；第三部分500张图像用来测试。<br>最后的实验结果如下：<br><img src="/2019/06/21/Enhance-Review/31.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/32.png" data-action="zoom"><br>除了比较PSNR/SSIM，文中还采用了问卷调查的形式，其中HDR模型取得了最好的结果，从上面的图也可以看出它的效果比较好，色彩比较鲜艳，但该模型存在一定的局限性，一些用于训练的HDR图像是色调映射得到的，会产生光晕效应；若输入图像比较暗或包含噪声，本文的模型会放大噪声。此外，该模型还可以有一些其他应用，如图像分割、卧室图像合成等，取得了不错的效果。总的来说，这篇论文给我们提供了一种“无监督”做图像增强的方法，并且使用U-Net加入全局特征，自适应权重的WGAN和独立的BN层来学习具有用户期望特征的图像。</p>
+<h2 id="Classification-Driven-Dynamic-Image-Enhancement"><a href="#Classification-Driven-Dynamic-Image-Enhancement" class="headerlink" title="Classification-Driven Dynamic Image Enhancement"></a>Classification-Driven Dynamic Image Enhancement</h2><p>这是CVPR2018的一篇文章，基于分类的动态图像增强，这个论文首次将图像增强任务与分类结合起来，不同于现有的图像增强方法去评判增强后图像的感知质量，而是用分类结果的准确性来衡量图像增强的质量，在没有很好的评价指标的情况下，作者Vivek Sharma等人提出了这样的模型，让我们从high-level的角度来对图像进行增强，是一种创新和突破。<br>本文的主要贡献是联合优化一个CNN用于增强和分类，我们通过动态卷积自适应地增强图像中的特征来实现这一目标，使得CNN结构能够选择性地增强那些有助于提高图像分类的特征。网络的整体结构如下：<br><img src="/2019/06/21/Enhance-Review/33.png" data-action="zoom"><br>给定一张输入图像，不是直接用CNN进行分类，而是先用WLS滤波器对图像细节进行增强，再对其进行分类，这样可以提高分类的可信度。本文的目标是学习一种动态图像增强网络来提高分类准确度，但不是近似特定的增强方法。为此，文中给出了三种CNN结构。<br>动态增强滤波器：<br><img src="/2019/06/21/Enhance-Review/34.png" data-action="zoom"><br>由图可知，对于一张输入的RGB图像I，先把它转化成亮度-色度（luminance-sschrominance）Y CbCr 彩色空间，增强算法用于RGB图像的亮度通道，可以使得过滤器修改整体色调属性和图像锐度，而不影响颜色。再加上色度通道的图像可以得到增强后的图像I’，之后增强后的图像输入分类网络中进行分类。其中的目标图像作者采用了5种经典的方法对其进行增强，分别为：(1) weighted least squares (WLS) filter, (2) bilateral filter (BF), (3) image sharpening filter (Imsharp), (4) guided filter (GF) ,(5)histogram equalization (HistEq)，均使用其默认参数。但在该模型中，每个数据集一次只使用其中一种增强方法，且对每一张输入图像，都动态得产生特定的滤波器参数。这里的卷积网络用了AlexNet，GoogleNet, VGG-VD, VGG-16和BN-Inception这五个模型进行测试，其中BN-Inception在分类中表现最好，因此在后续实验中作为默认结构。分类网络中的全连接层和分类层的参数均使用预训练好的网络微调得到。<br>该网络的loss有两部分组成，用于增强的MSE loss和用于分类的softmax loss，用SGD优化器联合优化这两部分损失，总的损失函数如下：<br><img src="/2019/06/21/Enhance-Review/35.png" data-action="zoom"><br>其中，MSE loss计算的是增强后的亮度图像与用传统方法增强后的目标图像的均方误差。a为分类网络中最后一个全连接层的输出，y为图像I的真实标签，C为分类数量。联合优化使得损失梯度可以从ClassNet中反向传播至EnhanceNet，来优化滤波器的参数。<br>静态滤波器：<br><img src="/2019/06/21/Enhance-Review/36.png" data-action="zoom"><br>在该结构中，静态滤波器由第一种结构中所有的动态滤波器的平均得到，每个滤波器的权重相等，均为1/K=0.2(K=5)；同时，由于增强后的图像可能比原始图像效果还差，因此这边使用一个恒等滤波器来产生一张原始图像,再将它们与色度图像相加得到增强后的RGB图像以及它们的权重，这个权重表明增强方法对输入图像的重要性。在分类网络中，输入为5种方法增强后的图像和原始图像及其对应权重和标签，输出为图像类别。和第一种方法一样，分类网络中的全连接层和分类层的参数均使用预训练好的网络微调得到。<br>这里的损失为权值与softmax损失的加权和，带权重的loss可写成如下形式：<br><img src="/2019/06/21/Enhance-Review/37.png" data-action="zoom"><br>其中，K=5,前K个权重相等，均为0.2，第K+1个原始RGB图像的权重设为1.<br>多动态滤波器：<br><img src="/2019/06/21/Enhance-Review/38.png" data-action="zoom"><br>这个网络结构与第一种结构比较相似,针对每种增强方法使用K个增强网络动态地产生K个滤波器，不同于第二种方法中取相同的权重，这里的权值根据均方误差来决定，增强后的图像误差越小，则权重越大，其计算公式如下:<br><img src="/2019/06/21/Enhance-Review/39.png" data-action="zoom"><br>同样，这边也加入恒等滤波器得到原始图像，且权值为1。其损失函数在第二种结构的基础上加入MSE来联合优化这K个增强网络，公式如下：<br><img src="/2019/06/21/Enhance-Review/40.png" data-action="zoom"><br>通过这种方式来训练网络可以使这些滤波器更好地增强图像的结构，以便于提高图像的准确率。<br>实验结果如下：<br><img src="/2019/06/21/Enhance-Review/41.png" data-action="zoom"><br>总的来说，本文提出了一种CNN结构能效仿一系列的增强滤波器，通过端到端的学习来提高图像分类，由于一般的图像增强方法没有评判标准，所以将图像增强与分类任务结合起来，以提高图像分类正确率作为图像增强的标准，更具有实际意义。但这种方法存在一些问题，文中使用五种传统的增强方法来得到目标图像，所以增强网络学习到的结果最好也是接近这几种方法的结果，且文中没有具体研究这些增强后的图像，所以不知道它的效果到底如何，只能说明有助于图像的分类。</p>
+<h2 id="Range-Scaling-Global-U-Net-for-Perceptual-Image-Enhancement-on-Mobile-Devices"><a href="#Range-Scaling-Global-U-Net-for-Perceptual-Image-Enhancement-on-Mobile-Devices" class="headerlink" title="Range Scaling Global U-Net for Perceptual Image Enhancement on Mobile Devices"></a>Range Scaling Global U-Net for Perceptual Image Enhancement on Mobile Devices</h2><p>这是ECCV-PIRM2018（Perceptual Image Enhancement on Smartphones Challenge）挑战赛中，图像增强任务第一名的论文，主要用于处理手机等小型移动设备上的图像增强。现有的图像增强方法在亮度、颜色、对比度、细节、噪声抑制等方面对低质量图像进行了改进，但由于移动设备处理速度慢、内存消耗大，很少能解决感知图像增强的问题，已有的一些方法也很难直接迁移到手机上使用。移动设备上的感知图像增强，尤其是智能手机，最近引起了越来越多的工业界和学术圈兴趣，因此本文提出了一个尺度缩放的全局U-Net网络（Range Scaling Global U-Net，RSGUNet)用于移动设备上的图像增强。<br>这篇文章的网络结构如下：<br><img src="/2019/06/21/Enhance-Review/42.png" data-action="zoom"><br>主体框架是U-Net，可以利用不同分辨率下图像的feature map。在此基础上本文做出了两点改进，一是引入全局特征来减少视觉伪影，二是使用range scaling layer代替residuals，也就是逐个元素相乘，而不是相加。作者通过实验发现这两点创新可以缓解增强后图像的视觉伪影。这里的全局特征向量可以看成是一个正则化器，用于惩罚会导致视觉伪影的低分辨率特征，且使用avgpooling来提取全局特征比使用全连接层所需要的参数量更少。Range scaling layer可以实现像素强度的逐像素缩放，相比于传统的residual-learning残差学习网络，本文提出的RSGUNet网络能力更强，它能学习到更精细、更复杂的低质量图像到高质量图像的映射关系。<br>Loss函数的设计包括L1 loss, MS-SSIM loss, VGG loss, GAN loss and total variation loss。<br><img src="/2019/06/21/Enhance-Review/43.png" data-action="zoom"><br>L1 loss可以获得色彩和亮度信息；MS-SSIM loss可以保留更多高频信息，有实验证明，这两个loss组合比L2 loss的效果要好。<br><img src="/2019/06/21/Enhance-Review/44.png" data-action="zoom"><br>VGG loss保证了增强后图像和目标图像特征表现的相似性，它是在预训练好的VGG计算多个层之间feature map欧式距离的均值得到的。<br><img src="/2019/06/21/Enhance-Review/45.png" data-action="zoom"><br>GAN loss可以近似两幅图像之间的感知距离，因此最小化GAN loss可以使得生成的图像更加真实。<br><img src="/2019/06/21/Enhance-Review/46.png" data-action="zoom"><br>TV loss可以有效抑制高频噪声。<br>总的loss为这些loss的加权和：<br><img src="/2019/06/21/Enhance-Review/47.png" data-action="zoom"><br>实验中用到的数据集是DPED中iPhone和Canon这个数据对，训练集为160000个100*100的patch，验证集为43000个patch，测试的时候用的是400张原图，作者对比了一些方法，结果如下：<br><img src="/2019/06/21/Enhance-Review/48.png" data-action="zoom"><br>可视化结果如下：<br><img src="/2019/06/21/Enhance-Review/49.png" data-action="zoom"><br>PRIM2018图像增强挑战赛的结果如下：<br><img src="/2019/06/21/Enhance-Review/50.png" data-action="zoom"><br>这篇论文也存在一些问题，它在大多数图像上表现较好，但少数增强后的图像比较黑或者模糊，原因可能是U-Net的下采样操作，但实验结果中没有发现伪影。总的来说，本文提出的结构在主观上和客观上都取得了较好的效果，且计算复杂度大大降低，适用于移动设备上的图像增强。这篇文章也给我们提供了一个新的研究方向，探索新的、轻量级的网络结构来实现实时的图像增强任务。</p>
+<h2 id="Fast-Perceptual-Image-Enhancement"><a href="#Fast-Perceptual-Image-Enhancement" class="headerlink" title="Fast Perceptual Image Enhancement"></a>Fast Perceptual Image Enhancement</h2><p>这篇文章跟上一篇一样，也是ECCV-PRIM2018年挑战赛的，在图像增强任务上获得第二名，它是在这边介绍的第一篇论文的模型作为baseline，在它的基础上改进了生成器模型，判别器模型和loss函数的设计都跟baseline一样，但其速度大大提升，因此可以适用于移动设备上。<br>来看一下baseline和这篇论文的生成器模型：<br><img src="/2019/06/21/Enhance-Review/51.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/52.png" data-action="zoom"><br>通过对比可以发现，block的数量从4变成了2，第一层和最后几层的通道数都大大减少，降低模型的复杂度。此外，为了进一步减少计算时间，还做了一个改进就是空间分辨率的减少，多出来的4<em>4</em>32和4<em>4</em>64其实是一个下采样(strided convolutional layers)，每次卷积后feature map的大小就减半，在两个residual block后的两个卷积层相当于是两个上采样层(transposed convolution layers)，将特征恢复到原始分辨率。在每个分辨率下，通过skip connection将相同分辨率的feature map学习一个残差，便于网络学习。作者对比了不同的卷积核大小、通道数及block数对模型性能与速度的影响，结果如下：<br><img src="/2019/06/21/Enhance-Review/53.png" data-action="zoom"><br>可以看到，本文提出的模型在不影响性能的情况下，实现了baseline近6.3倍的加速。虽然该模型由于上采样过程会引入轻微的棋盘伪影，但它是一个不损失图像质量的更快的模型，本文采用的数据集也是DPED，测试结果如下：<br><img src="/2019/06/21/Enhance-Review/54.png" data-action="zoom"><br>作者对不通道卷积核大小、通道数以及激活函数进行了实验，最终权衡了效果和速度，选择了第三行的参数作为网络结构。<br>可视化结果如下：<br><img src="/2019/06/21/Enhance-Review/55.png" data-action="zoom"><br>与baseline相比，本文的方法生成的图像在某些方面更加精细，在边缘处没有色彩伪影，且减少噪声，纹理更清晰。从整体上来说，这篇文章的创新的不是很大，在baseline基础上网络结构的没有特别大的改动，但它的计算速度明显提升，这就表明了基于卷积神经网络的图像增强已经可以产生适用于移动设备的高质量的结果。       </p>
+<h2 id="Deep-Networks-for-Image-to-Image-Translation-with-Mux-and-Demux-Layers"><a href="#Deep-Networks-for-Image-to-Image-Translation-with-Mux-and-Demux-Layers" class="headerlink" title="Deep Networks for Image-to-Image Translation with Mux and Demux Layers"></a>Deep Networks for Image-to-Image Translation with Mux and Demux Layers</h2><p>这篇论文是ECCV-PRIM2018年挑战赛图像增强任务的第三名，虽然结果没有之前两篇的好，但创新点比较大。第一，这篇论文提出了一种shuffle pixel的上采样和下采样层，分别称为Mux and Demux layers，可以直接在CNN中使用，和标准的池化操作相比，这种方式可以保持输入信息不丢失；第二，提出了一种的CNN结构，将Mux，Demux，DenseNet结合起来，在低分辨率下处理feature map，效率比较高；第三，本文在DPED方法基础上引入了一个加权的L1 loss和上下文损失，（contextual loss），为了验证，使用NIQE index来提高图像的感知质量。<br>先来看一下Demux和Mux layer，结构如下：<br><img src="/2019/06/21/Enhance-Review/56.png" data-action="zoom"><br>Mux layer类似于pixel shuffling layer，能直接处理feature map产生一个新的feature map，可以直接在卷积神经网络中当成一个上采样层。Mux先把输入分为几个小组，每组四个feature map，按上述规则重新排列，输出的feature map长宽分别为输入的两倍，数量为输入的1/4。Demux可以看成网络中的下采样操作，是Mux的逆过程，其feature map数量是输入的4倍，长宽分别为输入的1/2。标准的下采样操作如max pooling, average pooling, strided convolutional 是不可逆的，但本文中提出的这种方式没有改变任何像素值，即没有丢失输入信息，这是提高深度学习模型性能的关键之一。<br>本文的网络结构包含一个生成器和一个判别器，判别器和DPED中的结构一样，生成器有两种不同的结构，如下：<br><img src="/2019/06/21/Enhance-Review/57.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/58.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/59.png" data-action="zoom"><br>从图2中可以看出，生成器处理三种分辨率，输入一张RGB图像先经过下采样，为了生成高频细节和高感知质量的图像，每次下采样后引入噪声通道，然后输入到DenseBlock进行处理，再经过一次相同的操作，之后两次上采样得到输出的RGB图像，在每个卷积层后使用instance normalization来调整feature map的全局参数。图3中，直接对输入图像做两次下采样操作，得到的feature map比较小，可以减少计算复杂性且提高模型性能。图4判别器网络包含五个卷积层，每个接着一个LeakyReLU和BN，第1，2，5个卷积层的步长分别为4，2，2。<br>Loss函数在DPED的基础上引入了一个加权的L1 loss，如下：<br><img src="/2019/06/21/Enhance-Review/60.png" data-action="zoom"><br>分别计算R，G，B三个通道的L1损失，参数使用的是YUV色彩空间转换的系数。<br>还有和一个上下文损失(Contextual Loss)，如下：<br><img src="/2019/06/21/Enhance-Review/61.png" data-action="zoom"><br>其中CXij表示两个特征之间的相似性，定义为：<br><img src="/2019/06/21/Enhance-Review/62.png" data-action="zoom"><br>Dij表示xi, yi之间的余弦距离，eps=0.00001, h&gt;0为带宽系数，最终的上下文损失为：<br><img src="/2019/06/21/Enhance-Review/63.png" data-action="zoom"><br>DPED中的4个损失函数分别如下：<br><img src="/2019/06/21/Enhance-Review/64.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/65.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/66.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/67.png" data-action="zoom"><br>总的损失为：<br><img src="/2019/06/21/Enhance-Review/68.png" data-action="zoom"><br>系数分别为：5000，10，10，0.5，2000。<br>在DPED上的实验结果如下：<br><img src="/2019/06/21/Enhance-Review/69.png" data-action="zoom"><br>在衡量图像的PSNR和SSIM之外，本文还引入了一种新的评价机制NIQE。Natural Image Quality Evaluator(NIQE)是一种盲图像质量指数，它基于一组已知的统计特征，这些特征对自然图像遵循多元高斯分布。它可以在没有任何参考图像的情况下量化自然或真实图像的外观，提供类似于人类评估的感知质量指数。其值越小，则表示图像感知质量越好，可以看到本文的结果所得的NIQE最低。<br><img src="/2019/06/21/Enhance-Review/70.png" data-action="zoom"><br>可视化结果如下：<br><img src="/2019/06/21/Enhance-Review/71.png" data-action="zoom"><br>从图中可以看出，DPED的结果局部过亮，本文中的方法比其他方法更能平衡对比度和细节，得到高质量的感知图像。但也存在局限性，当输入图像过亮或者曝光过度的时候就很难成功转化为高质量图像，这可能是数据集的影响，DPED中只包含低亮度的图像，因此可以在训练中加入一些自适应和扩展的数据集。<br>总的来说，本文提出了新的上采样和下采样操作，引入了两个新的损失函数和NIQE这个评价机制，并在实验中加入噪声通道，可以有效提高图像感知质量，在低分辨率下处理图像，也使得模型复杂度大大降低，适用于手机等移动设备。  </p>
+<h2 id="Low-Light-Image-Enhancement-via-a-Deep-Hybrid-Network"><a href="#Low-Light-Image-Enhancement-via-a-Deep-Hybrid-Network" class="headerlink" title="Low-Light Image Enhancement via a Deep Hybrid Network"></a>Low-Light Image Enhancement via a Deep Hybrid Network</h2><p>这是TOG2019年的一篇论文，感觉创新点还是比较多的，第一，提出了一种深度混合网络来增强低光照图像，该网络包含两个部分，一部分为内容stream，用于预测输入图像的场景信息，另一部分为边缘stream，用于学习边缘细节。第二，提出了一种空间变体RNN结构，引入两个权重map作为输入特征和RNN的隐含层状态，这个RNN用于获取图像内部结构，如边缘等。第三，由于在增强图像细节时可能会使噪声放大，因为在训练集中加入高斯噪声，可以有效抑制测试图像上的噪声。此外，这个混合网络采用感知损失和判别损失，可以生成视觉效果较好的增强图像。<br>网络结构如下：<br><img src="/2019/06/21/Enhance-Review/72.png" data-action="zoom"><br>该模型包含两个分支，上面是一个残差的encoder-decoder结构用于估计场景信息，前两个卷积层为膨胀卷积用于扩大感受野，edge stream中反卷积模块的特征在上采样过程中concat起来。Encoder和decoder各有三个卷积模块，每个包含一些卷积层，ReLU和skip links，是一个先下采样再上采样的过程。<br>Edge stream通过一个空间变体（spatially variant）的RNNs来预测图像的静态边缘(spatially variant),该网络的输入为低光照图像及其梯度，具体结构如下：<br><img src="/2019/06/21/Enhance-Review/73.png" data-action="zoom"><br>从图中，可以看出深度CNN结构用于获取两个权重map g和p,上半部分对输入图像采用下采样卷积获得多尺度的特征x,大小分别为{1，1/2，1/4，1/8}，再将他们resize到与x一样大，然后concatenate起来作为RNN的输入，隐含层的计算公式为：<br><img src="/2019/06/21/Enhance-Review/74.png" data-action="zoom"><br>从4个方向分别扫描图像，可以生成四个隐含的activation maps来学习不同的边缘相关特征。然后根据各个方向的最大响应选出最优方向，采用node-wise max pooling对每个位置选择每个四个方向中的最大值作为静态边缘信息。<br>得到边缘特征和内容特征后，concatenate起来，经过两个额外的卷积层就可以得到增强后的图像，除了计算基本的MSE loss之外，还引入了感知损失VGG16和判别损失，计算公式如下：<br><img src="/2019/06/21/Enhance-Review/75.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/76.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/77.png" data-action="zoom"><br><img src="/2019/06/21/Enhance-Review/78.png" data-action="zoom"><br>总的损失如下：<br><img src="/2019/06/21/Enhance-Review/79.png" data-action="zoom"><br>判别网络如下：<br><img src="/2019/06/21/Enhance-Review/80.png" data-action="zoom"><br>本文中用到的训练集是从MIT-Adobe Five5K,从中挑选了336对低光照图像。测试时对十张图像用伽马变换做了暗处理，并加了1%的高斯噪声，结果如下：<br><img src="/2019/06/21/Enhance-Review/81.png" data-action="zoom"><br>可视化结果如下：<br><img src="/2019/06/21/Enhance-Review/82.png" data-action="zoom"><br>总的来说，这篇论文提出了一个混合模型，内容层用于增强低亮度输入图像的可见性并学习对场景内容的整体估计；边缘网络用改进的空间变体RNN从其输入和梯度中学习边缘信息，将两者结合起来能获得高质量的增强图像。但感觉这个网络比较难训练，而且用CNN获取的权重文中也没有详细说明，实现起来可能会比较困难。      </p>
+
+
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+                <div id="gitalk-container"></div>     <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                        clientID: '98e7cbcd4e5f0c3b1319',
+                        clientSecret: 'd506d8485b483357c399e2cc572840d73c8df3c6',
+                        repo: 'JiaqianLi.github.io',
+                        owner: 'JiaqianLi',
+                        admin: ['JiaqianLi'],
+                        id: '2019/06/21/Enhance-Review/',
+                        distractionFreeMode: true,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/12/05/ADMM/" data-toggle="tooltip" data-placement="top" title="凸优化ADMM(Alternating Direction Method of Multipliers)交替方向乘子算法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+                <p></p>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#介绍"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#DSLR-Quality-Photos-on-Mobile-Devices-with-Deep-Convolutional-Networks"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">DSLR-Quality Photos on Mobile Devices with Deep Convolutional Networks</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#WESPE-Weakly-Supervised-Photo-Enhancer-for-Digital-Cameras"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">WESPE: Weakly Supervised Photo Enhancer for Digital Cameras</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Deep-Photo-Enhancer-Unpaired-Learning-for-Image-Enhancement-from-Photographs-with-GANs"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Deep Photo Enhancer: Unpaired Learning for Image Enhancement from Photographs with GANs</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Classification-Driven-Dynamic-Image-Enhancement"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">Classification-Driven Dynamic Image Enhancement</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Range-Scaling-Global-U-Net-for-Perceptual-Image-Enhancement-on-Mobile-Devices"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">Range Scaling Global U-Net for Perceptual Image Enhancement on Mobile Devices</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Fast-Perceptual-Image-Enhancement"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">Fast Perceptual Image Enhancement</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Deep-Networks-for-Image-to-Image-Translation-with-Mux-and-Demux-Layers"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">Deep Networks for Image-to-Image Translation with Mux and Demux Layers</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Low-Light-Image-Enhancement-via-a-Deep-Hybrid-Network"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">Low-Light Image Enhancement via a Deep Hybrid Network</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#enhancement" title="enhancement">enhancement</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://junchenglee.com/" target="_blank">junchengli</a></li>
+                    
+                        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+                    
+                        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+                    
+                        <li><a href="https://me.csdn.net/kirito_acmer" target="_blank">SLY&#39;s Blog</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+                    
+                        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+                    
+                        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+                    
+                        <li><a href="https://www.elainelv.top/" target="_blank">elainelv</a></li>
+                    
+                        <li><a href="https://xuzhongyou.github.io/" target="_blank">xuzhongyou</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!--  <script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>  -->
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/JiaqianLi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jiaqian Li 2019 
+                </p>
+                <p class="copyright text-muted">
+                    <!-- <a target="_blank" title="web analytic"><img alt="web analytic" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" style="border-width:0" /></a> -->
+                    <!-- <a><img alt="web trackers" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" 
+                    style="border-width:0"/></a> -->
+
+                    <!-- GoStats Simple HTML Based Code -->
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
+                    <!-- End GoStats Simple HTML Based Code -->
+
+                    <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
+                    <!-- <span id="busuanzi_container_site_pv">
+					    <span id="busuanzi_value_site_pv"></span>
+					</span> -->
+					<!-- <a target="_blank" title="webstats program"><img alt="webstats program" 
+					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
+					style="border-width:0" /></a> -->
+					visitors since 2018/08/20, 
+                    <span class="post-count">54.6k words altogether</span>
+                </p>
+                  
+                </div>
+            </div>
+        </div>
+    
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jiaqianlee.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-124157944-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '2640a6444407cd5de76cf21291f919ba';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://jiaqianlee.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
