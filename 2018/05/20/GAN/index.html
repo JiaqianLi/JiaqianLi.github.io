@@ -163,6 +163,13 @@ var _hmt = _hmt || [];
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -171,13 +178,6 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -235,17 +235,17 @@ var _hmt = _hmt || [];
 
                 <div align="middle"><br>    <object width="340" height="86" data="http://music.163.com/style/swf/widget.swf?sid=862099032&type=2&auto=0&width=320&height=66" type="application/x-shockwave-flash"></object><br></div>
 
-<h2 id="GAN究竟在做什么？"><a href="#GAN究竟在做什么？" class="headerlink" title="GAN究竟在做什么？"></a>GAN究竟在做什么？</h2><p> 学习样本集的数据分布</p>
-<h3 id="A-学习数据分布有什么用？"><a href="#A-学习数据分布有什么用？" class="headerlink" title="A.学习数据分布有什么用？"></a>A.学习数据分布有什么用？</h3><p>（1）    学习到高维抽象的分布函数<br>（2）    模拟预测未来数据<br>（3）    处理缺省数据问题：如半监督学习<br>（4）    生产真实样本<br>建立模型，分析数据特征，还原数据，……</p>
-<h3 id="B-如何生成真实样本？"><a href="#B-如何生成真实样本？" class="headerlink" title="B.如何生成真实样本？"></a>B.如何生成真实样本？</h3><p> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/91951233.jpg" alt="1"></p>
-<h3 id="C-生成模型的一些常见方法："><a href="#C-生成模型的一些常见方法：" class="headerlink" title="C.生成模型的一些常见方法："></a>C.生成模型的一些常见方法：</h3><p> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/79995755.jpg" alt="2"></p>
-<h3 id="D-生成模型常见方法的比较："><a href="#D-生成模型常见方法的比较：" class="headerlink" title="D.生成模型常见方法的比较："></a>D.生成模型常见方法的比较：</h3><p>显式：或多或少的需要知道或者假设模型的分布；大多通过Markov chains方法<br>隐式：使用隐藏编码，无需假设模型，无需Markov chains，以最终生成图像的相似性作为目标</p>
-<h2 id="GAN如何做的？"><a href="#GAN如何做的？" class="headerlink" title="GAN如何做的？"></a>GAN如何做的？</h2><p>思想：二人零和博弈（two-player game）<br>博弈双方，两个模型：<br>生成模型（G），判别模型（D） （分类器/网络结构）<br>判别模型：是一个二分类器（看作0-1二分类），用于判断样本是真是假；（分类器输入为样本，输出概率大于0.5为真，否则为假）<br>生成模型：是一个样本生成器，把一个噪声包装成另一个逼真的样本，使得判别器误认为是真样本；（输入为噪声，输出为样本维度相同的噪声（假样本））<br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/11597086.jpg" alt="3"><br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/40354682.jpg" alt="4"></p>
-<h2 id="GAN是如何训练的？"><a href="#GAN是如何训练的？" class="headerlink" title="GAN是如何训练的？"></a>GAN是如何训练的？</h2><p>几个问题：<br>(1)我们有什么？<br>有且仅有真实训练样本集，无label<br>(假样本集：随机制造而来，无label)<br>(2)无监督训练or有监督训练？<br>有监督，监督信号：真1假0<br>(3)我们的目的是什么？<br>生成逼真的假样本，越真越好<br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/28170221.jpg" alt="5"><br>精髓：假样本在训练过程中的真假变换，这也是博弈得以进行的关键之处。</p>
+<h2><span id="gan究竟在做什么">GAN究竟在做什么？</span></h2><p> 学习样本集的数据分布</p>
+<h3><span id="a学习数据分布有什么用">A.学习数据分布有什么用？</span></h3><p>（1）    学习到高维抽象的分布函数<br>（2）    模拟预测未来数据<br>（3）    处理缺省数据问题：如半监督学习<br>（4）    生产真实样本<br>建立模型，分析数据特征，还原数据，……</p>
+<h3><span id="b如何生成真实样本">B.如何生成真实样本？</span></h3><p> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/91951233.jpg" alt="1"></p>
+<h3><span id="c生成模型的一些常见方法">C.生成模型的一些常见方法：</span></h3><p> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/79995755.jpg" alt="2"></p>
+<h3><span id="d生成模型常见方法的比较">D.生成模型常见方法的比较：</span></h3><p>显式：或多或少的需要知道或者假设模型的分布；大多通过Markov chains方法<br>隐式：使用隐藏编码，无需假设模型，无需Markov chains，以最终生成图像的相似性作为目标</p>
+<h2><span id="gan如何做的">GAN如何做的？</span></h2><p>思想：二人零和博弈（two-player game）<br>博弈双方，两个模型：<br>生成模型（G），判别模型（D） （分类器/网络结构）<br>判别模型：是一个二分类器（看作0-1二分类），用于判断样本是真是假；（分类器输入为样本，输出概率大于0.5为真，否则为假）<br>生成模型：是一个样本生成器，把一个噪声包装成另一个逼真的样本，使得判别器误认为是真样本；（输入为噪声，输出为样本维度相同的噪声（假样本））<br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/11597086.jpg" alt="3"><br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/40354682.jpg" alt="4"></p>
+<h2><span id="gan是如何训练的">GAN是如何训练的？</span></h2><p>几个问题：<br>(1)我们有什么？<br>有且仅有真实训练样本集，无label<br>(假样本集：随机制造而来，无label)<br>(2)无监督训练or有监督训练？<br>有监督，监督信号：真1假0<br>(3)我们的目的是什么？<br>生成逼真的假样本，越真越好<br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/28170221.jpg" alt="5"><br>精髓：假样本在训练过程中的真假变换，这也是博弈得以进行的关键之处。</p>
 <p><strong>原文目标函数：</strong><br><img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/64449541.jpg" alt="6"></p>
 <p><strong>算法伪代码：</strong><br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/97269652.jpg" alt="7">  </p>
 <p><strong>原文结论</strong><br> <img src="http://pdi88an0w.bkt.clouddn.com/18-8-16/54027248.jpg" alt="8"></p>
-<h2 id="GAN性质小结"><a href="#GAN性质小结" class="headerlink" title="GAN性质小结"></a>GAN性质小结</h2><p>(1)自动的学习原始真实样本集的数据分布，无需假设额外的分布模型；<br>(2)自动学习潜在的损失函数，判别网络潜在学习到的损失函数隐藏在网络之中；<br>(3)提供无监督的学习方法，无监督学习是机器学习领域的终极目标</p>
+<h2><span id="gan性质小结">GAN性质小结</span></h2><p>(1)自动的学习原始真实样本集的数据分布，无需假设额外的分布模型；<br>(2)自动学习潜在的损失函数，判别网络潜在学习到的损失函数隐藏在网络之中；<br>(3)提供无监督的学习方法，无监督学习是机器学习领域的终极目标</p>
 <p>Problem:<br>(1)不收敛的问题：网络不稳定，难以训练；<br>(2)网络需要调才能得到较好的结果，比如交替迭代次数，对结果的影响就较大</p>
 <p>参考内容：<br><a href="https://blog.csdn.net/on2way/article/details/72773771" target="_blank" rel="noopener">https://blog.csdn.net/on2way/article/details/72773771</a><br>以及他的视频分享：<a href="http://www.mooc.ai/open/course/301" target="_blank" rel="noopener">http://www.mooc.ai/open/course/301</a><br>论文链接：<a href="https://arxiv.org/pdf/1406.2661.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1406.2661.pdf</a></p>
 
@@ -292,7 +292,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#GAN究竟在做什么？"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">GAN究竟在做什么？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#A-学习数据分布有什么用？"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">A.学习数据分布有什么用？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#B-如何生成真实样本？"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">B.如何生成真实样本？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#C-生成模型的一些常见方法："><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">C.生成模型的一些常见方法：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#D-生成模型常见方法的比较："><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">D.生成模型常见方法的比较：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#GAN如何做的？"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">GAN如何做的？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#GAN是如何训练的？"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">GAN是如何训练的？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#GAN性质小结"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">GAN性质小结</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">GAN究竟在做什么？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">A.学习数据分布有什么用？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">B.如何生成真实样本？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">C.生成模型的一些常见方法：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">D.生成模型常见方法的比较：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">GAN如何做的？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">GAN是如何训练的？</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">GAN性质小结</span></a></li></ol>
         
         </div>
       </aside>
@@ -346,6 +346,8 @@ var _hmt = _hmt || [];
                         <li><a href="https://thuang001.github.io/" target="_blank">晨曦微光</a></li>
                     
                         <li><a href="http://simtalk.cn/" target="_blank">simtalk</a></li>
+                    
+                        <li><a href="https://kevinj-huang.github.io/" target="_blank">kevinj-huang</a></li>
                     
                 </ul>
                 
