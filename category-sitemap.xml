@@ -7,43 +7,8 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
-        <lastmod>2018-10-02T09:25:24.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</loc>
-        <lastmod>2018-10-02T11:33:12.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/categories/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
         <lastmod>2018-10-02T12:04:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2018-10-02T13:09:04.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/categories/%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB/</loc>
-        <lastmod>2018-10-02T15:07:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-        <lastmod>2018-10-02T15:23:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -65,6 +30,41 @@
     <url>
         <loc>http://jiaqianlee.com/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
         <lastmod>2019-06-21T08:26:34.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E8%BD%AF%E4%BB%B6%E4%BD%BF%E7%94%A8/</loc>
+        <lastmod>2019-08-19T06:01:01.828Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2019-08-19T06:03:19.275Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/</loc>
+        <lastmod>2019-08-19T06:11:29.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
+        <lastmod>2019-08-19T06:21:02.231Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E6%96%87%E5%AD%97%E8%AF%86%E5%88%AB/</loc>
+        <lastmod>2019-08-19T06:28:03.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

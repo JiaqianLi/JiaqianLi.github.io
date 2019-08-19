@@ -2,27 +2,6 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://jiaqianlee.com/tags/R-CNN/</loc>
-        <lastmod>2018-10-02T09:25:24.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/LSTM/</loc>
-        <lastmod>2018-10-02T11:59:26.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/CTW/</loc>
-        <lastmod>2018-10-02T12:02:56.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/ImageNet/</loc>
         <lastmod>2018-10-02T12:04:32.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -37,106 +16,8 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/SRCNN/</loc>
-        <lastmod>2018-10-02T12:29:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/ResNet/</loc>
-        <lastmod>2018-10-02T13:07:36.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/Deconvolution/</loc>
-        <lastmod>2018-10-02T13:08:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/DRCN/</loc>
-        <lastmod>2018-10-02T13:08:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/Machine-Learning/</loc>
-        <lastmod>2018-10-02T13:09:04.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/Deep-Learning/</loc>
-        <lastmod>2018-10-02T13:09:36.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/VGG/</loc>
-        <lastmod>2018-10-02T13:09:44.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/RARE/</loc>
-        <lastmod>2018-10-02T13:10:12.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/STN/</loc>
-        <lastmod>2018-10-02T13:10:12.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/SRN/</loc>
-        <lastmod>2018-10-02T13:10:12.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/OCR/</loc>
-        <lastmod>2018-10-02T15:07:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/FAN/</loc>
-        <lastmod>2018-10-02T15:07:34.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/SR/</loc>
-        <lastmod>2018-10-02T15:23:54.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/Computer-Vision/</loc>
         <lastmod>2018-10-19T14:15:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/tags/CNN/</loc>
-        <lastmod>2018-10-24T13:57:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
@@ -191,13 +72,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/GAN/</loc>
-        <lastmod>2019-06-21T08:14:26.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
         <lastmod>2019-06-21T08:14:26.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -214,6 +88,132 @@
     <url>
         <loc>http://jiaqianlee.com/tags/enhancement/</loc>
         <lastmod>2019-06-21T08:26:34.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/CNN/</loc>
+        <lastmod>2019-08-19T05:54:13.508Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/CTW/</loc>
+        <lastmod>2019-08-19T05:57:21.319Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/GAN/</loc>
+        <lastmod>2019-08-19T05:58:31.793Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/DRCN/</loc>
+        <lastmod>2019-08-19T05:59:01.936Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Deconvolution/</loc>
+        <lastmod>2019-08-19T06:00:14.702Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Machine-Learning/</loc>
+        <lastmod>2019-08-19T06:03:19.275Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/LSTM/</loc>
+        <lastmod>2019-08-19T06:04:43.421Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/SRCNN/</loc>
+        <lastmod>2019-08-19T06:08:05.313Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/ResNet/</loc>
+        <lastmod>2019-08-19T06:10:43.026Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/R-CNN/</loc>
+        <lastmod>2019-08-19T06:11:29.157Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/RARE/</loc>
+        <lastmod>2019-08-19T06:18:52.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/STN/</loc>
+        <lastmod>2019-08-19T06:18:52.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/SRN/</loc>
+        <lastmod>2019-08-19T06:18:52.464Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/SR/</loc>
+        <lastmod>2019-08-19T06:20:23.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Deep-Learning/</loc>
+        <lastmod>2019-08-19T06:20:23.566Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/VGG/</loc>
+        <lastmod>2019-08-19T06:21:02.231Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/OCR/</loc>
+        <lastmod>2019-08-19T06:28:03.433Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/FAN/</loc>
+        <lastmod>2019-08-19T06:28:03.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
