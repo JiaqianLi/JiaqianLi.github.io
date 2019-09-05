@@ -163,14 +163,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="介绍">介绍</span></h1><p>这是第一篇将CNN与Retinex理论结合起来的论文，提出了一个多尺度Retinex卷积网络，端到端的实现低光照图像增强，属于有监督学习，即输入为一张暗的图像，输出为亮图。<br>本文的最大创新点在于其认为多尺度的Retinex理论等价于一个不同高斯卷积核组成的反馈卷积神经网络，可以写成如下形式：<br><img src="/2019/09/05/MSRNET/1.jpg" data-action="zoom"><br>网络结构由三部分组成，分别为多尺度的对数变换，差分卷积和色彩复原函数，如下：<br><img src="/2019/09/05/MSRNET/2.jpg" data-action="zoom"><br>目标函数为：<br><img src="/2019/09/05/MSRNET/3.jpg" data-action="zoom"><br>所用的数据集为真是世界的低光照图像，MEF dataset, NPE dataset和VV dataset。评价指标包括SSIM/NIQE/ Discrete Entropy/ Angular error。对比的方法有Fast efficient algorithm for enhancement of low lighting video/A weighted variational model for simultaneous reflectance and illumination estimation/ Low-light image enhancement via illumination map estimation/A multi-scale retinex for bridging the gap between color images and the human observation of scenes.<br>部分结果如下：<br><img src="/2019/09/05/MSRNET/4.jpg" data-action="zoom"></p>
+                <h1><span id="介绍">介绍</span></h1><p>这是第一篇将CNN与Retinex理论结合起来的论文，提出了一个多尺度Retinex卷积网络，端到端的实现低光照图像增强，属于有监督学习，即输入为一张暗的图像，输出为亮图。<br>本文的最大创新点在于其认为多尺度的Retinex理论等价于一个不同高斯卷积核组成的反馈卷积神经网络，可以写成如下形式：<br><img src="/2019/09/05/MSRNET/1.png" data-action="zoom"><br>网络结构由三部分组成，分别为多尺度的对数变换，差分卷积和色彩复原函数，如下：<br><img src="/2019/09/05/MSRNET/2.jpg.png" data-action="zoom"><br>目标函数为：<br><img src="/2019/09/05/MSRNET/3.jpg.png" data-action="zoom"><br>所用的数据集为真是世界的低光照图像，MEF dataset, NPE dataset和VV dataset。评价指标包括SSIM/NIQE/ Discrete Entropy/ Angular error。对比的方法有Fast efficient algorithm for enhancement of low lighting video/A weighted variational model for simultaneous reflectance and illumination estimation/ Low-light image enhancement via illumination map estimation/A multi-scale retinex for bridging the gap between color images and the human observation of scenes.<br>部分结果如下：<br><img src="/2019/09/05/MSRNET/4.jpg.png" data-action="zoom"></p>
 <h1><span id="总结">总结</span></h1><p>总的来说，这篇论文将Retinex理论运用到CNN中，想法上比较创新，但网络结构中高斯差分卷积跟普通的卷积有什么区别没有说明，以及两个特征做差，感觉挺奇怪的，对比的方法中有两篇也比较老，文中还提到因为感受野的问题，对大的平滑区域会存在halo效应。</p>
 
 
