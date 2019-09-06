@@ -15,7 +15,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          SID - 李佳倩的博客 | LJQ&#39;s Blog
+          Learning to See in the Dark（CVPR2018） - 李佳倩的博客 | LJQ&#39;s Blog
         
     </title>
 
@@ -81,7 +81,7 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('header.jpg')
+            background-image: url('bg.jpg')
             /*post*/
         
     }
@@ -98,8 +98,12 @@
                     <div class="post-heading">
                         <div class="tags">
                             
+                              <a class="tag" href="/tags/#enhancement" title="enhancement">enhancement</a>
+                            
+                              <a class="tag" href="/tags/#SID" title="SID">SID</a>
+                            
                         </div>
-                        <h1>SID</h1>
+                        <h1>Learning to See in the Dark（CVPR2018）</h1>
                         <h2 class="subheading"></h2>
                         <span class="meta">
                             Posted by Jiaqian Li on
@@ -161,13 +165,6 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -176,6 +173,13 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -231,7 +235,9 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h1><span id="介绍">介绍</span></h1><p>这篇论文最大的贡献之一就是提供了一个真实世界的低光照图像和对应reference的数据集，但这些图像不是传统的类型，属于raw sensor data，低光照图像是短曝光下得到的，对应的ref为长曝光，SID数据集总共包含5094对。图像由两部相机Sony α7S II 和Fujiﬁlm X-T2拍摄得到，其对应的传感器分别为Bayer和X-Trans，得到的图像分辨率为4240×2832和6000×4000。<br>本文提出了一个端到端的网络结构，直接处理低光照的raw data，包括色彩变化、去马赛克、减少噪声和图像增强，网络结构如下：<br><img src="/2019/09/05/SID/1.png" data-action="zoom"><br>(a)为传统的图像处理流程，如白平衡、去马赛克、去噪、锐化、颜色空间转换、gamma变化等，这些一般针对特定的相机，泛化性能比较差，而且不能很好地处理极度低的SNR。(b)是本文中提出的结构，对于Bayer arrays把输入pack成4通道，对应的分辨率变为原来的一半；对于X-Trans arrays，输入为6/*6的block, pack成9通道（这里不太懂这个预处理有什么特殊目的）。之后减去black level再乘上期望的放大因子，得到的图像作为网络的输入，默认使用U-Net结构，网络的输出为12通道、原图一半空间分辨率的如下，再经过sub-pixel层复原到全分辨率大小，且输出为RGB空间。<br>网络使用L1loss，每个相机单独训练一个网络。由于低曝光图像往往带有噪声，所以作者还对比了一些去噪方法。部分实验结果如下：<br><img src="/2019/09/05/SID/2.png" data-action="zoom"><br><img src="/2019/09/05/SID/3.png" data-action="zoom">   </p>
+<h1><span id="总结">总结</span></h1><p>虽然本文的结构在SID数据集上有效抑制了噪声且得到了正确的色彩变换，但还是存在一些问题，如：SID数据集比较有限，不包含人像或者动态目标，不能处理HDR色调映射；实验结果存在一些伪影；提出的框架中放大因子需要在外部选择好输入；对每一种相机的传感器要单独训练一个网络，泛化能力比较差；处理图像的速度不够快，不能实现实时图像增强，这些都需要在后续的研究中继续加以改进。</p>
+
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
                 <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
@@ -254,7 +260,7 @@ var _hmt = _hmt || [];
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2019/09/05/LLIE/" data-toggle="tooltip" data-placement="top" title="LLIE">&larr; Previous Post</a>
+                            <a href="/2019/09/05/LLIE/" data-toggle="tooltip" data-placement="top" title="介绍几篇最近看的低光照图像增强的论文">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -275,7 +281,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="nav">none</ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">介绍</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">总结</span></a></li></ol>
         
         </div>
       </aside>
@@ -295,6 +301,10 @@ var _hmt = _hmt || [];
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#enhancement" title="enhancement">enhancement</a>
+                        
+                          <a class="tag" href="/tags/#SID" title="SID">SID</a>
+                        
                     </div>
                 </section>
                 
@@ -448,7 +458,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">55.0k words altogether</span>
+                    <span class="post-count">58.1k words altogether</span>
                 </p>
                   
                 </div>

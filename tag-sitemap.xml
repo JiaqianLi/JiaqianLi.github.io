@@ -212,8 +212,22 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/tags/SID/</loc>
+        <lastmod>2019-09-06T06:07:15.128Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/low-light/</loc>
+        <lastmod>2019-09-06T06:08:42.611Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/tags/enhancement/</loc>
-        <lastmod>2019-09-05T15:44:55.819Z</lastmod>
+        <lastmod>2019-09-06T06:09:07.289Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
