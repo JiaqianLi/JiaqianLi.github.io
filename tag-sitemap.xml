@@ -220,7 +220,14 @@
 
     <url>
         <loc>http://jiaqianlee.com/tags/enhancement/</loc>
-        <lastmod>2019-09-06T06:14:51.167Z</lastmod>
+        <lastmod>2019-09-09T15:13:23.624Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/SICE/</loc>
+        <lastmod>2019-09-09T15:13:23.624Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
