@@ -226,13 +226,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/enhancement/</loc>
-        <lastmod>2020-01-25T08:43:12.088Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/super-resolution/</loc>
         <lastmod>2020-01-25T08:56:09.009Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -249,6 +242,27 @@
     <url>
         <loc>http://jiaqianlee.com/tags/video-enhancement/</loc>
         <lastmod>2020-01-25T11:01:57.389Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/low-light-enhancement/</loc>
+        <lastmod>2020-01-25T11:16:54.100Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/enhancement/</loc>
+        <lastmod>2020-01-25T11:24:55.667Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Fusion/</loc>
+        <lastmod>2020-01-25T11:53:15.748Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
