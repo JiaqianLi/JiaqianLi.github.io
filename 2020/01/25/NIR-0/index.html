@@ -163,14 +163,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -234,11 +234,11 @@ var _hmt = _hmt || [];
                 post-container">
 
                 <blockquote>
-<p>堕落的很久又来更新博客，恰逢春节，先给大家拜个年，祝大家鼠年大吉，平安喜乐都属于你！也希望疫情能快快过去吧！</p>
+<p>堕落了很久的我又来更新博客啦，恰逢春节，先给大家拜个年，祝大家鼠年大吉，平安喜乐都属于你！也希望疫情能快快过去吧！</p>
 </blockquote>
 <p>这篇文章主要介绍一下用红外图像引导得图像增强，在光照条件不好的情况下，可见光图像中很多信息会丢失或者看不到，而红外图像的波长比较长，可以获得更多的细节信息，因此就可以利用红外图像来引导可见光图像的增强，包括去噪、去雾等。       </p>
 <h2><span id="enhancing-photographs-with-near-infrared-imagescvpr2018">Enhancing Photographs with Near Infrared Images(CVPR2018)</span></h2><p>这是第一篇用红外图像进行引导的图像增强，结合了小波变换，首先把红外和可见光图像进行分解，得到平均小波和细节小波，从平均小波中转换对比度信息，从细节小波中转换纹理细节，从而增强VIS图像。整体的流程如下：<br><img src="/2020/01/25/NIR-0/1.png" data-action="zoom"><br>此外，本文还提出了一个对偶摄像装置，同时获得可见光和红外图像。<br><img src="/2020/01/25/NIR-0/2.png" data-action="zoom"><br>部分实验结果如下:<br><img src="/2020/01/25/NIR-0/3.png" data-action="zoom"></p>
-<h2><span id="low-intensity-rgb-texture-enhancement-based-on-near-infrared-image-using-perceptual-information-international-conference-on-communications-circuits-and-systems-2018">Low Intensity RGB Texture Enhancement Based on Near Infrared Image Using Perceptual Information (International Conference on Communications, Circuits and Systems 2018）</span></h2><p>这篇论文提出了，利用RGB图像作为权重的JND map，将红外图像的纹理信息引入RGB中进行对比度增强的方法，流程如下：<br><img src="/2020/01/25/NIR-0/4.png" data-action="zoom"><br>JNDmap的计算如下：<br><img src="/2020/01/25/NIR-0/5.png" data-action="zoom"><br>实验结果：<br><img src="/2020/01/25/NIR-0/6.png" data-action="zoom"></p>
+<h2><span id="low-intensity-rgb-texture-enhancement-based-on-near-infrared-image-using-perceptual-information-icccs-2018">Low Intensity RGB Texture Enhancement Based on Near Infrared Image Using Perceptual Information (ICCCS 2018）</span></h2><p>这篇论文提出了，利用RGB图像作为权重的JND map，将红外图像的纹理信息引入RGB中进行对比度增强的方法，流程如下：<br><img src="/2020/01/25/NIR-0/4.png" data-action="zoom"><br>JNDmap的计算如下：<br><img src="/2020/01/25/NIR-0/5.png" data-action="zoom"><br>实验结果：<br><img src="/2020/01/25/NIR-0/6.png" data-action="zoom"></p>
 <h2><span id="correlation-based-joint-acquisition-and-demosaicing-of-visible-and-near-infrared-images-icip2011">CORRELATION-BASED JOINT ACQUISITION AND DEMOSAICING OF VISIBLE AND NEAR-INFRARED IMAGES (ICIP2011)</span></h2><p>本文的目标是设计一个系统可以使用单个传感器同时捕获NIR和RGB图像，在传感器前放置一个颜色滤波阵列(CFA)以便在采集过程中对场景进行子采样，为了获得四通道的全分辨率图像还要进行”demosaicing”的后处理。本文提出一个正则化的优化问题通过修正最优的CFA算法对NIR/RGB图像进行联合去马赛克，该优化问题用来最大化红外图像与可见光图像中亮度通道在高频部分的相关性。经过实验验证，红外图像和可见图像在高频部分是高度相关的。本文要优化的问题如下：<br><img src="/2020/01/25/NIR-0/7.png" data-action="zoom"><br>实验结果如下：<br><img src="/2020/01/25/NIR-0/8.png" data-action="zoom"></p>
 <h2><span id="enhancing-low-light-images-using-near-infrared-flash-imagesicip2010">ENHANCING LOW LIGHT IMAGES USING NEAR INFRARED FLASH IMAGES(ICIP2010)</span></h2><p>这篇论文提出了一种基于加权最小二乘WLS的方法，用红外闪光图像对可见光图像进行增强，在保持图像原始场景的同时去除可见光图像中的噪声，并提升其细节。此外，本文还构建了一个混合的相机系统，可以同时获得一张可见图像和对应的红外闪光图像，流程如下：<br><img src="/2020/01/25/NIR-0/9.png" data-action="zoom"><br>实验结果如下：<br><img src="/2020/01/25/NIR-0/10.png" data-action="zoom"></p>
 <h2><span id="near-infrared-image-guided-neural-networks-for-color-image-denoising-icassp-2019">NEAR-INFRARED IMAGE GUIDED NEURAL NETWORKS FOR COLOR IMAGE DENOISING (ICASSP 2019)</span></h2><p>这篇文章提出了一种基于深度学习结合红外图像指导做去噪的方法，思路比较简单，把红外图像和可见图像concat起来，同时输入到网络得到一个四通道的输入，然后经过一个卷积神经网络端到端地学习清晰图像与带噪声图像的映射关系，在合成数据集和真实数据集（自己采集，未公开）上都取得了art的结果，网络结构图和部分实验结果如下：<br><img src="/2020/01/25/NIR-0/11.png" data-action="zoom"><br><img src="/2020/01/25/NIR-0/12.png" data-action="zoom"><br><img src="/2020/01/25/NIR-0/13.png" data-action="zoom"></p>
@@ -266,6 +266,10 @@ var _hmt = _hmt || [];
                 <!-- Pager -->
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2020/01/25/SGN/" data-toggle="tooltip" data-placement="top" title="简单介绍两篇去噪论文">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
                             <a href="/2019/09/09/SICE/" data-toggle="tooltip" data-placement="top" title="Learning a Deep Single Image Contrast Enhancer from Multi-Exposure Images(TIP18)">Next Post &rarr;</a>
@@ -284,7 +288,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Enhancing Photographs with Near Infrared Images(CVPR2018)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Low Intensity RGB Texture Enhancement Based on Near Infrared Image Using Perceptual Information (International Conference on Communications, Circuits and Systems 2018）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">CORRELATION-BASED JOINT ACQUISITION AND DEMOSAICING OF VISIBLE AND NEAR-INFRARED IMAGES (ICIP2011)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ENHANCING LOW LIGHT IMAGES USING NEAR INFRARED FLASH IMAGES(ICIP2010)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">NEAR-INFRARED IMAGE GUIDED NEURAL NETWORKS FOR COLOR IMAGE DENOISING (ICASSP 2019)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Colouring the Near-Infrared</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Adaptive near-infrared and visible fusion for fast image enhancement</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Enhancing Photographs with Near Infrared Images(CVPR2018)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Low Intensity RGB Texture Enhancement Based on Near Infrared Image Using Perceptual Information (ICCCS 2018）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">CORRELATION-BASED JOINT ACQUISITION AND DEMOSAICING OF VISIBLE AND NEAR-INFRARED IMAGES (ICIP2011)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">ENHANCING LOW LIGHT IMAGES USING NEAR INFRARED FLASH IMAGES(ICIP2010)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">NEAR-INFRARED IMAGE GUIDED NEURAL NETWORKS FOR COLOR IMAGE DENOISING (ICASSP 2019)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">Colouring the Near-Infrared</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">Adaptive near-infrared and visible fusion for fast image enhancement</span></a></li></ol>
         
         </div>
       </aside>
@@ -459,7 +463,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">60.3k words altogether</span>
+                    <span class="post-count">61.6k words altogether</span>
                 </p>
                   
                 </div>

@@ -7,8 +7,32 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/2020/01/25/SGN/</loc>
+        <lastmod>2020-01-25T09:02:11.558Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/2020/01/25/STN/</loc>
+        <lastmod>2020-01-25T08:56:09.009Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/2019/06/21/Enhance-Review/</loc>
+        <lastmod>2020-01-25T08:43:12.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/2020/01/25/NIR-0/</loc>
-        <lastmod>2020-01-25T08:27:23.030Z</lastmod>
+        <lastmod>2020-01-25T08:36:31.087Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -161,14 +185,6 @@
     <url>
         <loc>http://jiaqianlee.com/2018/04/24/CNN/</loc>
         <lastmod>2019-08-19T05:54:13.508Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/2019/06/21/Enhance-Review/</loc>
-        <lastmod>2019-06-21T08:26:34.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

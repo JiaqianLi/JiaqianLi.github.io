@@ -227,7 +227,21 @@
 
     <url>
         <loc>http://jiaqianlee.com/tags/enhancement/</loc>
-        <lastmod>2020-01-25T08:27:23.030Z</lastmod>
+        <lastmod>2020-01-25T08:43:12.088Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/super-resolution/</loc>
+        <lastmod>2020-01-25T08:56:09.009Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/Denoising/</loc>
+        <lastmod>2020-01-25T09:02:11.558Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
