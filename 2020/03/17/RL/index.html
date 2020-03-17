@@ -165,14 +165,14 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -237,12 +237,13 @@ var _hmt = _hmt || [];
 
                 <blockquote>
 <p>第一次看强化学习的论文，可能理解不到位，如有问题，欢迎指出~</p>
-<h1><span id="unpaired-image-enhancementfeaturing-reinforcement-learning-controlled-image-editing-software">Unpaired Image Enhancement——Featuring Reinforcement-Learning-Controlled Image Editing Software</span></h1><h2><span id="本文的出发点">本文的出发点：</span></h2><p>①在大多数情况下，我们很难获取大量原始图像与增强后图像配对的数据集，因此本文提出一种不需要配对数据的图像增强网络，可以应用于真实场景。<br>②现有的基于CNN或者GAN的方法往往伴随着artifacts，训练高分辨率图像不稳定且耗时长，由于这些方法本质上是黑盒，不可解释也难以人为调整。</p>
+</blockquote>
+<p>论文题目： Unpaired Image Enhancement——Featuring Reinforcement-Learning-Controlled Image Editing Software</p>
+<h2><span id="本文的出发点">本文的出发点：</span></h2><p>①在大多数情况下，我们很难获取大量原始图像与增强后图像配对的数据集，因此本文提出一种不需要配对数据的图像增强网络，可以应用于真实场景。<br>②现有的基于CNN或者GAN的方法往往伴随着artifacts，训练高分辨率图像不稳定且耗时长，由于这些方法本质上是黑盒，不可解释也难以人为调整。</p>
 <h2><span id="主要贡献">主要贡献：</span></h2><p>为了实现无伪影、尺度不变、可解释的非成对图像增强，本文将图像编辑软件（如Adobe Photoshop）整合到GAN网络中，提出了一种以生成器作为软件控制代理的强化学习(RL)框架。不同于一般的GAN，生成器用于直接生成图像。在该框架中，生成器选择软件的参数，并在编辑结果欺骗鉴别器时获得奖励。通过使用RL进行训练，可以使用高质量的不可微图像编辑软件。作者将提出的方法应用于两个非配对的图像增强任务:照片增强和人脸美化。实验结果表明，与现有的基于非配对学习的方法相比，该方法具有更好的性能。</p>
 <h2><span id="方法">方法：</span></h2><h3><span id="符号说明">符号说明：</span></h3><p>X,Y分别表示原始图像域和目标图像域, 定义数据分布为\(x\sim p_s\),\(y\sim p_t\) 。输入图像x和动作向量（action vector） \(a=[a_1,a_2,\dots,a_k]\)作为图像编辑软件S的输入，输出为编辑后的图像\(y’=S(x,a)\),在训练过程中，生成器得到的数据分布\(y’\sim p_g\)逐渐接近\(p_t\)。</p>
 <h3><span id="整体框架">整体框架：</span></h3><p><img src="/2020/03/17/RL/1.png" data-action="zoom"></p>
 <h3><span id="判别器">判别器：</span></h3><p>训练过程中，本文的判别器D与一般GAN网络中的判别器作用相同，都是为了学习区分生成的图像与真实图像。这里采用梯度惩罚的Wasserstein GAN方法(WGAN-GP)，判别器的损失定义为：<br><img src="/2020/03/17/RL/2.png" data-action="zoom"><br>其中，Z为Lipschitz连续函数集中的正则化项，即：<br><img src="/2020/03/17/RL/3.png" data-action="zoom"></p>
-</blockquote>
 <p>\(\hat{y}\)为是在\(p_t\)和\(p_g\)之间沿直线采样的图像。</p>
 <h3><span id="生成器">生成器：</span></h3><p>本文的目标是将图像编辑软件整合到GAN中，即生成器以原始图像x作为输入，输出为软件的参数。若图像编辑软件是可微的，则可直接优化如下损失函数：<br><img src="/2020/03/17/RL/4.png" data-action="zoom"><br>但这种方法不能应用于不可微的图像编辑软件，如PS。此外，S是非线性的函数，对于用户来说，解释序列的操作比较困难，因此作者使用single-step action。若直接使用D(y’)作为reward来欺骗判别器，可能会导致x和y’之间的不一致性，因此作者将reward定义为：<br><img src="/2020/03/17/RL/5.png" data-action="zoom"><br>作者选择advantage actor-critic (A2C)作为RL的方法，包括值（value）网络V和策略（policy）网络 。其中value网络V (x)用于估计当前状态x的值，其损失定义为：<br><img src="/2020/03/17/RL/6.png" data-action="zoom"></p>
 <p>Policy网络\(\pi(a_k|x)\)输出当前状态x下每个动作\(a_k\)的概率，并经过训练使期望奖励最大化，即<br><img src="/2020/03/17/RL/7.png" data-action="zoom"><br>若通过a操作获得的奖励大于价值网络预测的奖励，则a的概率增加。第二项是计算熵的函数，用于鼓励代理搜索并防止收敛到局部最优。</p>
@@ -291,7 +292,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Unpaired Image Enhancement——Featuring Reinforcement-Learning-Controlled Image Editing Software</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">本文的出发点：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">主要贡献：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">方法：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">符号说明：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">整体框架：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.3.</span> <span class="toc-nav-text">判别器：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.4.</span> <span class="toc-nav-text">生成器：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.5.</span> <span class="toc-nav-text">网络结构：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">实验部分：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">总结：</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">本文的出发点：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">主要贡献：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">方法：</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">符号说明：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">整体框架：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">判别器：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">生成器：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">网络结构：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">实验部分：</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">总结：</span></a></li></ol>
         
         </div>
       </aside>
