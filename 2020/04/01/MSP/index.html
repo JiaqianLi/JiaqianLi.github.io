@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ECNU Computer Vision Group">
+    <meta name="keyword" content="华东师范大学18级研究生 图形图像处理与计算机视觉方向">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Multi-Stage Prediction Networks for Data Harmonization - 胖虎的博客 | LJQ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jiaqianlee.com/2020/04/01/MSP/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#mutil-task learning" title="mutil-task learning">mutil-task learning</a>
+                            
+                              <a class="tag" href="/tags/#data harmonization" title="data harmonization">data harmonization</a>
+                            
+                        </div>
+                        <h1>Multi-Stage Prediction Networks for Data Harmonization</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Jiaqian Li on
+                            2020-04-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LJQ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>论文题目：Multi-Stage Prediction Networks for Data Harmonization (MICCAI19)</p>
+<h2><span id="背景">背景</span></h2><p>由于图像采集缺乏标准化，数据协调（data harmonization）的目的是为了消除因扫描仪，中心或采集协议的规格而引起的差异。现有的方法往往针对每个设备训练一个单一网络，由于数据集比较少，所以往往会导致过拟合，而且未能充分利用多个预测任务之间的协同作用，因为这些预测任务通常是紧密相关的。而多任务学习允许模型集成来自多个平台的数据信息，为DH训练数据缺乏提供了一个强大的解决方案。</p>
+<h2><span id="主要贡献">主要贡献</span></h2><p>本文第一次将多任务学习引入数据协调,其目标是在不同的采集平台和站点之间协调图像，整合不同数据信息，提高模型的预测性能和学习效率。作者提出了一种多阶段预测（MSP）网络，即一个多任务学习框架，该框架将不同结构的神经网络（针对不同的个体采集平台进行训练）整合到一个统一的架构中。MSP将预训练好的单任务网络的高层次（high-level）特征作为额外网络的输入来指导最后的预测，用任务之间的冗余来充分利用有限的训练数据。</p>
+<h2><span id="数据集">数据集</span></h2><p>协调的数据由10位志愿者在三台不同的扫描仪上得到，分别为3T General Electric scanner，Prisma scanner，Connectom scanner，并有两种不同的协议（standard (st) protocol，state-of-the-art (sa) protocol），得到以下四种不同的数据，单目标网络将ge_st作为输入，分别预测其他三组图像。<br><img src="/2020/04/01/MSP/1.png" data-action="zoom"></p>
+<h2><span id="数据预处理">数据预处理</span></h2><p>对于得到的raw data先进行配准和归一化操作，随后从归一化数据信号中估计得到的6阶 real-and-symmetric SH deconvolution的28个系数作为分离的通道（不知道怎么翻译，给出原文We employed [17,18] where the 28 coefficients of the 6th order real-and-symmetric SH deconvolution were estimated from the normalized raw signal considered as separate channels of our data.）</p>
+<h2><span id="网络结构">网络结构</span></h2><p><img src="/2020/04/01/MSP/2.png" data-action="zoom"><br>把预测图像记为\(I_{ij},i=1,\dots,P-1,j=1,\dots,N\),输入图像记为\(I_{0j}\),其中N为图像数量，P为不同的设备数，\(T\in {1,\dots,P-1}\)为目标输出。文中的网络以\(P=4,T=1\)为例来说明。从上图的左半部分可以看到，对于单任务来说，要训练P-1个网络\(\hat{y}_{T}=N_T(x)\)。右半部分，先选择了P-1个最先进（SOAT）的预训练好的单一网络，作为多阶段网络（MSP）的第一阶段预测，即\(\hat{y}_{T}^1=N_i(x),i=1,\dots,T\)。若\(i \neq T\)，把网络\(N_i\)的最后一个feature map记为\(z_i\)，并构造新的网络\(N_{iT}\)，第二阶段将\(z_i\)作为输入（利用其他平台的信息），再与第一阶段得到的\(\hat{y}_{T}^1\)进行线性结合来预测目标设备T的最终结果，即：<br><img src="/2020/04/01/MSP/3.png" data-action="zoom"><br>损失函数也分为两阶段，文中用的是MSE，分别为：<br><img src="/2020/04/01/MSP/4.png" data-action="zoom"></p>
+<h2><span id="实验结果">实验结果</span></h2><p>文中作者分别对比了一些有代表性的单任务网络与多任务网络，如下：<br><img src="/2020/04/01/MSP/5.png" data-action="zoom"><br><img src="/2020/04/01/MSP/6.png" data-action="zoom"></p>
+<h2><span id="总结">总结</span></h2><p>这篇论文中，作者主要运用了多任务学习的方法，如多阶段预测MSP如何提高DH中深度学习的预测能力，以及如何改进目前最先进的单一网络方法。</p>
+
+
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+                <div id="gitalk-container"></div>     <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                        clientID: '98e7cbcd4e5f0c3b1319',
+                        clientSecret: 'd506d8485b483357c399e2cc572840d73c8df3c6',
+                        repo: 'JiaqianLi.github.io',
+                        owner: 'JiaqianLi',
+                        admin: ['JiaqianLi'],
+                        id: '2020/04/01/MSP/',
+                        distractionFreeMode: true,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/03/31/MRI/" data-toggle="tooltip" data-placement="top" title="Deep Learning Enables Reduced Gadolinium Dose for Contrast-Enhanced Brain MRI">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+                <p></p>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">主要贡献</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">数据集</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">数据预处理</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">网络结构</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">实验结果</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#mutil-task learning" title="mutil-task learning">mutil-task learning</a>
+                        
+                          <a class="tag" href="/tags/#data harmonization" title="data harmonization">data harmonization</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://junchenglee.com/" target="_blank">junchengli</a></li>
+                    
+                        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+                    
+                        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+                    
+                        <li><a href="https://shiliye.com/" target="_blank">SLY&#39;s Blog</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+                    
+                        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+                    
+                        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+                    
+                        <li><a href="https://www.elainelv.top/" target="_blank">elainelv</a></li>
+                    
+                        <li><a href="https://xuzhongyou.github.io/" target="_blank">xuzhongyou</a></li>
+                    
+                        <li><a href="https://thuang001.github.io/" target="_blank">晨曦微光</a></li>
+                    
+                        <li><a href="http://simtalk.cn/" target="_blank">simtalk</a></li>
+                    
+                        <li><a href="https://kevinj-huang.github.io/" target="_blank">kevinj-huang</a></li>
+                    
+                        <li><a href="http://suzhigao66.top/" target="_blank">suzhigao</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!--  <script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>  -->
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/JiaqianLi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jiaqian Li 2020 
+                </p>
+                <p class="copyright text-muted">
+                    <!-- <a target="_blank" title="web analytic"><img alt="web analytic" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" style="border-width:0" /></a> -->
+                    <!-- <a><img alt="web trackers" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" 
+                    style="border-width:0"/></a> -->
+
+                    <!-- GoStats Simple HTML Based Code -->
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
+                    <!-- End GoStats Simple HTML Based Code -->
+
+                    <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
+                    <!-- <span id="busuanzi_container_site_pv">
+					    <span id="busuanzi_value_site_pv"></span>
+					</span> -->
+					<!-- <a target="_blank" title="webstats program"><img alt="webstats program" 
+					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
+					style="border-width:0" /></a> -->
+					visitors since 2018/08/20, 
+                    <span class="post-count">68.2k words altogether</span>
+                </p>
+                  
+                </div>
+            </div>
+        </div>
+    
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jiaqianlee.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-124157944-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '2640a6444407cd5de76cf21291f919ba';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://jiaqianlee.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
