@@ -165,6 +165,13 @@ var _hmt = _hmt || [];
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -173,13 +180,6 @@ var _hmt = _hmt || [];
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -243,6 +243,7 @@ var _hmt = _hmt || [];
 <h2><span id="网络结构">网络结构</span></h2><p><img src="/2020/04/01/MSP/2.png" data-action="zoom"><br>把预测图像记为\(I_{ij},i=1,\dots,P-1,j=1,\dots,N\),输入图像记为\(I_{0j}\),其中N为图像数量，P为不同的设备数，\(T\in {1,\dots,P-1}\)为目标输出。文中的网络以\(P=4,T=1\)为例来说明。从上图的左半部分可以看到，对于单任务来说，要训练P-1个网络\(\hat{y}_{T}=N_T(x)\)。右半部分，先选择了P-1个最先进（SOAT）的预训练好的单一网络，作为多阶段网络（MSP）的第一阶段预测，即\(\hat{y}_{T}^1=N_i(x),i=1,\dots,T\)。若\(i \neq T\)，把网络\(N_i\)的最后一个feature map记为\(z_i\)，并构造新的网络\(N_{iT}\)，第二阶段将\(z_i\)作为输入（利用其他平台的信息），再与第一阶段得到的\(\hat{y}_{T}^1\)进行线性结合来预测目标设备T的最终结果，即：<br><img src="/2020/04/01/MSP/3.png" data-action="zoom"><br>损失函数也分为两阶段，文中用的是MSE，分别为：<br><img src="/2020/04/01/MSP/4.png" data-action="zoom"></p>
 <h2><span id="实验结果">实验结果</span></h2><p>文中作者分别对比了一些有代表性的单任务网络与多任务网络，如下：<br><img src="/2020/04/01/MSP/5.png" data-action="zoom"><br><img src="/2020/04/01/MSP/6.png" data-action="zoom"></p>
 <h2><span id="总结">总结</span></h2><p>这篇论文中，作者主要运用了多任务学习的方法，如多阶段预测MSP如何提高DH中深度学习的预测能力，以及如何改进目前最先进的单一网络方法。</p>
+<p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a href="https://cloud.tencent.com/developer/support-plan?invite_code=1sw3ok0rq88g1" target="_blank" rel="noopener">https://cloud.tencent.com/developer/support-plan?invite_code=1sw3ok0rq88g1</a></p>
 
 
                 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
