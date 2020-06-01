@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -236,7 +236,7 @@ var _hmt = _hmt || [];
                 <blockquote>
 <p>这篇论文主要介绍两篇基于深度学习的低光照图像增强的文章。</p>
 </blockquote>
-<h2><span id="progressive-retinex-mutually-reinforced-illumination-noise-perception-network-for-low-light-image-enhancementacmmm2019">Progressive Retinex: Mutually Reinforced Illumination-Noise Perception Network for Low Light Image Enhancement(ACMMM2019)</span></h2><p>基于Retinex的低光照图像增强包含对比度增强和噪声抑制两个任务，并存在一定的耦合关系，若忽略两者之间的关系可能会导致过度/欠平滑的结果。为了解决这一问题，本文提出了一种改进的Retinex框架，其中，低光照图像的噪声和亮度以一种互相增强的方式感知，来实现基于retinex的图像增强。本文设计了两个“逐点式”(即1<em>1的滤波器)的卷积神经网络分别用于建模环境光和图像噪声的统计规律，并利用它们作为约束来处理共同学习的过程，两个模型渐进地处理直到获得稳定的结果。网络结果图如下：<br><img src="/2020/01/25/LOW/1.png" data-action="zoom"><br>用网络学习得到的关于照度和噪声的有代表性像素的结果如下：<br><img src="/2020/01/25/LOW/2.png" data-action="zoom"><br>网络的训练采用MSEloss,要优化的目标函数分为两个子任务，对比度增强和噪声抑制，其表达式如下：<br><img src="/2020/01/25/LOW/3.png" data-action="zoom"><br>此外，本文还提出了一种构造数据集的方法，并模拟了与亮度有关的噪声分布，<br><img src="/2020/01/25/LOW/4.png" data-action="zoom"><br>部分实验结果如下：<br><img src="/2020/01/25/LOW/5.png" data-action="zoom"><br>但这种方法存在一个较大的局限性，由于只考虑像素空间的统计分布而忽略了结构性质，1</em>1的卷积核感受野比较小，导致卷积的时候没有邻域信息。</p>
+<h2><span id="progressive-retinex-mutually-reinforced-illumination-noise-perception-network-for-low-light-image-enhancementacmmm2019">Progressive Retinex: Mutually Reinforced Illumination-Noise Perception Network for Low Light Image Enhancement(ACMMM2019)</span></h2><p>基于Retinex的低光照图像增强包含对比度增强和噪声抑制两个任务，并存在一定的耦合关系，若忽略两者之间的关系可能会导致过度/欠平滑的结果。为了解决这一问题，本文提出了一种改进的Retinex框架，其中，低光照图像的噪声和亮度以一种互相增强的方式感知，来实现基于retinex的图像增强。本文设计了两个“逐点式”(即1*1的滤波器)的卷积神经网络分别用于建模环境光和图像噪声的统计规律，并利用它们作为约束来处理共同学习的过程，两个模型渐进地处理直到获得稳定的结果。网络结果图如下：<br><img src="/2020/01/25/LOW/1.png" data-action="zoom"><br>用网络学习得到的关于照度和噪声的有代表性像素的结果如下：<br><img src="/2020/01/25/LOW/2.png" data-action="zoom"><br>网络的训练采用MSEloss,要优化的目标函数分为两个子任务，对比度增强和噪声抑制，其表达式如下：<br><img src="/2020/01/25/LOW/3.png" data-action="zoom"><br>此外，本文还提出了一种构造数据集的方法，并模拟了与亮度有关的噪声分布，<br><img src="/2020/01/25/LOW/4.png" data-action="zoom"><br>部分实验结果如下：<br><img src="/2020/01/25/LOW/5.png" data-action="zoom"><br>但这种方法存在一个较大的局限性，由于只考虑像素空间的统计分布而忽略了结构性质，1*1的卷积核感受野比较小，导致卷积的时候没有邻域信息。</p>
 <h2><span id="eemefn-low-light-image-enhancement-via-edge-enhanced-multi-exposure-fusion-network-aaai2020">EEMEFN: Low-Light Image Enhancement via Edge-Enhanced Multi-Exposure Fusion Network (AAAI2020)</span></h2><p>现有的低光照图像增强算法存在三个问题：①现有的方法往往很难从极度暗/亮的图像中复原细节信息；②由于没有正常曝光的图像信息，现有的模型中存在色彩畸变；③基于像素点的损失会带来模糊等。了解决上述问题，本文提出了一个双阶段的模型为边缘增强的多曝光图像融合。第一阶段的多曝光融合模块通过生成和融合不同光照条件下的多曝光图像，恢复出良好的曝光图像细节，降低噪声方差和颜色偏差。值得注意的是，这里的多曝光图像是由原图乘上对应的比例得到的。第二阶段的边缘增强模块通过融合低光照图像和边缘信息生成高质量的图像。其网络结构如下：<br><img src="/2020/01/25/LOW/6.png" data-action="zoom"><br>其中，融合模块如下：<br><img src="/2020/01/25/LOW/7.png" data-action="zoom"><br>给出部分其在SID数据集上的结果：<br><img src="/2020/01/25/LOW/8.png" data-action="zoom"></p>
 
 

@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/2020/01/25/LOW/</loc>
+        <lastmod>2020-06-01T03:02:32.260Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/2020/04/01/MSP/</loc>
         <lastmod>2020-05-30T05:29:07.389Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -49,14 +57,6 @@
     <url>
         <loc>http://jiaqianlee.com/2020/01/25/NIR-0/</loc>
         <lastmod>2020-01-25T11:24:55.667Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/2020/01/25/LOW/</loc>
-        <lastmod>2020-01-25T11:16:54.100Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
