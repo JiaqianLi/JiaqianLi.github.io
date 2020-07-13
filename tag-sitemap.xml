@@ -282,13 +282,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/MRI-enhancement/</loc>
-        <lastmod>2020-03-31T06:29:58.971Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/mutil-task-learning/</loc>
         <lastmod>2020-05-30T05:29:07.389Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -304,7 +297,14 @@
 
     <url>
         <loc>http://jiaqianlee.com/tags/low-light-enhancement/</loc>
-        <lastmod>2020-06-01T03:02:32.260Z</lastmod>
+        <lastmod>2020-07-13T13:32:06.352Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/MRI-enhancement/</loc>
+        <lastmod>2020-07-13T13:42:22.593Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

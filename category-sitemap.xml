@@ -71,7 +71,14 @@
 
     <url>
         <loc>http://jiaqianlee.com/categories/%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
-        <lastmod>2020-06-01T03:02:32.260Z</lastmod>
+        <lastmod>2020-07-13T13:32:06.352Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%A2%9E%E5%BC%BA/</loc>
+        <lastmod>2020-07-13T13:42:22.593Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
