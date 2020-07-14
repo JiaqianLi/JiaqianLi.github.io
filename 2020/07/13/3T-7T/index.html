@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -177,7 +177,7 @@ var _hmt = _hmt || [];
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -233,7 +233,10 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="背景">背景</span></h1><p>在MRI扫描中，与常规3T MRI相比，特高磁场7T MRI具有更高的分辨率和更好的组织造影，有助于更准确、早期的脑部疾病诊断。然而，目前7T MRI扫描仪在临床和研究中更昂贵且数量更少，这促使研究者提出从3T MRI中重建与7T MRI质量相近的图像的方法，以提高图像的分辨率和对比度。 这样可以更准确地完成组织分割等后处理任务，以更高的分辨率和对比度看到脑组织的细节。这篇文章主要介绍从低分辨率的3TMRI中重建高分辨率的类7TMR图像的相关论文。</p>
+                <blockquote>
+<p>“然而人不是为失败而生的，”他说。“一个人可以被毁灭，但不能给打败”</p>
+</blockquote>
+<h1><span id="背景">背景</span></h1><p>在MRI扫描中，与常规3T MRI相比，特高磁场7T MRI具有更高的分辨率和更好的组织造影，有助于更准确、早期的脑部疾病诊断。然而，目前7T MRI扫描仪在临床和研究中更昂贵且数量更少，这促使研究者提出从3T MRI中重建与7T MRI质量相近的图像的方法，以提高图像的分辨率和对比度。 这样可以更准确地完成组织分割等后处理任务，以更高的分辨率和对比度看到脑组织的细节。这篇文章主要介绍从低分辨率的3TMRI中重建高分辨率的类7TMR图像的相关论文。</p>
 <h1><span id="相关论文">相关论文</span></h1><h2><span id="reconstruction-of-7t-like-images-from-3t-mrimcca-tmi2016">Reconstruction of 7T-Like Images From 3T MRI（MCCA TMI2016）</span></h2><p><strong>Authors:</strong> Khosro Bahrami, Feng Shi, Xiaopeng Zong, Hae Won Shin, Hongyu An, Dinggang Shen<br>这篇论文是MICCAI2015 M-CCA的扩展论文，它的主要贡献有：<br>1.提出multi-level CCA来增加3T、7T字典的关联性；<br>2.在MCCA空间使用组稀疏（group sparity）获得相邻patch的结构一致性<br>3.使用分层框架来逐步重建精细化的7T图像<br>方法：<br>一般的字典学习其能量函数可表示为：<br><img src="/2020/07/13/3T-7T/1.png" data-action="zoom"><br>空间域的稀疏表示假设3T (LR)和7T (HR)图像高度相关，具有相似的分布，但在实际应用中，这种假设可能并不完全成立。为了克服这一缺点，可以在CCA空间中进行稀疏表示。引入两个基向量，即<br><img src="/2020/07/13/3T-7T/2.png" data-action="zoom"><br>作者认为相邻的patch通常具有相似的结构，因此应该具有相似的稀疏表示。通过将一个patch及其附属的patch视为一个组，可增强相邻patch的组稀疏性，实现局部结构的一致性，则（3）式可以写成如下形式：<br><img src="/2020/07/13/3T-7T/3.png" data-action="zoom"><br>此外，作者认为在基于patch的重建中，patch的大小是非常重要的。因此本文提出了一种改变patch size的重建方案，通过从较大的patch开始，在多次迭代中层次化地减小patch的大小，即<br><img src="/2020/07/13/3T-7T/4.png" data-action="zoom"><br>总体结构如下：<br><img src="/2020/07/13/3T-7T/5.png" data-action="zoom"><br>实验部分：<br>本文使用了13例配对的3T、7T脑MRI图像，其中8名是健康的，5名是癫痫患者。定量评价指标有PSNR、SSIM、VIF、UQI及组织分割结果DICE。部分实验结果如下：<br><img src="/2020/07/13/3T-7T/6.png" data-action="zoom"> </p>
 <h2><span id="7t-guided-super-resolution-of-3t-mrirf-physics2017">7T-guided super-resolution of 3T MRI(RF Physics2017)</span></h2><p><strong>Authors:</strong> Khosro Bahrami, Feng Shi, Islem Rekik, and Yaozong Gao<br>本文用数学方法来生成类似7T的超分辨率3T图像，主要贡献有：<br>1.依次使用随机森林回归和稀疏表示来提高重构性能；<br>2.引入一种基于随机森林树输出分布的集成策略，去除异常值，避免不可靠的结果；<br>3.引入一种加权方案，对随机森林中有代表性的训练样本赋予更高的权值；<br>4.提出一种基于高分辨率空间图像的预选方案，进一步引入组稀疏性来共享输出的稀疏性<br>实验部分：<br>本文采用的数据集是15例配对好的3T、7T图像；对比方法均为传统方法，所用指标有PSNR、SSIM、UQI；用FSL中的FAST工具测试脑图像的分割结果。<br>本文框架如下：<br><img src="/2020/07/13/3T-7T/7.png" data-action="zoom"><br>部分实验结果如下：<br><img src="/2020/07/13/3T-7T/8.png" data-action="zoom"></p>
 <h2><span id="convolutional-neural-network-for-reconstruction-of-7t-like-images-from-3t-mri-using-appearance-and-anatomical-features-caaf-dlmia2016">Convolutional Neural Network for Reconstruction of 7T-like Images from 3T MRI Using Appearance and Anatomical Features (CAAF DLMIA2016)</span></h2><p><strong>Authors:</strong> Khosro Bahrami, Feng Shi, Islem Rekik, and Dinggang Shen<br>本文是用卷积神经网络来重建类7T图像，用的是3D-CNN。主要贡献有：<br>1.除了表观特征外，将解剖特征引入CNN用于学习3T、7T的映射，使相邻patch有解剖一致性<br>2.使用CNN结构端到端学习，采用不同卷积核更好地提取特征，不需要额外学习和优化步骤<br>网络结构如下，损失函数为MSE loss：<br><img src="/2020/07/13/3T-7T/9.png" data-action="zoom"><br>实验部分：<br>本文用到的数据集是15例配对MRI图像，其中健康受试者5例，癫痫8例，MCI 2例。所用指标PSNR，部分实验结果如下：<br><img src="/2020/07/13/3T-7T/10.png" data-action="zoom"><br><img src="/2020/07/13/3T-7T/81.png" data-action="zoom"></p>
@@ -463,7 +466,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">71.2k words altogether</span>
+                    <span class="post-count">71.3k words altogether</span>
                 </p>
                   
                 </div>
