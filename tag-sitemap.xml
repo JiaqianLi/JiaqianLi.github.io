@@ -304,7 +304,14 @@
 
     <url>
         <loc>http://jiaqianlee.com/tags/MRI-enhancement/</loc>
-        <lastmod>2020-07-14T09:08:02.309Z</lastmod>
+        <lastmod>2020-07-18T06:54:08.863Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/MR-Image-Synthesis/</loc>
+        <lastmod>2020-07-18T07:03:28.154Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
