@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ECNU Computer Vision Group">
+    <meta name="keyword" content="华东师范大学2018级研究生 图形图像处理与计算机视觉方向">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          医学图像跨域合成 - 胖虎的博客 | LJQ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jiaqianlee.com/2020/09/04/synthesis-1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('header.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#MR Image Synthesis" title="MR Image Synthesis">MR Image Synthesis</a>
+                            
+                        </div>
+                        <h1>医学图像跨域合成</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Jiaqian Li on
+                            2020-09-04
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LJQ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="背景">背景</span></h1><p>这篇文章主要介绍一些基于深度学习的医学图像合成的论文，医学图像跨域合成一般是指从一种模态转化为另一种模态，包括CT到PET，MR到CT，CT到MR及MRI中T1,T2,FLAIR等之间的转化。</p>
+<h1><span id="相关论文">相关论文</span></h1><h2><span id="deep-mr-to-ct-synthesis-using-unpaired-data-miccai-workshop2017">Deep MR to CT Synthesis using Unpaired Data (MICCAI workshop2017)</span></h2><p>Authors: Jelmer M. Wolterink1, Anna M. Dinkla2, Mark H.F. Savenije2, Peter R. Seevinck1, Cornelis A.T. van den Berg2, Ivana Isgum<br>Code：<a href="https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix" target="_blank" rel="noopener">https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix</a><br><strong>背景</strong><br>仅MR放射治疗计划要求精准MR-to-CT合成。目前用于磁共振到CT合成的深度学习方法依赖于同一患者的MR和CT训练图像的两两对齐。然而，成对图像的非对准问题会导致合成CT图像的误差。为了解决这一问题，本文提出用未配对的MR和CT 图像训练生成对抗网络(GAN)。<br><strong>贡献</strong><br>将cyclegan应用到非配对的MRI到CT图像生成/模态转换。实验发现使用非配对的数据集训练比配对数据集上取得的效果更好，更真实。<br>本文的网络结构比较简单，直接采用cyclegan的形式，由两个生成器和两个判别器组成，分别实现MRI到CT转换和CT到MRI的转换，损失函数有判别器的损失和循环一致性损失如图：<br><img src="/2020/09/04/synthesis-1/1.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/2.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/3.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/4.png" data-action="zoom"><br><strong>实验部分</strong><br>本文采用了24对MRI、CT图像作为数据集，用2D矢状面切片作为网络输入。评价指标用的是MAE和PSNR。文中没有提供与其他方法的对比结果，实验部分比较简单<br><img src="/2020/09/04/synthesis-1/5.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/6.png" data-action="zoom">  </p>
+<h2><span id="ea-gans-edge-aware-generative-adversarial-networks-for-cross-modality-mr-image-synthesistmi2019">Ea-GANs: Edge-Aware Generative Adversarial Networks for Cross-Modality MR Image Synthesis（TMI2019）</span></h2><p><strong>出发点</strong><br>现有的方法大多只关注于最小化像素/体素方向的强度差异，而忽略了图像内容结构的纹理细节，从而影响了合成图像的质量。为了解决这一问题，本文提出了一种基于边缘感知的生成对抗网络(Ea-GANs)的MR图像合成方法。<br><strong>贡献</strong><br>①为了解决2D模型预测结果不连续问题和现有的cGAN只考虑像素一致性而忽略图像内容结构一致性的问题，引入edge边缘信息，提出EaGAN网络用语MRI合成<br>②设计两种策略学习edge信息，gEaGAN只在生成器种约束edge map；dEaGAN同时在生成器和判别器中利用edge信息，与直接使用梯度相比，对噪声更不敏感且更注重邻域信息<br>关于图像边缘和3D Sobel算子的描述，如下：<br><img src="/2020/09/04/synthesis-1/7.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/8.png" data-action="zoom"> <strong>**<br>网络结构比较简单，主要由三部分组成，生成器，判别器和边缘提取器。<br><img src="/2020/09/04/synthesis-1/9.png" data-action="zoom"><br>其中，gEa-GAN的损失函数如下：<br><img src="/2020/09/04/synthesis-1/10.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/11.png" data-action="zoom"><br>dEa-GAN的损失函数如下：<br><img src="/2020/09/04/synthesis-1/12.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/13.png" data-action="zoom"> 
+</strong>实验部分**<br>本文采用两种数据集，BRATS2015和 the non-skull stripped IXI datasets。评价指标PSNR,SSIM,NMSE。部分实验结果如下：<br><img src="/2020/09/04/synthesis-1/14.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/15.png" data-action="zoom"> </p>
+<h2><span id="image-synthesis-in-multi-contrast-mri-with-conditional-generative-adversarial-networks-tmi-2019">Image Synthesis in Multi-Contrast MRI With Conditional Generative Adversarial Networks （TMI 2019）</span></h2><p>Authors: Salman UH. Dar, Mahmut Yurt, Levent Karacan, Aykut Erdem, Erkut Erdem, and Tolga Çukur<br>Code：<a href="http://github.com/icon-lab/mrirecon" target="_blank" rel="noopener">http://github.com/icon-lab/mrirecon</a><br><strong>背景</strong><br>获得具有多种不同对比的同一解剖图像增加了磁共振检查中可用的诊断信息的多样性。然而，扫描时间限制可能会阻止某些对比度的获取，而且对比度可能会被噪声和伪影破坏。在这种情况下，合成未获得的或损坏的对比的能力可以提高诊断的效用。对于多对比度合成，现有的方法一般学习一个从源到目标图像之间的非线性强度转换，要么通过非线性回归或确定性的神经网络，但是这些方法可能会在合成图像中丢失结构细节。<br><strong>本文的贡献</strong><br>这篇文章提出了一种基于条件GAN的多对比MRI图像合成的方法，实现MRI中T1,T2的相互转化合成，用对抗损失函数来保持图像的中高频细节。创新主要有两点：<br>①提供了两种不同的应用场景，对配准的多对比度MRI，设计pGAN，除了基本的生成对抗损失外，使用像素级的L1损失和感知损失加以约束；对非配准的图像，设计cGAN，用cycleGAN的思想，引入循环一致性损失来提高合成性能。<br>②利用相邻截面信息(neighboring cross-sections)来进一步提高合成图像的质量。<br>对于第一种配准的场景，网络结构如下，损失函数包括上述三个部分：<br><img src="/2020/09/04/synthesis-1/16.png" data-action="zoom"><br>对于第二种非配准的场景，网络结构如下，它的本质就是cyclegan：<br><img src="/2020/09/04/synthesis-1/17.png" data-action="zoom"><br>此外，为了合成x和y的每一个横截面，还利用了相邻横截面的相关信息，不仅通过图像本身上调节网络，且在图像的相邻横截面上调节网络。本质上，就是把像素级的合成扩展到某个区间内的合成，则原损失函数可以改写为如下形式：<br><img src="/2020/09/04/synthesis-1/18.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/19.png" data-action="zoom"><br>其中，x_k为以x为中心的k个连续截面组成的向量。<br><strong>实验部分</strong><br>本文用到的数据集有三个，分别为：MIDAS Dataset、IXI Dataset、BRATS Dataset。本文的实验对比和分析非常丰富，这里给出一部分实验结果：<br><img src="/2020/09/04/synthesis-1/20.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/21.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/22.png" data-action="zoom">  </p>
+<h2><span id="hi-net-hybrid-fusion-network-for-multi-modal-mr-image-synthesis-tmi-2020">Hi-Net: Hybrid-fusion Network for Multi-modal MR Image Synthesis (TMI 2020)</span></h2><p>Authors: Tao Zhou, Huazhu Fu, Geng Chen, Jianbing Shen, and Ling Shao<br>Code：<a href="https://github.com/taozh2017/HiNet" target="_blank" rel="noopener">https://github.com/taozh2017/HiNet</a><br><strong>出发点</strong><br>在许多任务中，融合这种多模态数据已被证明特别有效地提高了模型的性能。然而，由于数据质量差，患者频繁退出，收集每个患者的所有模式仍然是一个挑战。医学图像合成是解决这一问题的有效方法，可以将缺失的模态从已有的模态中合成出来。<br><strong>贡献</strong><br>①不同于单模态合成，本文提出一种新的MRI合成框架，用多种模态合成目标模态图像；<br>②Hi-Net通过特定网络获得单个模态特征，同时用分层多模态融合学习多模态间相关性；<br>③提出MFB模块自适应地对不同的融合策略进行加权<br>本文的网络结构由三个部分组成，分别为特定模态特征网络，多模态融合网络及多模态合成网络（包括一个生成器和一个判别器），损失函数由L1重建损失，生成器和判别器损失三部分构成，结构图如下：<br><img src="/2020/09/04/synthesis-1/23.png" data-action="zoom"><br>其中，MFB模块同时结合了加法，乘法，concatenate操作，让网络自适应的学习不同操作间的权重，可以更好地融合特征。<br><img src="/2020/09/04/synthesis-1/24.png" data-action="zoom"><br><strong>实验部分</strong><br>本文采用多模态的脑部肿瘤分割挑战赛BraTs2018的数据集，用T1,T2和Flair三种模态来验证本文提出方法的有效性。共285例数据，网络训练使用归一化到[-1,1]的2D切片，评价指标由PSNR,SSIM,NMSE。给出一部分实验结果<br><img src="/2020/09/04/synthesis-1/25.png" data-action="zoom"><br><img src="/2020/09/04/synthesis-1/26.png" data-action="zoom"> </p>
+<h1><span id="总结">总结</span></h1><p>之前介绍过很多关于有监督的图像合成，这里涉及到无监督的图像合成问题，主要是借鉴了自然图像中风格迁移的思想，用cyclegan来实现。</p>
+
+
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+                <script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script> 
+                <div id="gitalk-container"></div>     <script type="text/javascript">
+                    var gitalk = new Gitalk({
+                        clientID: '98e7cbcd4e5f0c3b1319',
+                        clientSecret: 'd506d8485b483357c399e2cc572840d73c8df3c6',
+                        repo: 'JiaqianLi.github.io',
+                        owner: 'JiaqianLi',
+                        admin: ['JiaqianLi'],
+                        id: '2020/09/04/synthesis-1/',
+                        distractionFreeMode: true,
+                    });
+                    gitalk.render('gitalk-container');
+                </script>
+
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/09/04/segmentation/" data-toggle="tooltip" data-placement="top" title="用于实时MRI脑部肿瘤分割的3D膨胀多纤维网络">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/07/18/synthesis/" data-toggle="tooltip" data-placement="top" title="不同模态MRI医学图像合成">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+                <p></p>
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">背景</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">相关论文</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">Deep MR to CT Synthesis using Unpaired Data (MICCAI workshop2017)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">Ea-GANs: Edge-Aware Generative Adversarial Networks for Cross-Modality MR Image Synthesis（TMI2019）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">Image Synthesis in Multi-Contrast MRI With Conditional Generative Adversarial Networks （TMI 2019）</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">Hi-Net: Hybrid-fusion Network for Multi-modal MR Image Synthesis (TMI 2020)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">总结</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#MR Image Synthesis" title="MR Image Synthesis">MR Image Synthesis</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://junchenglee.com/" target="_blank">junchengli</a></li>
+                    
+                        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+                    
+                        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+                    
+                        <li><a href="https://shiliye.com/" target="_blank">SLY&#39;s Blog</a></li>
+                    
+                        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+                    
+                        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+                    
+                        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+                    
+                        <li><a href="https://www.elainelv.top/" target="_blank">elainelv</a></li>
+                    
+                        <li><a href="https://xuzhongyou.github.io/" target="_blank">xuzhongyou</a></li>
+                    
+                        <li><a href="https://thuang001.github.io/" target="_blank">晨曦微光</a></li>
+                    
+                        <li><a href="http://simtalk.cn/" target="_blank">simtalk</a></li>
+                    
+                        <li><a href="https://kevinj-huang.github.io/" target="_blank">kevinj-huang</a></li>
+                    
+                        <li><a href="http://suzhigao66.top/" target="_blank">suzhigao</a></li>
+                    
+                        <li><a href="https://supercong94.wixsite.com/supercong94" target="_blank">supercong</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!--  <script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>  -->
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+<script type="text/javascript" src="/js/zooming.js"></script>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/JiaqianLi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jiaqian Li 2020 
+                </p>
+                <p class="copyright text-muted">
+                    <!-- <a target="_blank" title="web analytic"><img alt="web analytic" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" style="border-width:0" /></a> -->
+                    <!-- <a><img alt="web trackers" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" 
+                    style="border-width:0"/></a> -->
+
+                    <!-- GoStats Simple HTML Based Code -->
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
+                    <!-- End GoStats Simple HTML Based Code -->
+
+                    <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
+                    <!-- <span id="busuanzi_container_site_pv">
+					    <span id="busuanzi_value_site_pv"></span>
+					</span> -->
+					<!-- <a target="_blank" title="webstats program"><img alt="webstats program" 
+					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
+					style="border-width:0" /></a> -->
+					visitors since 2018/08/20, 
+                    <span class="post-count">74.7k words altogether</span>
+                </p>
+                  
+                </div>
+            </div>
+        </div>
+    
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jiaqianlee.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-124157944-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '2640a6444407cd5de76cf21291f919ba';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://jiaqianlee.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>

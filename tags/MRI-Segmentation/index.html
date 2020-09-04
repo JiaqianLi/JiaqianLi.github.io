@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta name="baidu-site-verification" content="rlXUrNbP8h">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ECNU Computer Vision Group">
+    <meta name="keyword" content="华东师范大学2018级研究生 图形图像处理与计算机视觉方向">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          胖虎的博客 | LJQ&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://jiaqianlee.com/tags/MRI-Segmentation/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/undefined')
+            /*page*/
+        
+    }
+    
+</style>
+
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="site-heading">
+                        <h1>LJQ&#39;s Blog</h1>
+                        <!--<hr class="small">-->
+                        <span class="subheading">欢迎大佬们来玩！</span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?46e79e71af0709a5b9106bf20cecc493";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LJQ&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            
+                
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 归档列表 -->
+            
+            
+
+             <!-- 归档列表 -->
+
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2020">
+                    <span class="tag-text">2020</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-04
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/09/04/segmentation/" style="color: #0085a1">
+                        <span>
+                            用于实时MRI脑部肿瘤分割的3D膨胀多纤维网络
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-04
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/09/04/synthesis-1/" style="color: #0085a1">
+                        <span>
+                            医学图像跨域合成
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-18
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/07/18/synthesis/" style="color: #0085a1">
+                        <span>
+                            不同模态MRI医学图像合成
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-13
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/07/13/3T-7T/" style="color: #0085a1">
+                        <span>
+                            医学图像MRI增强相关论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-01
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/04/01/MSP/" style="color: #0085a1">
+                        <span>
+                            Multi-Stage Prediction Networks for Data Harmonization
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/03/31/MRI/" style="color: #0085a1">
+                        <span>
+                            Deep Learning Enables Reduced Gadolinium Dose for Contrast-Enhanced Brain MRI
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-17
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/03/17/RL/" style="color: #0085a1">
+                        <span>
+                            Unpaired Image Enhancement Featuring Reinforcement-Learning-Controlled Image Editing Software
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    03-16
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/03/16/Self/" style="color: #0085a1">
+                        <span>
+                            Self-supervised Image Enhancement Network Training with Low Light Images Only
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/Fusion/" style="color: #0085a1">
+                        <span>
+                            介绍几篇图像融合相关的论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/LOW/" style="color: #0085a1">
+                        <span>
+                            介绍两篇比较新的低光照图像增强的论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/Dark/" style="color: #0085a1">
+                        <span>
+                            简单介绍两篇低光照视频增强的论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/STN/" style="color: #0085a1">
+                        <span>
+                            空间特征转换网络及其在超分辨中的应用
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/SGN/" style="color: #0085a1">
+                        <span>
+                            简单介绍两篇去噪论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2020/01/25/NIR-0/" style="color: #0085a1">
+                        <span>
+                            NIR引导的RGB图像增强
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2019">
+                    <span class="tag-text">2019</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/09/09/SICE/" style="color: #0085a1">
+                        <span>
+                            Learning a Deep Single Image Contrast Enhancer from Multi-Exposure Images(TIP18)
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/09/05/LLIE/" style="color: #0085a1">
+                        <span>
+                            介绍几篇最近看的低光照图像增强的论文
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/09/05/SID/" style="color: #0085a1">
+                        <span>
+                            Learning to See in the Dark（CVPR2018）
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/09/05/MSRNET/" style="color: #0085a1">
+                        <span>
+                            MSR-net Low-light Image Enhancement Using Deep Convolutional Network (arxiv17
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2019/06/21/Enhance-Review/" style="color: #0085a1">
+                        <span>
+                            基于深度学习的图像增强综述
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
+                    <span class="tag-text">2018</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    12-05
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/12/05/ADMM/" style="color: #0085a1">
+                        <span>
+                            凸优化ADMM(Alternating Direction Method of Multipliers)交替方向乘子算法
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/11/21/photo-enhancer-GANs-1/" style="color: #0085a1">
+                        <span>
+                            基于GANs的非配对学习用于图像增强
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    11-01
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/11/01/ACE/" style="color: #0085a1">
+                        <span>
+                            基于变分法的感知色彩校正
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-22
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/10/22/enhancement/" style="color: #0085a1">
+                        <span>
+                            基于图像分类的动态图像增强
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    10-03
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/10/03/convex/" style="color: #0085a1">
+                        <span>
+                            Convex set and convex function
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    09-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/09/28/RCNN/" style="color: #0085a1">
+                        <span>
+                            RCNN 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/07/09/RARE/" style="color: #0085a1">
+                        <span>
+                            Robust Scene Text Recognition with Automatic Rectification 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    07-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/07/06/FAN/" style="color: #0085a1">
+                        <span>
+                            Focusing Attention Network（FAN）自然图像文本识别 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-28
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/28/CV/" style="color: #0085a1">
+                        <span>
+                            计算机视觉相关会议、期刊简介
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-15
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/15/Deconvolution/" style="color: #0085a1">
+                        <span>
+                            基于深度卷积神经网络的图像反卷积 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-09
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/09/SRCNN/" style="color: #0085a1">
+                        <span>
+                            基于深度卷积神经网络的图像超分辨率重建（SRCNN）学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-08
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/08/SRreview/" style="color: #0085a1">
+                        <span>
+                            基于深度学习的图像超分辨率方法 总结
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-07
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/07/SR/" style="color: #0085a1">
+                        <span>
+                            图像超分辨率及相关知识  简介
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/06/DRCN/" style="color: #0085a1">
+                        <span>
+                            基于深度循环卷积神经网络的图像超分辨率重建  学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    06-03
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/06/03/ResNet/" style="color: #0085a1">
+                        <span>
+                            深度残差神经网络ResNet 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-31
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/31/ImageNet/" style="color: #0085a1">
+                        <span>
+                            ImageNet 近几年模型汇总
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/25/VGG/" style="color: #0085a1">
+                        <span>
+                            深度卷积神经网络VGG 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-20
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/20/GAN/" style="color: #0085a1">
+                        <span>
+                            生成对抗网络GAN原理 学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-17
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/17/CTW/" style="color: #0085a1">
+                        <span>
+                            Chinese Text in the Wild  学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    05-15
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/05/15/OCR/" style="color: #0085a1">
+                        <span>
+                            Implicit Language Model in LSTM for OCR  学习笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/25/ML/" style="color: #0085a1">
+                        <span>
+                            周志华《机器学习》第2章部分笔记
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-25
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/25/Git/" style="color: #0085a1">
+                        <span>
+                            Git及Github的使用
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    04-24
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/2018/04/24/CNN/" style="color: #0085a1">
+                        <span>
+                            CNN卷积神经网络 ILSVRC-2012
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+
+            </div>
+
+          <!-- Sidebar Container -->
+<div class="
+    col-lg-3 col-lg-offset-0
+    col-md-3 col-md-offset-0
+    col-sm-12
+    col-xs-12
+    sidebar-container
+">
+    
+        <!-- Featured Tags -->
+
+<section>
+    <!-- no hr -->
+    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+            
+            <a href="/tags/#ACE" title="ACE" rel="1">ACE</a>
+            
+        
+            
+            <a href="/tags/#变分法" title="变分法" rel="1">变分法</a>
+            
+        
+            
+            <a href="/tags/#色彩校正" title="色彩校正" rel="1">色彩校正</a>
+            
+        
+            
+            <a href="/tags/#MRI enhancement" title="MRI enhancement" rel="2">MRI enhancement</a>
+            
+        
+            
+            <a href="/tags/#ADMM" title="ADMM" rel="1">ADMM</a>
+            
+        
+            
+            <a href="/tags/#CNN" title="CNN" rel="2">CNN</a>
+            
+        
+            
+            <a href="/tags/#Computer Vision" title="Computer Vision" rel="1">Computer Vision</a>
+            
+        
+            
+            <a href="/tags/#OCR" title="OCR" rel="3">OCR</a>
+            
+        
+            
+            <a href="/tags/#CTW" title="CTW" rel="1">CTW</a>
+            
+        
+            
+            <a href="/tags/#DRCN" title="DRCN" rel="1">DRCN</a>
+            
+        
+            
+            <a href="/tags/#SR" title="SR" rel="4">SR</a>
+            
+        
+            
+            <a href="/tags/#video enhancement" title="video enhancement" rel="1">video enhancement</a>
+            
+        
+            
+            <a href="/tags/#Deconvolution" title="Deconvolution" rel="1">Deconvolution</a>
+            
+        
+            
+            <a href="/tags/#FAN" title="FAN" rel="1">FAN</a>
+            
+        
+            
+            <a href="/tags/#enhancement" title="enhancement" rel="7">enhancement</a>
+            
+        
+            
+            <a href="/tags/#Fusion" title="Fusion" rel="1">Fusion</a>
+            
+        
+            
+            <a href="/tags/#GAN" title="GAN" rel="2">GAN</a>
+            
+        
+            
+            <a href="/tags/#ImageNet" title="ImageNet" rel="1">ImageNet</a>
+            
+        
+            
+            <a href="/tags/#ILSVRC" title="ILSVRC" rel="1">ILSVRC</a>
+            
+        
+            
+            <a href="/tags/#Machine Learning" title="Machine Learning" rel="1">Machine Learning</a>
+            
+        
+            
+            <a href="/tags/#low-light enhancement" title="low-light enhancement" rel="1">low-light enhancement</a>
+            
+        
+            
+            <a href="/tags/#mutil-task learning" title="mutil-task learning" rel="1">mutil-task learning</a>
+            
+        
+            
+            <a href="/tags/#data harmonization" title="data harmonization" rel="1">data harmonization</a>
+            
+        
+            
+            <a href="/tags/#LSTM" title="LSTM" rel="1">LSTM</a>
+            
+        
+            
+            <a href="/tags/#RARE" title="RARE" rel="1">RARE</a>
+            
+        
+            
+            <a href="/tags/#STN" title="STN" rel="1">STN</a>
+            
+        
+            
+            <a href="/tags/#SRN" title="SRN" rel="1">SRN</a>
+            
+        
+            
+            <a href="/tags/#R-CNN" title="R-CNN" rel="1">R-CNN</a>
+            
+        
+            
+            <a href="/tags/#Reinforcement Learning" title="Reinforcement Learning" rel="1">Reinforcement Learning</a>
+            
+        
+            
+            <a href="/tags/#image enhancement" title="image enhancement" rel="1">image enhancement</a>
+            
+        
+            
+            <a href="/tags/#ResNet" title="ResNet" rel="1">ResNet</a>
+            
+        
+            
+            <a href="/tags/#SICE" title="SICE" rel="1">SICE</a>
+            
+        
+            
+            <a href="/tags/#SID" title="SID" rel="1">SID</a>
+            
+        
+            
+            <a href="/tags/#SRCNN" title="SRCNN" rel="1">SRCNN</a>
+            
+        
+            
+            <a href="/tags/#super resolution" title="super resolution" rel="1">super resolution</a>
+            
+        
+            
+            <a href="/tags/#Deep Learning" title="Deep Learning" rel="1">Deep Learning</a>
+            
+        
+            
+            <a href="/tags/#Denoising" title="Denoising" rel="1">Denoising</a>
+            
+        
+            
+            <a href="/tags/#Self-supervised" title="Self-supervised" rel="1">Self-supervised</a>
+            
+        
+            
+            <a href="/tags/#VGG" title="VGG" rel="1">VGG</a>
+            
+        
+            
+            <a href="/tags/#convex set" title="convex set" rel="1">convex set</a>
+            
+        
+            
+            <a href="/tags/#convex function" title="convex function" rel="1">convex function</a>
+            
+        
+            
+            <a href="/tags/#图像增强" title="图像增强" rel="2">图像增强</a>
+            
+        
+            
+            <a href="/tags/#无监督学习" title="无监督学习" rel="1">无监督学习</a>
+            
+        
+            
+            <a href="/tags/#图像分类" title="图像分类" rel="1">图像分类</a>
+            
+        
+            
+            <a href="/tags/#MRI Segmentation" title="MRI Segmentation" rel="1">MRI Segmentation</a>
+            
+        
+            
+            <a href="/tags/#MR Image Synthesis" title="MR Image Synthesis" rel="2">MR Image Synthesis</a>
+            
+        
+    </div>
+</section>
+
+        <hr>
+    
+        <!-- Short About -->
+<section class="visible-md visible-lg">
+    <h5><a href="/about/">ABOUT ME</a></h5>
+    <div class="short-about">
+
+        
+            <img id="avatar_pic" src="/img/ironman-draw.png">
+        
+
+        
+            <p>一只小白的成长之路！</p>
+        
+
+        <!-- SNS Link -->
+        <ul class="list-inline">
+            
+            
+            
+                <li>
+                    <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa  fa-stack-1x fa-inverse">知</i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://github.com/JiaqianLi">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+
+            
+                <li>
+                    <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                </li>
+            
+
+            
+
+            
+            
+            
+        </ul>
+    </div>
+</section>
+        <hr>
+    
+        
+  <h5>RECENT POSTS
+  <div class="widget">
+    <ul>
+      
+        <li>
+          <a href="/2020/09/04/segmentation/">用于实时MRI脑部肿瘤分割的3D膨胀多纤维网络</a>
+        </li>
+      
+        <li>
+          <a href="/2020/09/04/synthesis-1/">医学图像跨域合成</a>
+        </li>
+      
+        <li>
+          <a href="/2020/07/18/synthesis/">不同模态MRI医学图像合成</a>
+        </li>
+      
+        <li>
+          <a href="/2020/07/13/3T-7T/">医学图像MRI增强相关论文</a>
+        </li>
+      
+        <li>
+          <a href="/2020/04/01/MSP/">Multi-Stage Prediction Networks for Data Harmonization</a>
+        </li>
+      
+    </ul>
+  </div>
+</h5>
+        <hr>
+    
+        <!-- Friends Blog -->
+
+<h5>FRIENDS</h5>
+<ul class="list-inline">
+
+    
+        <li><a href="https://junchenglee.com/" target="_blank">junchengli</a></li>
+    
+        <li><a href="http://huangxuan.me/" target="_blank">huangxuan</a></li>
+    
+        <li><a href="https://godweiyang.com/" target="_blank">WeiYang</a></li>
+    
+        <li><a href="https://shiliye.com/" target="_blank">SLY&#39;s Blog</a></li>
+    
+        <li><a href="https://blog.csdn.net/loadqian" target="_blank">MY CSDN</a></li>
+    
+        <li><a href="http://colah.github.io/" target="_blank">colah</a></li>
+    
+        <li><a href="http://freemind.pluskid.org/" target="_blank">freemind</a></li>
+    
+        <li><a href="https://www.elainelv.top/" target="_blank">elainelv</a></li>
+    
+        <li><a href="https://xuzhongyou.github.io/" target="_blank">xuzhongyou</a></li>
+    
+        <li><a href="https://thuang001.github.io/" target="_blank">晨曦微光</a></li>
+    
+        <li><a href="http://simtalk.cn/" target="_blank">simtalk</a></li>
+    
+        <li><a href="https://kevinj-huang.github.io/" target="_blank">kevinj-huang</a></li>
+    
+        <li><a href="http://suzhigao66.top/" target="_blank">suzhigao</a></li>
+    
+        <li><a href="https://supercong94.wixsite.com/supercong94" target="_blank">supercong</a></li>
+    
+</ul>
+
+        <hr>
+    
+        
+    <h5>ARCHIVES</h5>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+
+        <hr>
+    
+        <!-- Categories -->
+
+    <h5>categories
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/凸优化/">凸优化</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/医学图像分割/">医学图像分割</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/医学图像合成/">医学图像合成</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/医学图像增强/">医学图像增强</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/图像去噪/">图像去噪</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/图像增强/">图像增强</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文字识别/">文字识别</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/机器学习/">机器学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/目标检测/">目标检测</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/神经网络/">神经网络</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件使用/">软件使用</a><span class="category-list-count">1</span></li></ul>
+    </div>
+</h5>
+        <hr>
+    
+</div>
+
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/qian-qian-12-25-86">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/JiaqianLi">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://user.qzone.qq.com/770534632">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Jiaqian Li 2020 
+                </p>
+                <p class="copyright text-muted">
+                    <!-- <a target="_blank" title="web analytic"><img alt="web analytic" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" style="border-width:0" /></a> -->
+                    <!-- <a><img alt="web trackers" src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_visitors/counter.png" 
+                    style="border-width:0"/></a> -->
+
+                    <!-- GoStats Simple HTML Based Code -->
+                    <a target="_blank" title="web site traffic statistics" href="http://www.gostats.org"><img alt="web site traffic statistics" src="//www.gostats.org/0.png?a=100504365&ct=7&ci=3" style="border-width:0"></a>
+                    <!-- End GoStats Simple HTML Based Code -->
+
+                    <!-- <a><img border="0" src="https://cc.amazingcounters.com/counter.php?i=3221735&c=9665518" alt="AmazingCounters.com"></a> -->
+                    <!-- <span id="busuanzi_container_site_pv">
+					    <span id="busuanzi_value_site_pv"></span>
+					</span> -->
+					<!-- <a target="_blank" title="webstats program"><img alt="webstats program" 
+					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
+					style="border-width:0" /></a> -->
+					visitors since 2018/08/20, 
+                    <span class="post-count">74.7k words altogether</span>
+                </p>
+                  
+                </div>
+            </div>
+        </div>
+    
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jiaqianlee.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-124157944-1';
+    var _gaDomain = 'auto';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '2640a6444407cd5de76cf21291f919ba';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script> -->
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://jiaqianlee.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</body>
+
+</html>
