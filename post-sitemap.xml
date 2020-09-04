@@ -8,7 +8,7 @@
 
     <url>
         <loc>http://jiaqianlee.com/2020/09/04/synthesis-1/</loc>
-        <lastmod>2020-09-04T05:34:53.459Z</lastmod>
+        <lastmod>2020-09-04T09:21:03.033Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>http://jiaqianlee.com/2020/09/04/segmentation/</loc>
-        <lastmod>2020-09-04T05:28:41.546Z</lastmod>
+        <lastmod>2020-09-04T09:19:41.402Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/2020/07/13/3T-7T/</loc>
+        <lastmod>2020-09-04T06:38:28.355Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -25,14 +33,6 @@
     <url>
         <loc>http://jiaqianlee.com/2020/07/18/synthesis/</loc>
         <lastmod>2020-09-04T03:26:02.117Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/2020/07/13/3T-7T/</loc>
-        <lastmod>2020-07-18T06:54:08.863Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

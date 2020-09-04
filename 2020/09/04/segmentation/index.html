@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>3D Dilated Multi-Fiber Network for Real-time Brain Tumor Segmentation in MRI (MICCAI2019)<br>Authors: Chen Chen, Xiaopeng Liu, Meng Ding, Junfeng Zheng, Jiangyun Li<br>Code：<a href="https://github.com/China-LiuXiaopeng/BraTS-DMFNet" target="_blank" rel="noopener">https://github.com/China-LiuXiaopeng/BraTS-DMFNet</a></p>
+                <h1><span id="3d-dilated-multi-fiber-network-for-real-time-brain-tumor-segmentation-in-mri-miccai2019">3D Dilated Multi-Fiber Network for Real-time Brain Tumor Segmentation in MRI (MICCAI2019)</span></h1><p>Authors: Chen Chen, Xiaopeng Liu, Meng Ding, Junfeng Zheng, Jiangyun Li<br>Code：<a href="https://github.com/China-LiuXiaopeng/BraTS-DMFNet" target="_blank" rel="noopener">https://github.com/China-LiuXiaopeng/BraTS-DMFNet</a></p>
 <h2><span id="贡献">贡献</span></h2><p>①提出了一个轻量级且高效的3D CNN来实现实时的脑部肿瘤分割，主要在于网络结构的创新，在保持高分割准确率的前提下大大减少了计算成本。<br>②设计了一个多纤维（MF）和膨胀多纤维（DMF）单元，即组卷积+膨胀卷积（不同权重实现多尺度特征）+multiplexer（促进组间信息流通）。</p>
 <h2><span id="方法">方法</span></h2><p>首先介绍本文中提出的两个模块，MF和DMF，对于MF模块，是在组卷积的基础上加上了multiplexer，也就是两个1<em>1</em>1的卷积，来融合不同组间的特征；DMF是在MF的基础上，将3<em>3</em>3的卷积核使用不同膨胀率的膨胀卷积来代替，且对于每个卷积核设置不同的权重，让网络自适应的学习。<br><img src="/2020/09/04/segmentation/1.png" data-action="zoom"><br>本文的网络结构比较简单，总体是一个UNet的框架，然后引入了上述的两个模块，如下：<br><img src="/2020/09/04/segmentation/2.png" data-action="zoom"></p>
 <h2><span id="实验部分">实验部分</span></h2><p>本文采用的是Brain Tumor Segmentation (BraTS) 2018挑战赛的数据集，每个3D MRI图像包括四种不同的模态，即native T1-weighted (T1), post-contrast T1-weighted (T1ce), T2-weighted (T2) and Fluid Attenuated Inversion Recovery (FLAIR)。给出部分实验结果：<br><img src="/2020/09/04/segmentation/3.png" data-action="zoom"><br><img src="/2020/09/04/segmentation/4.png" data-action="zoom"><br><img src="/2020/09/04/segmentation/5.png" data-action="zoom"></p>
@@ -277,7 +277,7 @@ var _hmt = _hmt || [];
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">贡献</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">实验部分</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">3D Dilated Multi-Fiber Network for Real-time Brain Tumor Segmentation in MRI (MICCAI2019)</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">贡献</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">方法</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">实验部分</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -456,7 +456,7 @@ var _hmt = _hmt || [];
 					src="http://monster.gostats.com/bin/count/a_494843/t_4/i_38/z_0/show_hits/counter.png" 
 					style="border-width:0" /></a> -->
 					visitors since 2018/08/20, 
-                    <span class="post-count">74.7k words altogether</span>
+                    <span class="post-count">75.2k words altogether</span>
                 </p>
                   
                 </div>
