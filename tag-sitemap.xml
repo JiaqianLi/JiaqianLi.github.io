@@ -191,14 +191,14 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/OCR/</loc>
+        <loc>http://jiaqianlee.com/tags/FAN/</loc>
         <lastmod>2019-08-19T06:28:03.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/FAN/</loc>
+        <loc>http://jiaqianlee.com/tags/OCR/</loc>
         <lastmod>2019-08-19T06:28:03.433Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -303,13 +303,6 @@
     </url>
 
     <url>
-        <loc>http://jiaqianlee.com/tags/MRI-enhancement/</loc>
-        <lastmod>2020-09-04T06:38:28.355Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://jiaqianlee.com/tags/MRI-Segmentation/</loc>
         <lastmod>2020-09-04T09:19:41.402Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -319,6 +312,13 @@
     <url>
         <loc>http://jiaqianlee.com/tags/MR-Image-Synthesis/</loc>
         <lastmod>2020-09-04T11:25:26.868Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://jiaqianlee.com/tags/MRI-enhancement/</loc>
+        <lastmod>2020-09-13T07:24:05.673Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

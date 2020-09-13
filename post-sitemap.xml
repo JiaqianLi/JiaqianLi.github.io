@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://jiaqianlee.com/2020/07/13/3T-7T/</loc>
+        <lastmod>2020-09-13T07:24:05.673Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://jiaqianlee.com/2020/09/04/synthesis-1/</loc>
         <lastmod>2020-09-04T11:25:26.868Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -17,14 +25,6 @@
     <url>
         <loc>http://jiaqianlee.com/2020/09/04/segmentation/</loc>
         <lastmod>2020-09-04T09:19:41.402Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://jiaqianlee.com/2020/07/13/3T-7T/</loc>
-        <lastmod>2020-09-04T06:38:28.355Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
